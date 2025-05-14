@@ -1,0 +1,1 @@
+PRESENTATION.md : Create your presentation/lesson "slides". This should include all of the info from your presentation. You SHOULD NOT just read the slides, but the slides should contain enough information such that if you didn't watch the video, you would learn most of it.
