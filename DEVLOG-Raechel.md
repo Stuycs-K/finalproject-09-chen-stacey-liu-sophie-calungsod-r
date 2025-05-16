@@ -16,5 +16,5 @@ and old C files in order to finish up the function used to read the
 Whitespace files. It should now correctly return the tabs, spaces, and new
 lines in a string, but I will have to test properly tomorrow.
 
-### 2024-01-03 - Brief description
+### 2024-05-16 - Whitespace spreadsheet formatting and fixing main C code
 
