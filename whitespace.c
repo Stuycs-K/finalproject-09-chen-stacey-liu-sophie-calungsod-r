@@ -39,16 +39,26 @@ void parse_args( char * line, char ** arg_ary ){
     fclose(input);
 }*/
 
-// doesnt work yet
-int readFile(char* fileName){
-  int space;
+// gets the string of spaces, tabs, and new lines
+char * readFile(char* fileName){
   int file = open(fileName, O_RDONLY , 0);
   if(file == -1){
     // prints "Error #: Error message here"
     printf("Error %d: %s\n", errno, strerror(errno));
   }
-  if (read(file, &space, sizeof(int)) == -1) printf("Error %d: %s\n", errno, strerror(errno));
-  printf(space);
+
+  char* buff = malloc(1024*4); // make files later, see if we need more
+  // error msg if the malloc didnt work
+  int len = 0; // used to go through the buffer
+
+  char space;
+  while(read(file,&space,1)==1){ // while there's still a space to read
+    if(space==' ' || space=='\n' || space=='\t'){
+        len+=1;
+        buff[len]=space;
+    }
+  }
+  buff[len]='\0';
   close(file);
-  return 0;
-}
+    return buff;
+  }
