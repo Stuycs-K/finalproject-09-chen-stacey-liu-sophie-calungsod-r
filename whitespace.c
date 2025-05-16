@@ -6,8 +6,8 @@ int main(int argc, char const *argv[]){
     printf("\nUse either option '-p' to print the translated Whitespace or '-r' to run the translated command.");
   }
   if (argc>1 && strcmp(argv[1],"-p")==0){ // first argument is 'p', print the translated
-    char* translated = 'hi'; // replace with function call
-    printf(translated);
+    char translated[] = "hi"; // replace with function call
+    printf("%s", translated);
   }
   if (argc>1 && strcmp(argv[1],"-r")==0){ // first argument is 'p', runs the translated command
     // uses function on a string and then calls execvp successfully
