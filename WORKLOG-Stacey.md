@@ -6,3 +6,6 @@ Spent 30 minutes at home continuing with stack manipulation research and flow co
 
 ### 2024-05-16 - Started coding number
 Spent a full class period figuring out how to identify numbers in Whitespace.
+
+### 2024-05-18 - Finished coding number
+Spent 30 minutes finishing the code for finding numbers in Whitespace.
