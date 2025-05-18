@@ -16,5 +16,5 @@
 
 #ifndef numbertest
 #define numbertest
-
+int findNumber(char* str);
 #endif
