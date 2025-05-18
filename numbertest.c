@@ -1,9 +1,9 @@
 #include "numbertest.h"
 
 int main(){
-  char* test = "           \n";
-  char* cpyp = " 	  	 		\n";
-  printf("%d\n", findNumber(test));
+  char* test = " \t  \t \t\t\n";
+  char* test2 = "\t\t\t  \t \n";
+  printf("%d\n", findNumber(test2));
   return 0;
 }
 
@@ -15,12 +15,10 @@ int findNumber(char* str){
   ptr++;
   while (*ptr != '\n'){
     if (*ptr == ' '){
-      printf("movedspace\n");
-      num << 1;
+      num = num << 1;
     }
-    else if (*ptr == '\t'){ // does it need to be ascii?
-      printf("movedtab\n");
-      num << 1;
+    else if (*ptr == '\t'){
+      num = num << 1;
       num++;
     }
     ptr++;
