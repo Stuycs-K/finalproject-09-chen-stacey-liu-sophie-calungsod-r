@@ -9,7 +9,7 @@ int main(int argc, char const *argv[]){
     char translated[] = "hi"; // replace with function call
     printf("%s", translated);
   }
-  if (argc>1 && strcmp(argv[1],"-r")==0){ // first argument is 'p', runs the translated command
+  if (argc>1 && strcmp(argv[1],"-r")==0){ // first argument is 'r', runs the translated command
     // uses function on a string and then calls execvp successfully
     char * args[1024*4]; // change later
     char line[] = "echo 'Hello World'"; // this line should come from 
@@ -52,4 +52,22 @@ char * readFile(char* fileName){
   buff[len]='\0';
   close(file);
     return buff;
+  }
+
+  struct space_node * linkList(char *strIn){
+    struct space_node *head = NULL;
+    struct space_node *curr = NULL;
+
+    // go through everything in the string except idk how... while something
+    // inside the loop:
+    struct space_node *new = malloc(sizeof(struct space_node));
+    // throw error if it doesnt malloc right
+
+    if(head==NULL){
+      head==new;
+    }
+    else{
+      curr->next=new;
+    }
+    return head;
   }
