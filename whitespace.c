@@ -6,8 +6,10 @@ int main(int argc, char const *argv[]){
     printf("\nUse either option '-p' to print the translated Whitespace or '-r' to run the translated command.");
   }
   if (argc>1 && strcmp(argv[1],"-p")==0){ // first argument is 'p', print the translated
-    char translated[] = "hi"; // replace with function call
-    printf("%s", translated);
+    /*char translated[] = "hi"; // replace with function call
+    printf("%s", translated);*/
+    char * stringOf = readFile("test.txt");
+    printf("%d",findNumber(stringOf));
   }
   if (argc>1 && strcmp(argv[1],"-r")==0){ // first argument is 'r', runs the translated command
     // uses function on a string and then calls execvp successfully
@@ -18,7 +20,28 @@ int main(int argc, char const *argv[]){
   }
 }
 
+int findNumber(char* str){
+  int num = 0;
+  int sign = 1;
+  char * ptr = str;
+  if (*ptr == '\t') sign=-1;
+  ptr++;
+  while (*ptr != '\n'){
+    if (*ptr == ' '){
+      num = num << 1;
+    }
+    else if (*ptr == '\t'){
+      num = num << 1;
+      num++;
+    }
+    ptr++;
+  }
+  return sign*num;
+}
+
+
 // potentially move to a new file later
+// used for execvp
 void parse_args( char * line, char ** arg_ary ){
   char *token;
   int i = 0;
@@ -64,7 +87,7 @@ char * readFile(char* fileName){
     // throw error if it doesnt malloc right
 
     if(head==NULL){
-      head==new;
+      head=new;
     }
     else{
       curr->next=new;
