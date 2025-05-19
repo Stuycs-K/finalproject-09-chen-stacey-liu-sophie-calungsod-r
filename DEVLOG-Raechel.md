@@ -27,4 +27,14 @@ to figure out a linked list structure for the Whitespace input. I created a
 new struct and started a function that will parse a string holding the file
 contents into a linked list of the new struct nodes.
 
-### 2025-05-19 - 
+
+### 2025-05-19 - Combining and testing code
+I spent 25 minutes in class trying to consolidate me and Stacey's code in order to
+make the main program correctly interpret numbers from Whitespace. I ran into 
+a segmentation fault during testing and will try to remedy this as soon as possible.
+I also spent 10 minutes researching and coming up with content for our readme file.
+
+I spent 30 minutes at home fixing errors in the code, including the segmentation 
+fault that occurred while I tried to test the Whitespace number translator. After
+editing the code, numbers seem to be correctly interpreted, but further testing
+is needed to make sure this works within other pieces of code.
