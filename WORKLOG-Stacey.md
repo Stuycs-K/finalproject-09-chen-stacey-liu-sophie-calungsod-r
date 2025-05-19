@@ -9,3 +9,6 @@ Spent a full class period figuring out how to identify numbers in Whitespace.
 
 ### 2024-05-18 - Finished coding number
 Spent 30 minutes finishing the code for finding numbers in Whitespace.
+
+### 2024-05-19 - Heap research
+Spent class period watching [this video](https://www.youtube.com/watch?v=O406bEHAOcc) and taking notes, specifically on heaps.
