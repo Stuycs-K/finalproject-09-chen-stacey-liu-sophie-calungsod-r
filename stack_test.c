@@ -7,6 +7,7 @@ typedef struct {
   int top;
 } Stack;
 
+/*Set stack length to 0*/
 void init(Stack *stack) {
   stack->top = -1;
 }
@@ -80,5 +81,30 @@ void slide(Stack *stack, int n) {
   stack->top = 0;
 }
 
+/*Print full stack. For dev purposes*/
+void print(Stack *stack) {
+  printf("{");
+  for (int i = 0; i <= stack->top; i++) {
+    printf("%d, ", stack->ary[i]);
+  }
+  printf("}\n");
+}
+
 int main() {
+  Stack stack;
+  init(&stack);
+
+  push(&stack, 3);
+  print(&stack);
+
+  push(&stack, 5);
+  print(&stack);
+
+  push(&stack, 2);
+  print(&stack);
+
+  push(&stack, 8);
+  print(&stack);
+
+  return 0;
 }
