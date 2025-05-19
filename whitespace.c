@@ -12,6 +12,7 @@ int main(int argc, char const *argv[]){
     // trying to get it to read a file containing a string... should translate to -50 i think
     // but im getting Segmentation fault: 11
     char * stringOf = readFile("test.txt");
+    printf("here is the string from the file: %s\n",stringOf);
     printf("%d",findNumber(stringOf));
   }
   if (argc>1 && strcmp(argv[1],"-r")==0){ // first argument is 'r', runs the translated command
@@ -29,7 +30,7 @@ int findNumber(char* str){
   char * ptr = str;
   if (*ptr == '\t') sign=-1;
   ptr++;
-  while (*ptr != '\n'){
+  while (*ptr != '\n' && *ptr != '\0'){
     if (*ptr == ' '){
       num = num << 1;
     }
@@ -42,20 +43,6 @@ int findNumber(char* str){
   return sign*num;
 }
 
-
-// potentially move to a new file later
-// used for execvp
-void parse_args( char * line, char ** arg_ary ){
-  char *token;
-  int i = 0;
-  while((token = strsep(&line, " "))!=0){
-    // put token into array arg_ary
-    arg_ary[i] = token;
-    i++;
-  }
-  arg_ary[i] = NULL;
-}
-
 // gets the string of spaces, tabs, and new lines
 char * readFile(char* fileName){
   int file = open(fileName, O_RDONLY , 0);
@@ -64,18 +51,23 @@ char * readFile(char* fileName){
     printf("Error %d: %s\n", errno, strerror(errno));
   }
 
+
   char* buff = malloc(1024*4); // make files later, see if we need more
   // add error msg if the malloc didnt work
+  if (buff==NULL){
+    perror("didn't malloc buff correctly");
+  }
   int len = 0; // used to go through the buffer
 
   char space;
   while(read(file,&space,1)==1){ // while there's something to read
-    if(space==' ' || space=='\n' || space=='\t'){
-        len+=1;
-        buff[len]=space;
+    if(space==' ' || space=='\n' || space=='\t'){ // tabs?????
+      buff[len]=space;
+      len++;
     }
   }
-  buff[len]='\0';
+
+  buff[len] = '\0';
   close(file);
     return buff;
   }
@@ -99,3 +91,16 @@ char * readFile(char* fileName){
     return head;
   }
 */
+
+// potentially move to a new file later
+// used for execvp
+void parse_args( char * line, char ** arg_ary ){
+  char *token;
+  int i = 0;
+  while((token = strsep(&line, " "))!=0){
+    // put token into array arg_ary
+    arg_ary[i] = token;
+    i++;
+  }
+  arg_ary[i] = NULL;
+}

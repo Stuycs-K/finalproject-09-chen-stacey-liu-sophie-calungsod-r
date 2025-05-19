@@ -1,8 +1,9 @@
 #include "numbertest.h"
 
 int main(){
-  char* test = " \t  \t \t\t\n";
-  char* test2 = "\t\t\t  \t \n";
+  char* test = " \t  \t \t\t\n"; // 75
+  char* test2 = "\t\t\t  \t \n"; // -50
+  printf("%d\n", findNumber(test));
   printf("%d\n", findNumber(test2));
   return 0;
 }
