@@ -8,6 +8,9 @@ int main(int argc, char const *argv[]){
   if (argc>1 && strcmp(argv[1],"-p")==0){ // first argument is 'p', print the translated
     /*char translated[] = "hi"; // replace with function call
     printf("%s", translated);*/
+
+    // trying to get it to read a file containing a string... should translate to -50 i think
+    // but im getting Segmentation fault: 11
     char * stringOf = readFile("test.txt");
     printf("%d",findNumber(stringOf));
   }
@@ -77,6 +80,7 @@ char * readFile(char* fileName){
     return buff;
   }
 
+/*
   struct space_node * linkList(char *strIn){
     struct space_node *head = NULL;
     struct space_node *curr = NULL;
@@ -94,3 +98,4 @@ char * readFile(char* fileName){
     }
     return head;
   }
+*/
