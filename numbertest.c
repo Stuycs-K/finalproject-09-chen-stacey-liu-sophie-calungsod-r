@@ -44,13 +44,16 @@ void markLoc(char ** label_ary, char* label, char* ptr){
   //maybe don't have this as a function -> just save pointer + label as pair in array
 }
 
-*(ptr) + *(ptr+1) + *(ptr+2)
-
 void callSubRoutine(char * label){
   // NST[label]
 }
 
-void unCondJump(char * label){
+void unCondJump(char * label, char ** label_ary, char * currPtr){
+  // currPtr is the pointer denoting where we are in the Whitespace code
+  // label_ary is the array of labels and their pointers
+  // label is the label we jump to
+  // loop through label_ary & if label is found, set currPtr(might need to be char **) to the pointer associated with that label
+
   //NSN[label]
 }
 
