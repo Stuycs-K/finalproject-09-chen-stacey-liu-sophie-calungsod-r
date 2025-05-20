@@ -91,6 +91,16 @@ void slide(Stack *stack, int n) {
   }
 }
 
+/*Pop and return the top item*/
+int pop(Stack *stack) {
+  if (isEmpty(stack)) {
+    perror(":(");
+    return 0;
+  }
+  stack->top--;
+  return stack->ary[stack->top+1];
+}
+
 /*Print full stack. For dev purposes*/
 void print(Stack *stack) {
   printf("{");
@@ -129,6 +139,9 @@ int main() {
   print(&stack);
 
   slide(&stack, 2);
+  print(&stack);
+
+  printf("%d\n", pop(&stack));
   print(&stack);
 
   return 0;
