@@ -14,4 +14,4 @@ This document must be updated daily every time you finish a work session.
 
 ### 2025-05-19 - stack implementation cont.
 - Wrote swap, discard, copy, and slide functions for stack & fixed some function calls in previously written functions (35 min)
-- Started testing stack functions
+- Wrote tests for the stack functions. Fixed faulty logic in slide function and exception statements. (20 min)
