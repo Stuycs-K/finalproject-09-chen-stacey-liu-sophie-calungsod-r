@@ -1,10 +1,17 @@
 #include "numbertest.h"
-
+#define ARRAY_SIZE 100
 int main(){
   char* test = " \t  \t \t\t\n"; // 75
   char* test2 = "\t\t\t  \t \n"; // -50
   printf("%d\n", findNumber(test));
   printf("%d\n", findNumber(test2));
+
+  char ** label_ary = malloc(ARRAY_SIZE);
+  char * labelString = "\n  \t\n";
+  char * label = "\t\n";
+  markLoc(label_ary, label, &label);
+
+
   return 0;
 }
 
@@ -28,11 +35,16 @@ int findNumber(char* str){
 }
 
 // flow control -- move this to another file eventually
-void markLoc(char* label){
+// in the main file, keep a 2d array (label_ary), which stores the labels & the pointer to that label
+void markLoc(char ** label_ary, char* label, char* ptr){
   // NSS[label]
+  char[2] subary = {label, ptr};
+  *(label_ary) = subary
   // save as pointer? char **
   //maybe don't have this as a function -> just save pointer + label as pair in array
 }
+
+*(ptr) + *(ptr+1) + *(ptr+2)
 
 void callSubRoutine(char * label){
   // NST[label]
