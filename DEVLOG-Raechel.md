@@ -38,3 +38,9 @@ I spent 30 minutes at home fixing errors in the code, including the segmentation
 fault that occurred while I tried to test the Whitespace number translator. After
 editing the code, numbers seem to be correctly interpreted, but further testing
 is needed to make sure this works within other pieces of code.
+
+### 2025-05-20 - Writing main code
+I spent 40 minutes in class testing more of our number interpretations and writing 
+code for our main whitespace.c file. I focused mainly on the conditionals that determine
+whether a stack manipulation, mathematical, or input/output function needs to be called
+to interpret the encoded Whitespace.
