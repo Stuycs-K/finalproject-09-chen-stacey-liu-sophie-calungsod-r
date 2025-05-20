@@ -15,3 +15,7 @@ This document must be updated daily every time you finish a work session.
 ### 2025-05-19 - stack implementation cont.
 - Wrote swap, discard, copy, and slide functions for stack & fixed some function calls in previously written functions (35 min)
 - Wrote tests for the stack functions. Fixed faulty logic in slide function and exception statements. (20 min)
+
+### 2025-05-19 - stack implementation cont. cont.
+- Wrote pop function for stack and fixed a few more bugs in the exception if statements (20 min)
+- Wrote add, subtract, divide, mulitply, and modulo functions (20 min)
