@@ -25,3 +25,24 @@ int findNumber(char* str){
   }
   return sign*num;
 }
+
+// flow control -- move this to another file eventually
+void markLoc(){
+  // NSS[label]
+
+}
+
+void callSubRoute(){
+  // NST[label]
+}
+
+void unCondJump(){
+  //NSN[label]
+}
+
+void zeroJump(){
+  //NTS[label]
+}
+void negJump(){
+  //NTT[label]
+}
