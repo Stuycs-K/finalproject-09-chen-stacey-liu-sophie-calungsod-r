@@ -12,3 +12,5 @@ Spent 30 minutes finishing the code for finding numbers in Whitespace.
 
 ### 2024-05-19 - Heap research
 Spent class period watching [this video](https://www.youtube.com/watch?v=O406bEHAOcc) and taking notes, specifically on heaps.
+
+Spent 20 minutes at home starting to write the functions for flow control.
