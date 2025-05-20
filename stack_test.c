@@ -43,7 +43,7 @@ void duplicate(Stack *stack) {
 
 /*Swap the top 2 items on stack*/
 void swap(Stack *stack) {
-  if (isEmpty(stack)) {
+  if (stack->top < 2) {
     perror(":(");
     return;
   }
@@ -63,12 +63,12 @@ void discard(Stack *stack) {
 
 /*Copy nth item on the stack to top of stack*/
 void copy(Stack *stack, int n) {
-  if (isFull(stack) || isEmpty(stack)) {
+  if (isFull(stack) || stack->top < n) {
     perror(":(");
     return;
   }
   stack->top++;
-  stack->ary[stack->top] = stack->ary[n];
+  stack->ary[stack->top] = stack->ary[n-1];
 }
 
 /*Slide (pop and discard) n items off the stack, keeping top item*/
@@ -77,8 +77,18 @@ void slide(Stack *stack, int n) {
     perror(":(");
     return;
   }
-  stack->ary[0] = stack->ary[stack->top];
-  stack->top = 0;
+  if (n >= (stack->top + 1)) {
+    stack->ary[0] = stack->ary[stack->top];
+    stack->top = 0;
+  }
+  else {
+    int i = 0;
+    for (int j = n; j <= stack->top; j++) {
+      stack->ary[i] = stack->ary[j];
+      i++;
+    }
+    stack->top = i-1;
+  }
 }
 
 /*Print full stack. For dev purposes*/
@@ -104,6 +114,21 @@ int main() {
   print(&stack);
 
   push(&stack, 8);
+  print(&stack);
+
+  swap(&stack);
+  print(&stack);
+
+  duplicate(&stack);
+  print(&stack);
+
+  discard(&stack);
+  print(&stack);
+
+  copy(&stack, 2);
+  print(&stack);
+
+  slide(&stack, 2);
   print(&stack);
 
   return 0;
