@@ -29,15 +29,15 @@ int findNumber(char* str){
 // flow control -- move this to another file eventually
 void markLoc(char* label){
   // NSS[label]
-  // save as pointer?
+  // save as pointer? char **
   //maybe don't have this as a function -> just save pointer + label as pair in array
 }
 
-void callSubRoute(){
+void callSubRoutine(char * label){
   // NST[label]
 }
 
-void unCondJump(Stack *stack){
+void unCondJump(char * label){
   //NSN[label]
 }
 
@@ -45,7 +45,7 @@ void zeroJump(Stack *stack, char * label){
   //NTS[label]
   if (stack->ary[stack->top] == 0) unCondJump(stack, label);
 }
-void negJump(){
+void negJump(Stack *stack, char * label){
   //NTT[label]
   if (stack->ary[stack->top] < 0) unCondJump(stack, label);
 }
