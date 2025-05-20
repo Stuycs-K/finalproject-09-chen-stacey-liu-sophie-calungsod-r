@@ -95,7 +95,7 @@ void slide(Stack *stack, int n) {
 int pop(Stack *stack) {
   if (isEmpty(stack)) {
     perror(":(");
-    return 0;
+    return NULL;
   }
   stack->top--;
   return stack->ary[stack->top+1];
@@ -108,41 +108,4 @@ void print(Stack *stack) {
     printf("%d, ", stack->ary[i]);
   }
   printf("}\n");
-}
-
-int main() {
-  Stack stack;
-  init(&stack);
-
-  push(&stack, 3);
-  print(&stack);
-
-  push(&stack, 5);
-  print(&stack);
-
-  push(&stack, 2);
-  print(&stack);
-
-  push(&stack, 8);
-  print(&stack);
-
-  swap(&stack);
-  print(&stack);
-
-  duplicate(&stack);
-  print(&stack);
-
-  discard(&stack);
-  print(&stack);
-
-  copy(&stack, 2);
-  print(&stack);
-
-  slide(&stack, 2);
-  print(&stack);
-
-  printf("%d\n", pop(&stack));
-  print(&stack);
-
-  return 0;
 }
