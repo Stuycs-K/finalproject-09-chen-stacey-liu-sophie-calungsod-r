@@ -41,9 +41,9 @@ void duplicate(Stack *stack) {
   stack->ary[stack->top] = stack->ary[stack->top-1];
 }
 
-/*Swap the top 2 items on stack*/
+/*Swap the top 2 items on stack. If stack size is less than 2, return error*/
 void swap(Stack *stack) {
-  if (stack->top < 2) {
+  if (stack->top < 1) {
     perror(":(");
     return;
   }
@@ -63,7 +63,7 @@ void discard(Stack *stack) {
 
 /*Copy nth item on the stack to top of stack*/
 void copy(Stack *stack, int n) {
-  if (isFull(stack) || stack->top < n) {
+  if (isFull(stack) || stack->top < n-1) {
     perror(":(");
     return;
   }
