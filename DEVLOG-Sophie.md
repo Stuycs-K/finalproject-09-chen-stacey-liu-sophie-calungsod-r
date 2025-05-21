@@ -20,3 +20,6 @@ This document must be updated daily every time you finish a work session.
 - Wrote pop function for stack and fixed a few more bugs in the exception if statements (20 min)
 - Wrote add, subtract, divide, mulitply, and modulo functions (20 min)
 - Wrote comments for the functions, fixed incorrect logic for slide function, wrote tests. (30 min)
+
+### 2025-05-21 - whitespace knowledge clarification
+- Clarified how heap access and input/output works in whitespace (10 min)
