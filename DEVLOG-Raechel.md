@@ -44,3 +44,7 @@ I spent 40 minutes in class testing more of our number interpretations and writi
 code for our main whitespace.c file. I focused mainly on the conditionals that determine
 whether a stack manipulation, mathematical, or input/output function needs to be called
 to interpret the encoded Whitespace.
+
+I spent 25 minutes at home continuing with the function that will call which 
+interpretation function to use using conditionals, this time working on flow
+control and heap access. I also reorganized some of our research on my spreadsheet.

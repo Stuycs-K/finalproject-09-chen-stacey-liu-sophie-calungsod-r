@@ -142,6 +142,39 @@ int whichFunc(char* line){
       // Slide n items off the stack, keeping top item
     }
   } 
+  // heap access
+  else if (*(ptr)=="\t" && *(ptr+1)=="\t"){
+    if (*(ptr+2)==" "){ 
+      // store in heap
+    }
+    if (*(ptr+2)=="\t"){ 
+      // retrieve from heap
+    }
+  }
+  // flow control
+  else if (*(ptr)=="\n"){
+    if (*(ptr+1)==" " && *(ptr+2)==" " && *(ptr+3)=="label?"){ 
+      // Mark a location in program
+    }
+    if (*(ptr+1)==" " && *(ptr+2)=="\t" && *(ptr+3)=="label?"){ 
+      // Call a subroutine
+    }
+    if (*(ptr+1)==" " && *(ptr+2)=="\n" && *(ptr+3)=="label?"){ 
+      // Jump unconditionally to a label
+    }
+    if (*(ptr+1)=="\t" && *(ptr+2)==" " && *(ptr+3)=="label?"){ 
+      // Jump to a label if the top of the stack is zero
+    }
+    if (*(ptr+1)=="\t" && *(ptr+2)=="\t" && *(ptr+3)=="label?"){ 
+      // Jump to label if the top of the stack is negative
+    }
+    if (*(ptr+1)=="\t" && *(ptr+2)=="\n"){ 
+      // End subroutine & transfer control back to caller  
+    }
+    if (*(ptr+1)=="\n" && *(ptr+2)=="\n"){ 
+      // End program
+    }
+  }
 
   // at the end, move the pointer forward the appropriate amnt of steps
 
