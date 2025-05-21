@@ -6,11 +6,46 @@ int main(){
   printf("%d\n", findNumber(test));
   printf("%d\n", findNumber(test2));
 
-  char ** label_ary = malloc(ARRAY_SIZE);
-  char * labelString = "\n  \t\n";
-  char * label = "\t\n";
-  markLoc(label_ary, label, &label);
+  // char ** label_ary = malloc(ARRAY_SIZE);
+  // char * labelString = "\n  \t\n";
+  // char * label = "\t\n";
+  // markLoc(label_ary, label, &label);
 
+  // code for flow control part of whitespace, reference whichFunc() in whitespace.c
+  char * testline = "\n  \t\n"; // placeholder string for now
+  char * ptr; // points to where you are in string/Whitespace code
+  char ** label_ary; // keeps track of labels & their pointers
+  if (*(ptr) == '\n'){ // if IMP is N, aka flow control
+    if (*(ptr+1) == ' ' && *(ptr+2) == ' '){ // mark location with the label
+      ptr+= 3;
+      int strlen = 0;
+      while (*ptr != '\n') {
+        strlen++;
+        ptr++;
+      }
+      char * label;
+      strncpy(label, ptr-strlen, strlen);
+      markLoc(label_ary, label, &ptr);
+    }
+    if (*(ptr+1) == ' ' && *(ptr+2) == '\t'){ // call subroutine
+
+    }
+    if (*(ptr+1) == ' ' && *(ptr+2) == '\n'){ // jump unconditionally
+
+    }
+    if (*(ptr+1) == '\t' && *(ptr+2) == ' '){ // zero jump
+
+    }
+    if (*(ptr+1) == '\t' && *(ptr+2) == '\t'){ // negative jump
+
+    }
+    if (*(ptr+1) == '\t' && *(ptr+2) == '\n'){ // end subroutine
+
+    }
+    if (*(ptr+1) == '\n' && *(ptr+2) == '\n'){ // end program
+
+    }
+  }
 
   return 0;
 }
