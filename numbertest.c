@@ -36,11 +36,11 @@ int findNumber(char* str){
 
 // flow control -- move this to another file eventually
 // in the main file, keep a 2d array (label_ary), which stores the labels & the pointer to that label
+// each array in label_ary -> [label, address]
 void markLoc(char ** label_ary, char* label, char* ptr){
   // NSS[label]
   char[2] subary = {label, ptr};
   *(label_ary) = subary
-  // save as pointer? char **
   //maybe don't have this as a function -> just save pointer + label as pair in array
 }
 
@@ -48,13 +48,18 @@ void callSubRoutine(char * label){
   // NST[label]
 }
 
-void unCondJump(char * label, char ** label_ary, char * currPtr){
-  // currPtr is the pointer denoting where we are in the Whitespace code
+void unCondJump(char * label, char ** label_ary, char ** currPtr){
+  //NSN[label]
+  // currPtr is address of the pointer denoting where we are in the Whitespace code
   // label_ary is the array of labels and their pointers
   // label is the label we jump to
   // loop through label_ary & if label is found, set currPtr(might need to be char **) to the pointer associated with that label
-
-  //NSN[label]
+  for (int i = 0; i<ARRAY_SIZE; i++){
+    if (!strcmp(label, label_ary[i][0])){
+      *currPtr = label_ary[i][1];
+      break;
+    }
+  }
 }
 
 void zeroJump(Stack *stack, char * label){
