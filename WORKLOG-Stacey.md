@@ -17,3 +17,5 @@ Spent 20 minutes at home starting to write the functions for flow control.
 
 ### 2024-05-20 - Worked on flow control functions
 Spent class period working on the functions for flow control, specifically markLoc() and unCondJump().
+
+Spent 10 minutes at home continuing the unCondJump() functions and spent 20 minutes starting to write the conditional statements for each.
