@@ -179,3 +179,27 @@ int whichFunc(char* line){
   // at the end, move the pointer forward the appropriate amnt of steps
 
 }
+
+// deal with stack stuff
+void markLoc(char* label){
+  // NSS[label]
+  // save as pointer? char **
+  //maybe don't have this as a function -> just save pointer + label as pair in array
+}
+
+void callSubRoutine(char * label){
+  // NST[label]
+}
+
+void unCondJump(char * label){
+  //NSN[label]
+}
+
+void zeroJump(Stack *stack, char * label){
+  //NTS[label]
+  if (stack->ary[stack->top] == 0) unCondJump(stack, label);
+}
+void negJump(Stack *stack, char * label){
+  //NTT[label]
+  if (stack->ary[stack->top] < 0) unCondJump(stack, label);
+}
