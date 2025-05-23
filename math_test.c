@@ -2,60 +2,60 @@
 #include "stack_test.h"
 
 // second number popper [operator] first number popped
-// do we push the found value to the stack????? 
+// do we push the found value to the stack????? yes
 
-/* Returns the sum of the 1st value popped and 2nd value popped.
- * Returns 0 if stack has less than 2 items.
- */
-int add(Stack *stack) {
+/* Pushes the sum of the 1st value popped and 2nd value popped to stack */
+void add(Stack *stack) {
   if (stack->top < 0) {
     perror(":(");
-    return 0;
+    return;
   }
-  return (pop(stack) + pop(stack));
+  push(stack, (pop(stack) + pop(stack)));
 }
 
-/* Returns the difference of the 2nd value popped and 1st value popped.
- * Returns 0 if stack has less than 2 items.
- */
-int subtract(Stack *stack) {
+/* Pushes the difference of the 2nd value popped and 1st value popped to stack */
+void subtract(Stack *stack) {
   if (stack->top < 0) {
     perror(":(");
-    return 0;
+    return;
   }
   int first_pop = pop(stack);
-  return (pop(stack) - first_pop);
+  push(stack, (pop(stack) - first_pop));
 }
 
-/* Returns the product of the 1st value popped and 2nd value popped.
- * Returns 0 if stack has less than 2 items.
- */
-int multiply(Stack *stack) {
+/* Pushes the product of the 1st value popped and 2nd value popped */
+void multiply(Stack *stack) {
   if (stack->top < 0) {
     perror(":(");
-    return 0;
+    return;
   }
-  return (pop(stack) * pop(stack));
-}
-/* Returns the quotient of the 2nd value popped and 1st value popped.
- * Returns 0 if stack has less than 2 items.
- */
-int divide(Stack *stack) {
-  if (stack->top < 0) {
-    perror(":(");
-    return 0;
-  }
-  return (1 / (pop(stack) / pop(stack)));
+  push(stack, (pop(stack) * pop(stack)));
 }
 
-/* Returns the remainder of the 2nd value popped and 1st value popped.
- * Returns 0 if stack has less than 2 items.
+/* Pushes the quotient of the 2nd value popped and 1st value popped.
+ * Returns an error if < 2 items in stack
+ * Returns an error if the 1st value popped is 0
  */
-int modulo(Stack *stack) {
+void divide(Stack *stack) {
   if (stack->top < 0) {
-    perror(":(");
-    return 0;
+    perror("Insufficient amount of items in stack");
+    return;
   }
   int first_pop = pop(stack);
-  return (pop(stack) % first_pop);
+  int second_pop = pop(stack);
+  if (second_pop == 0) {
+    perror("Error: unable to divide by 0");
+    return;
+  }
+  push(stack, (second_pop / first_pop));
+}
+
+/* Returns the remainder of the 2nd value popped and 1st value popped */
+void modulo(Stack *stack) {
+  if (stack->top < 0) {
+    perror(":(");
+    return;
+  }
+  int first_pop = pop(stack);
+  push(stack, (pop(stack) % first_pop));
 }
