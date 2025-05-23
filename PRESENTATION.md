@@ -1,6 +1,21 @@
 PRESENTATION.md : Create your presentation/lesson "slides". This should include all of the info from your presentation. You SHOULD NOT just read the slides, but the slides should contain enough information such that if you didn't watch the video, you would learn most of it.
 
 
+Whitespace is an esoteric language written by Edwin Brady and Chris morris in 2003. In a strange diversion from typical programming, Whitespace coding only uses spaces, tabs, and new lines -- all other characters are completely ignored.
+
+There are three important ASCII values used in our code: 32 for space, 9 for tab, and 10 for *line feed*, or a new line. 
+
+The first thing that our group had to learn about is Instruction Modification Parameters, or IMP. IMP refers to the beginning of a command, used to designate its purpose when interpreting code. For Whitespace, there are five different IMPs for five different categories of commands: Input/Output, stack manipulation, arithmetic, flow control, and heap access.
+
+--> explain what our stack system is and how it works here
+
+For input/output, the IMP at the beginning of each command is [TAB][SPACE]. Input/output commands generally pop values from a stack, perform an action on it, and outputs it or stores it to be used for later.
+
+[show examples and explain the commands specifically]
+
+For stack manipulation, the IMP at the beginning of each command is just a [SPACE]. Stack manipulation commands are used to modify the stack---pushing items, duplicating items, swapping items, discarding items, etc.
+
+[show examples and explain the commands specifically]
 
 
 
