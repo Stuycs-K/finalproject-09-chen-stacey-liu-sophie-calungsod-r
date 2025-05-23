@@ -31,7 +31,15 @@ int main(){
 
     }
     if (*(ptr+1) == ' ' && *(ptr+2) == '\n'){ // jump unconditionally
-
+      ptr+= 3;
+      int strlen = 0;
+      while (*ptr != '\n') {
+        strlen++;
+        ptr++;
+      }
+      char * label;
+      strncpy(label, ptr-strlen, strlen);
+      unCondJump(label, label_ary, &ptr);
     }
     if (*(ptr+1) == '\t' && *(ptr+2) == ' '){ // zero jump
 
