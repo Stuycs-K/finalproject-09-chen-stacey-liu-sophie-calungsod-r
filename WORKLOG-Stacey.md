@@ -20,3 +20,6 @@ Spent 30 minutes at home continuing with stack manipulation research and flow co
 
 ### 2024-05-22 - Worked on flow control conditional statements
 - Spent 30 minutes at home on unCondJump(), findLabel(), and reordered code to integrate zeroJump() and negJump() into main code.
+
+### 2024-05-23 - Worked on finding Whitespace code taht used flow control
+- Spent 30 minutes at home on unCondJump(), findLabel(), and reordered code to integrate zeroJump() and negJump() into main code.
