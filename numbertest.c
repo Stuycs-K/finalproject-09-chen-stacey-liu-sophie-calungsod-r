@@ -18,34 +18,25 @@ int main(){
   if (*(ptr) == '\n'){ // if IMP is N, aka flow control
     if (*(ptr+1) == ' ' && *(ptr+2) == ' '){ // mark location with the label
       ptr+= 3;
-      int strlen = 0;
-      while (*ptr != '\n') {
-        strlen++;
-        ptr++;
-      }
-      char * label;
-      strncpy(label, ptr-strlen, strlen);
-      markLoc(label_ary, label, &ptr);
+      char * label = findLabel(ptr);
+      ptr += strlen(label);
+      markLoc(label_ary, label, &(ptr-strlen));
+      ptr++; // move pointer to after the /n
     }
     if (*(ptr+1) == ' ' && *(ptr+2) == '\t'){ // call subroutine
 
     }
     if (*(ptr+1) == ' ' && *(ptr+2) == '\n'){ // jump unconditionally
       ptr+= 3;
-      int strlen = 0;
-      while (*ptr != '\n') {
-        strlen++;
-        ptr++;
-      }
-      char * label;
-      strncpy(label, ptr-strlen, strlen);
+      char * label = findLabel(ptr);
+      ptr += strlen(label);
       unCondJump(label, label_ary, &ptr);
     }
     if (*(ptr+1) == '\t' && *(ptr+2) == ' '){ // zero jump
-
+      zeroJump(stack, label);
     }
     if (*(ptr+1) == '\t' && *(ptr+2) == '\t'){ // negative jump
-
+      negativeJump(stack, label);
     }
     if (*(ptr+1) == '\t' && *(ptr+2) == '\n'){ // end subroutine
 
@@ -77,6 +68,16 @@ int findNumber(char* str){
   return sign*num;
 }
 
+char * findLabel(char * ptr){
+  int strlen = 0;
+  while (*ptr != '\n') {
+    strlen++;
+    ptr++;
+  }
+  strncpy(label, ptr-strlen, strlen);
+  return label;
+}
+
 // flow control -- move this to another file eventually
 // in the main file, keep a 2d array (label_ary), which stores the labels & the pointer to that label
 // each array in label_ary -> [label, address]
@@ -87,7 +88,7 @@ void markLoc(char ** label_ary, char* label, char* ptr){
   //maybe don't have this as a function -> just save pointer + label as pair in array
 }
 
-void callSubRoutine(char * label){
+void callSubRoutine(char ** label_ary, char * label, char* ptr){
   // NST[label]
 }
 
