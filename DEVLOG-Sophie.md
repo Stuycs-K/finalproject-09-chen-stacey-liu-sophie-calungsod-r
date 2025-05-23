@@ -23,3 +23,6 @@ This document must be updated daily every time you finish a work session.
 
 ### 2025-05-21 - whitespace knowledge clarification
 - Clarified how heap access and input/output works in whitespace (10 min)
+
+### 2025-05-22 - heap implementation 
+- Created a heap struct and wrote store and retrieve functions for a heap (20 min)
