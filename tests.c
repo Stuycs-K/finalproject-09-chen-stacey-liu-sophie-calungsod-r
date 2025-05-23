@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "stack_test.h"
+#include "heap_test.h"
 #include "math_test.h"
 
 int main() {
@@ -72,12 +73,22 @@ int main() {
   push(&stack, 8);
   print(&stack);
 
-  printf("%d\n", add(&stack));
+  printf("MATH\n");
+
+  add(&stack);
   print(&stack);
-  printf("%d\n", subtract(&stack));
-  printf("%d\n", divide(&stack));
-  printf("%d\n", multiply(&stack));
-  printf("%d\n", modulo(&stack));
+
+  subtract(&stack);
+  print(&stack);
+
+  divide(&stack);
+  print(&stack);
+
+  multiply(&stack);
+  print(&stack);
+
+  modulo(&stack);
+  print(&stack);
 
   return 0;
 }
