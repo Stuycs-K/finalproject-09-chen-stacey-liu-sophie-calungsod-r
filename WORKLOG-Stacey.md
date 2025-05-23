@@ -17,3 +17,6 @@ Spent 30 minutes at home continuing with stack manipulation research and flow co
 ### 2024-05-20 - Worked on flow control functions
 - Spent class period working on the functions for flow control, specifically markLoc() and unCondJump().
 - Spent 10 minutes at home continuing the unCondJump() functions and spent 20 minutes starting to write the conditional statements for each.
+
+### 2024-05-22 - Worked on flow control conditional statements
+- Spent 30 minutes at home on unCondJump(), findLabel(), and reordered code to integrate zeroJump() and negJump() into main code.
