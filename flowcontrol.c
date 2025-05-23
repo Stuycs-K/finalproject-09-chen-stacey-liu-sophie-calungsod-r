@@ -89,7 +89,18 @@ void zeroJump(Stack *stack, char * label){
   //NTS[label]
   if (stack->ary[stack->top] == 0) unCondJump(label, label_ary, currPtr);
 }
+
 void negJump(Stack *stack, char * label){
   //NTT[label]
   if (stack->ary[stack->top] < 0) unCondJump(stack, label);
+}
+
+// takes Whitespace code and prints it in NST
+void printReadable(char * str){
+  for (i = 0; i<strlen(str); i++){
+    if (str[i] == '\t') printf("T");
+    else if (str[i] == '\n') printf("N\n");
+    else if (str[i] == ' ') printf("S");
+    else printf(" ");
+  }
 }
