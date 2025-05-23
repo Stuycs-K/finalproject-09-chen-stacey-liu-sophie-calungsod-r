@@ -26,3 +26,6 @@ This document must be updated daily every time you finish a work session.
 
 ### 2025-05-22 - heap implementation 
 - Created a heap struct and wrote store and retrieve functions for a heap (20 min)
+
+### 2025-05-23 - heaps & math operation fixes
+- added heap code to makefile and updated the math operation functions to push the found value to a stack and added an error to a division by 0 case (40 min)
