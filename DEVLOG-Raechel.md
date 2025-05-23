@@ -49,12 +49,13 @@ I spent 25 minutes at home continuing with the function that will call which
 interpretation function to use using conditionals, this time working on flow
 control and heap access. I also reorganized some of our research on my spreadsheet.
 
-### 2025-05-20 - Writing README, presentation, and consolidating code
+### 2025-05-22 - Writing README, presentation, and consolidating code
 I spent 35 minutes in class combining code, specifically adding the basics for our
 future stack control code into the main code file. I also spent time looking through
 resources, editing the markdown in our README, and adding to our presentation file.
 
-I spent 25 minutes at home cleaning up our main code to ensure that the pointer works
-correctly. I also communicated next steps with the rest of the group and made a plan
-as we move forward.
+### 2025-05-23 - Writing presentation
+I spent 35 minutes in class writing the beginning of our presentation markdown file
+with the information that our group gathered on our shared Google Doc. Our group also
+spent time reviewing each other's code, debugging, and ensuring that we're on the same page.
 
