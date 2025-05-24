@@ -15,3 +15,12 @@ void retrieve(Heap *heap, Stack *stack) {
     int value = heap->ary[address];
     push(stack, value);
 }
+
+/* Print full heap. For dev purposes */
+void print_heap(Heap *heap) {
+  printf("[");
+  for (int i = 0; i < 10; i++) {
+    printf("%d, ", heap->ary[i]);
+  }
+  printf("]\n");
+}

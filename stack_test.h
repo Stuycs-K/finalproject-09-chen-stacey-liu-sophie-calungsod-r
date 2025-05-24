@@ -18,6 +18,7 @@ void copy(Stack *stack, int n);
 void slide(Stack *stack, int n);
 int pop(Stack *stack);
 
+/* dev */
 void print(Stack *stack);
 
 #endif

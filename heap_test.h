@@ -12,4 +12,7 @@ typedef struct {
 void store(Heap *heap, Stack *stack);
 void retrieve(Heap *heap, Stack *stack);
 
+/* dev */
+void print_heap(Heap *heap);
+
 #endif

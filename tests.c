@@ -90,5 +90,19 @@ int main() {
   modulo(&stack);
   print(&stack);
 
+  Heap heap;
+  print_heap(&heap);
+
+  store(&heap, &stack);
+  print_heap(&heap);
+
+  store(&heap, &stack);
+  pop(&stack);
+
+  retrieve(&heap, &stack);
+  
+  print_heap(&heap);
+  print(&stack);
+
   return 0;
 }
