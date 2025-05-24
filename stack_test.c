@@ -19,7 +19,7 @@ int isFull(Stack *stack) {
 /* Push number n onto stack */
 void push(Stack *stack, int n) {
   if (isFull(stack)) {
-    perror(":(");
+    perror("Error: stack is full");
     return;
   }
   stack->top++;
@@ -28,8 +28,12 @@ void push(Stack *stack, int n) {
 
 /* Duplicate top item on stack */
 void duplicate(Stack *stack) {
-  if (isFull(stack) || isEmpty(stack)) {
-    perror(":(");
+  if (isFull(stack)) {
+    perror("Error: stack is full");
+    return;
+  }
+  if (isEmpty(stack)) {
+    perror("Error: stack is empty");
     return;
   }
   stack->top++;
@@ -41,7 +45,7 @@ void duplicate(Stack *stack) {
 */
 void swap(Stack *stack) {
   if (stack->top < 1) {
-    perror(":(");
+    perror("Error: insufficient number of items in stack");
     return;
   }
   int temp = stack->ary[stack->top];
@@ -52,7 +56,7 @@ void swap(Stack *stack) {
 /* Discard top item on stack */
 void discard(Stack *stack) {
   if (isEmpty(stack)) {
-    perror(":(");
+    perror("Error: stack is empty");
     return;
   }
   stack->top--;
@@ -60,8 +64,12 @@ void discard(Stack *stack) {
 
 /* Copy nth item on the stack to top of stack */
 void copy(Stack *stack, int n) {
-  if (isFull(stack) || stack->top < n-1) {
-    perror(":(");
+  if (isFull(stack)) {
+    perror("Error: stack is full");
+    return;
+  }
+  if (stack->top < n-1) {
+    perror("Error: item at given index does not exist");
     return;
   }
   stack->top++;
@@ -73,7 +81,7 @@ void copy(Stack *stack, int n) {
  */
 void slide(Stack *stack, int n) {
   if (isEmpty(stack)) {
-    perror(":(");
+    perror("Error: stack is empty");
     return;
   }
   if (n >= stack->top) { //only top item remains if n >= (the amt of items in stack - 1)
@@ -91,7 +99,7 @@ void slide(Stack *stack, int n) {
  */
 int pop(Stack *stack) {
   if (isEmpty(stack)) {
-    perror(":(");
+    perror("Error: stack is empty");
     return 0;
   }
   stack->top--;
