@@ -1,7 +1,14 @@
 #include "whitespace.h"
+#include "stack.h"
+#include "heap.h"
+#include "math.h"
 
+Stack stack;
+Heap heap;
 
 int main(int argc, char const *argv[]){
+  init(&stack);
+
   if (argc<=1){
     printf("\nUse either option '-p' to print the translated Whitespace or '-r' to run the translated command.");
   }
@@ -92,18 +99,23 @@ int whichFunc(char* line){
   if (*ptr=="\t" && *ptr+1==" "){ // [TAB][SPACE] beginning indicates math
     if (*ptr+2==" " && *ptr+3==" "){ // [SPACE][SPACE] addition
       // call addition function
+      add(&stack);
     }
     if (*ptr+2==" " && *ptr+3=="\t"){ // [SPACE][TAB] subtraction
       // call subtraction function
+      subtract(&stack);
     }
     if (*ptr+2==" " && *ptr+3=="\n"){ // [SPACE][LINEFEED] multiplication
       // call multiplication function
+      multiply(&stack);
     }
     if (*ptr+2=="\t" && *ptr+3==" "){ // [TAB][SPACE] int division
       // call int division function
+      divide(&stack);
     }
     if (*ptr+2=="\t" && *ptr+3=="\t"){ // [TAB][TAB] modulo
       // call modulo function
+      modulo(&stack);
     }
   }
   // input/output
@@ -125,30 +137,38 @@ int whichFunc(char* line){
   else if (*ptr==" "){
     if (*ptr+1==" " && *ptr+2=="number"){ // should find number later
       // push number onto stack
+      //push(&stack, number);
     }
     if (*ptr+1=="\n" && *ptr+2==" "){ 
       // duplicate top item on stack
+      duplicate(&stack);
     }
     if (*ptr+1=="\n" && *ptr+2=="\t"){
       // swap 2 top items on stack
+      swap(&stack);
     }
     if (*ptr+1=="\n" && *ptr+2=="\n"){
       // discard top item on stack
+      discard(&stack);
     }
     if (*ptr+1==" " && *ptr+2=="number"){ // number later
       // Copy nth item on the stack onto top of stack
+      //copy(&stack, number)
     }
     if (*ptr+1=="\n" && *ptr+2=="number"){ // number later
       // Slide n items off the stack, keeping top item
+      //slide(&stack, number)
     }
   } 
   // heap access
   else if (*ptr=="\t" && *ptr+1=="\t"){
     if (*ptr+2==" "){ 
       // store in heap
+      store(&heap, &stack);
     }
     if (*ptr+2=="\t"){ 
       // retrieve from heap
+      retrieve(&heap, &stack);
     }
   }
   // flow control
