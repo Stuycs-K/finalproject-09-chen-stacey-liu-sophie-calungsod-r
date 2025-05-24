@@ -28,5 +28,6 @@ This document must be updated daily every time you finish a work session.
 - Created a heap struct and wrote store and retrieve functions for a heap (20 min)
 
 ### 2025-05-23 - heaps & math operation fixes
-- added heap code to makefile and updated the math operation functions to push the found value to a stack and added an error to division by 0 and mod 0 cases (40 min)
-- updated print statements when encounter an error & updated comments to reflect above changes (15 min)
+- Added heap code to makefile and updated the math operation functions to push the found value to a stack and added an error to division by 0 and mod 0 cases (40 min)
+- Updated print statements when encounter an error & updated comments to reflect above changes (15 min)
+- Wrote heap tests (20 min)
