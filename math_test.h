@@ -3,10 +3,10 @@
 
 #include "stack_test.h"
 
-int add(Stack *stack);
-int subtract(Stack *stack);
-int multiply(Stack *stack);
-int divide(Stack *stack);
-int modulo(Stack *stack);
+void add(Stack *stack);
+void subtract(Stack *stack);
+void multiply(Stack *stack);
+void divide(Stack *stack);
+void modulo(Stack *stack);
 
 #endif
