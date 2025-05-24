@@ -69,7 +69,7 @@ void copy(Stack *stack, int n) {
     return;
   }
   if (stack->top < n-1) {
-    perror("Error: item at given index does not exist");
+    perror("Error: item at given index does not exist in stack");
     return;
   }
   stack->top++;
