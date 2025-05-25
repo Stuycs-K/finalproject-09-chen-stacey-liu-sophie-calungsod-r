@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "stack.h"
 
 /* Set stack length to 0 */
