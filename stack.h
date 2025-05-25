@@ -10,6 +10,9 @@ typedef struct {
 
 void init(Stack *stack);
 
+int isEmpty(Stack *stack);
+int isFull(Stack *stack);
+
 void push(Stack *stack, int n);
 void duplicate(Stack *stack);
 void swap(Stack *stack);

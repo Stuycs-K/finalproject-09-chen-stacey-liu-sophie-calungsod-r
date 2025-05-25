@@ -8,6 +8,10 @@
 
 /* Pushes the sum of the 1st value popped and 2nd value popped to stack */
 void add(Stack *stack) {
+  if (isFull(stack)) {
+    perror("Math Error: Stack is full");
+    return;
+  }
   if (stack->top < 1) {
     perror("Math Error: Insufficient number of items in stack");
     return;
@@ -17,6 +21,10 @@ void add(Stack *stack) {
 
 /* Pushes the difference of the 2nd value popped and 1st value popped to stack */
 void subtract(Stack *stack) {
+  if (isFull(stack)) {
+    perror("Math Error: Stack is full");
+    return;
+  }
   if (stack->top < 1) {
     perror("Math Error: Insufficient number of items in stack");
     return;
@@ -27,6 +35,10 @@ void subtract(Stack *stack) {
 
 /* Pushes the product of the 1st value popped and 2nd value popped to stack */
 void multiply(Stack *stack) {
+  if (isFull(stack)) {
+    perror("Math Error: Stack is full");
+    return;
+  }
   if (stack->top < 1) {
     perror("Math Error: Insufficient number of items in stack");
     return;
@@ -34,10 +46,12 @@ void multiply(Stack *stack) {
   push(stack, (pop(stack) * pop(stack)));
 }
 
-/* Pushes the quotient of the 2nd value popped and 1st value popped to stack.
- * Returns an error if the 1st value popped is 0
- */
+/* Pushes the quotient of the 2nd value popped and 1st value popped to stack */
 void divide(Stack *stack) {
+  if (isFull(stack)) {
+    perror("Math Error: Stack is full");
+    return;
+  }
   if (stack->top < 1) {
     perror("Math Error: Insufficient number of items in stack");
     return;
@@ -51,10 +65,12 @@ void divide(Stack *stack) {
   push(stack, (second_pop / first_pop));
 }
 
-/* Pushes the remainder of the 2nd value popped and 1st value popped to stack 
- * Returns an error if the 1st value popped is 0 
- */
+/* Pushes the remainder of the 2nd value popped and 1st value popped to stack */
 void modulo(Stack *stack) {
+  if (isFull(stack)) {
+    perror("Math Error: Stack is full");
+    return;
+  }
   if (stack->top < 1) {
     perror("Math Error: Insufficient number of items in stack");
     return;

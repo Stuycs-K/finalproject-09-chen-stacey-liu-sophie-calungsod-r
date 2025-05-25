@@ -4,6 +4,10 @@
 
 /* Store in heap */
 void store(Heap *heap, Stack *stack) {
+  if (stack->top < 1) {
+    perror("Heap Error: Insufficient number of items in stack");
+    return;
+  }
   int value = pop(stack);
   int address = pop(stack);
   if (address >= MAX_HEAP_SIZE || address < 0) {
@@ -15,6 +19,14 @@ void store(Heap *heap, Stack *stack) {
 
 /* Retrieve from heap */
 void retrieve(Heap *heap, Stack *stack) {
+  if (isFull(stack)) {
+    perror("Heap Error: Stack is full");
+    return;
+  }
+  if (isEmpty(stack)) {
+    perror("Heap Error: Stack is empty");
+    return;
+  }
   int address = pop(stack);
   if (address >= MAX_HEAP_SIZE || address < 0) {
     perror("Heap Error: Invalid address");
