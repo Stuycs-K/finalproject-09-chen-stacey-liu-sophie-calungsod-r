@@ -3,6 +3,8 @@
 #include "stack_test.h"
 #include "heap_test.h"
 
+//should we add a print statement asking for input?
+
 /* Takes user input and inputs it as an ASCII character to a heap.
  * Uses first popped item from stack for the heap address
  */
@@ -11,7 +13,8 @@ void input_char(Stack *stack, Heap *heap) {
     char value;
     char input[256];
     fgets(input, 255, stdin);
-    sscanf(input, "%c", value);
+    //printf("input a character: \n");
+    sscanf(input, "%c", &value);
 
     //store input to heap
     int address = pop(stack);
@@ -23,10 +26,11 @@ void input_char(Stack *stack, Heap *heap) {
  */
 void input_num(Stack *stack, Heap *heap) {
     //get user input
-    char value;
+    int value;
     char input[256];
     fgets(input, 255, stdin);
-    sscanf(input, "%d", value);
+    //printf("input a number: \n");
+    sscanf(input, "%d", &value);
     
     //store input to heap
     int address = pop(stack);

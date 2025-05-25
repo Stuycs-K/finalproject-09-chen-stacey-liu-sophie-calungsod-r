@@ -2,6 +2,7 @@
 #include "stack_test.h"
 #include "heap_test.h"
 #include "math_test.h"
+#include "io_test.h"
 
 int main() {
   Stack stack;
@@ -103,6 +104,19 @@ int main() {
   
   print_heap(&heap);
   print(&stack);
+
+  output_num(&stack);
+  output_num(&stack);
+  push(&stack, 72);
+  output_char(&stack);
+
+  input_char(&stack, &heap);
+  print_heap(&heap);
+
+  push(&stack, 5);
+  input_num(&stack, &heap);
+  print_heap(&heap);
+
 
   return 0;
 }
