@@ -42,7 +42,7 @@ void duplicate(Stack *stack) {
 
 /* Swap the top 2 items on stack. 
  * If stack size is less than 2, return error 
-*/
+ */
 void swap(Stack *stack) {
   if (stack->top < 1) {
     perror("Stack Error: Insufficient number of items in stack");
