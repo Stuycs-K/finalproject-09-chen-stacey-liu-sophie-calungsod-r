@@ -92,9 +92,7 @@ void slide(Stack *stack, int n) {
   }
 }
 
-/* Pop and return the top item. 
- * Returns 0 if stack is empty 
- */
+/* Pop and return the top item */
 int pop(Stack *stack) {
   if (isEmpty(stack)) {
     perror("Stack Error: Stack is empty");
