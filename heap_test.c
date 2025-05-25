@@ -7,7 +7,7 @@ void store(Heap *heap, Stack *stack) {
   int value = pop(stack);
   int address = pop(stack);
   if (address >= MAX_HEAP_SIZE || address < 0) {
-    perror("Error: Invalid address");
+    perror("Heap Error: Invalid address");
     return;
   }
   heap->ary[address] = value;
@@ -17,7 +17,7 @@ void store(Heap *heap, Stack *stack) {
 void retrieve(Heap *heap, Stack *stack) {
   int address = pop(stack);
   if (address >= MAX_HEAP_SIZE || address < 0) {
-    perror("Error: Invalid address");
+    perror("Heap Error: Invalid address");
     return;
   }
   int value = heap->ary[address];

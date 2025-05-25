@@ -13,7 +13,7 @@ void input_char(Stack *stack, Heap *heap) {
     char value;
     char input[256];
     fgets(input, 255, stdin);
-    //printf("input a character: \n");
+    //printf("input a character: ");
     sscanf(input, "%c", &value);
 
     //store input to heap
@@ -29,7 +29,7 @@ void input_num(Stack *stack, Heap *heap) {
     int value;
     char input[256];
     fgets(input, 255, stdin);
-    //printf("input a number: \n");
+    //printf("input a number: ");
     sscanf(input, "%d", &value);
     
     //store input to heap
