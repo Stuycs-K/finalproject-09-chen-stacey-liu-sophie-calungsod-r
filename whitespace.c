@@ -1,7 +1,14 @@
 #include "whitespace.h"
+#include "stack.h"
+#include "heap.h"
+#include "math.h"
 
+Stack stack;
+Heap heap;
 
 int main(int argc, char const *argv[]){
+  init(&stack);
+
   if (argc<=1){
     printf("\nUse either option '-p' to print the translated Whitespace or '-r' to run the translated command.");
   }
@@ -9,11 +16,9 @@ int main(int argc, char const *argv[]){
     /*char translated[] = "hi"; // replace with function call
     printf("%s", translated);*/
 
-    // trying to get it to read a file containing a string... should translate to -50 i think
-    // but im getting Segmentation fault: 11
     char * stringOf = readFile("test.txt");
-    printf("here is the string from the file: %s\n",stringOf);
-    printf("%d",findNumber(stringOf));
+    //printf("here is the string from the file: %s\n",stringOf);
+    printf("translated number: %d",findNumber(stringOf));
   }
   if (argc>1 && strcmp(argv[1],"-r")==0){ // first argument is 'r', runs the translated command
     // uses function on a string and then calls execvp successfully
@@ -51,7 +56,6 @@ char * readFile(char* fileName){
     printf("Error %d: %s\n", errno, strerror(errno));
   }
 
-
   char* buff = malloc(1024*4); // make files later, see if we need more
   // add error msg if the malloc didnt work
   if (buff==NULL){
@@ -64,6 +68,9 @@ char * readFile(char* fileName){
     if(space==' ' || space=='\n' || space=='\t'){ // tabs?????
       buff[len]=space;
       len++;
+      if(space==' ') printf("[SPACE]");
+      if(space=='\n') printf("[LINEFEED]\n");
+      if(space=='\t') printf("[TAB]");
     }
   }
 
@@ -71,26 +78,6 @@ char * readFile(char* fileName){
   close(file);
     return buff;
   }
-
-/*
-  struct space_node * linkList(char *strIn){
-    struct space_node *head = NULL;
-    struct space_node *curr = NULL;
-
-    // go through everything in the string except idk how... while something
-    // inside the loop:
-    struct space_node *new = malloc(sizeof(struct space_node));
-    // throw error if it doesnt malloc right
-
-    if(head==NULL){
-      head=new;
-    }
-    else{
-      curr->next=new;
-    }
-    return head;
-  }
-*/
 
 // potentially move to a new file later
 // used for execvp
@@ -103,4 +90,136 @@ void parse_args( char * line, char ** arg_ary ){
     i++;
   }
   arg_ary[i] = NULL;
+}
+
+int whichFunc(char* line){
+  char* ptr; // points to where you are in the string
+
+  // MATH
+  if (*ptr=="\t" && *ptr+1==" "){ // [TAB][SPACE] beginning indicates math
+    if (*ptr+2==" " && *ptr+3==" "){ // [SPACE][SPACE] addition
+      // call addition function
+      add(&stack);
+    }
+    if (*ptr+2==" " && *ptr+3=="\t"){ // [SPACE][TAB] subtraction
+      // call subtraction function
+      subtract(&stack);
+    }
+    if (*ptr+2==" " && *ptr+3=="\n"){ // [SPACE][LINEFEED] multiplication
+      // call multiplication function
+      multiply(&stack);
+    }
+    if (*ptr+2=="\t" && *ptr+3==" "){ // [TAB][SPACE] int division
+      // call int division function
+      divide(&stack);
+    }
+    if (*ptr+2=="\t" && *ptr+3=="\t"){ // [TAB][TAB] modulo
+      // call modulo function
+      modulo(&stack);
+    }
+  }
+  // input/output
+  else if (*ptr=="\t" && *ptr+1=="\n"){
+    if (*ptr+2=="\t" && *ptr+3==" "){ 
+      // call 1st IO function
+    }
+    if (*ptr+2=="\t" && *ptr+3=="\t"){ 
+      // call 2nd IO function
+    }
+    if (*ptr+2==" " && *ptr+3==" "){ 
+      // call 3rd IO function
+    }
+    if (*ptr+2==" " && *ptr+3=="\t"){ 
+      // call 4th IO function
+    }
+  }
+  // stack manipulation
+  else if (*ptr==" "){
+    if (*ptr+1==" " && *ptr+2=="number"){ // should find number later
+      // push number onto stack
+      //push(&stack, number);
+    }
+    if (*ptr+1=="\n" && *ptr+2==" "){ 
+      // duplicate top item on stack
+      duplicate(&stack);
+    }
+    if (*ptr+1=="\n" && *ptr+2=="\t"){
+      // swap 2 top items on stack
+      swap(&stack);
+    }
+    if (*ptr+1=="\n" && *ptr+2=="\n"){
+      // discard top item on stack
+      discard(&stack);
+    }
+    if (*ptr+1==" " && *ptr+2=="number"){ // number later
+      // Copy nth item on the stack onto top of stack
+      //copy(&stack, number)
+    }
+    if (*ptr+1=="\n" && *ptr+2=="number"){ // number later
+      // Slide n items off the stack, keeping top item
+      //slide(&stack, number)
+    }
+  } 
+  // heap access
+  else if (*ptr=="\t" && *ptr+1=="\t"){
+    if (*ptr+2==" "){ 
+      // store in heap
+      store(&heap, &stack);
+    }
+    if (*ptr+2=="\t"){ 
+      // retrieve from heap
+      retrieve(&heap, &stack);
+    }
+  }
+  // flow control
+  else if (*ptr=="\n"){
+    if (*ptr+1==" " && *ptr+2==" " && *ptr+3=="label?"){ 
+      // Mark a location in program
+    }
+    if (*ptr+1==" " && *ptr+2=="\t" && *ptr+3=="label?"){ 
+      // Call a subroutine
+    }
+    if (*ptr+1==" " && *ptr+2=="\n" && *ptr+3=="label?"){ 
+      // Jump unconditionally to a label
+    }
+    if (*ptr+1=="\t" && *ptr+2==" " && *ptr+3=="label?"){ 
+      // Jump to a label if the top of the stack is zero
+    }
+    if (*ptr+1=="\t" && *ptr+2=="\t" && *ptr+3=="label?"){ 
+      // Jump to label if the top of the stack is negative
+    }
+    if (*ptr+1=="\t" && *ptr+2=="\n"){ 
+      // End subroutine & transfer control back to caller  
+    }
+    if (*ptr+1=="\n" && *ptr+2=="\n"){ 
+      // End program
+    }
+  }
+
+  // at the end, move the pointer forward the appropriate amnt of steps
+
+}
+
+// deal with stack stuff
+void markLoc(char* label){
+  // NSS[label]
+  // save as pointer? char **
+  //maybe don't have this as a function -> just save pointer + label as pair in array
+}
+
+void callSubRoutine(char * label){
+  // NST[label]
+}
+
+void unCondJump(char * label){
+  //NSN[label]
+}
+
+void zeroJump(Stack *stack, char * label){
+  //NTS[label]
+  if (stack->ary[stack->top] == 0) unCondJump(stack, label);
+}
+void negJump(Stack *stack, char * label){
+  //NTT[label]
+  if (stack->ary[stack->top] < 0) unCondJump(stack, label);
 }

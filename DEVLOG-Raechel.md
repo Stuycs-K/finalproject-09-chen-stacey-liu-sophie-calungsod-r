@@ -38,3 +38,24 @@ I spent 30 minutes at home fixing errors in the code, including the segmentation
 fault that occurred while I tried to test the Whitespace number translator. After
 editing the code, numbers seem to be correctly interpreted, but further testing
 is needed to make sure this works within other pieces of code.
+
+### 2025-05-20 - Writing main code
+I spent 40 minutes in class testing more of our number interpretations and writing 
+code for our main whitespace.c file. I focused mainly on the conditionals that determine
+whether a stack manipulation, mathematical, or input/output function needs to be called
+to interpret the encoded Whitespace.
+
+I spent 25 minutes at home continuing with the function that will call which 
+interpretation function to use using conditionals, this time working on flow
+control and heap access. I also reorganized some of our research on my spreadsheet.
+
+### 2025-05-22 - Writing README, presentation, and consolidating code
+I spent 35 minutes in class combining code, specifically adding the basics for our
+future stack control code into the main code file. I also spent time looking through
+resources, editing the markdown in our README, and adding to our presentation file.
+
+### 2025-05-23 - Writing presentation
+I spent 35 minutes in class writing the beginning of our presentation markdown file
+with the information that our group gathered on our shared Google Doc. Our group also
+spent time reviewing each other's code, debugging, and ensuring that we're on the same page.
+

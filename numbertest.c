@@ -1,6 +1,7 @@
 #include "numbertest.h"
 #define ARRAY_SIZE 100
 int main(){
+  // [SPACE][TAB][SPACE][SPACE][TAB][SPACE][TAB][TAB]
   char* test = " \t  \t \t\t\n"; // 75
   char* test2 = "\t\t\t  \t \n"; // -50
   printf("%d\n", findNumber(test));
