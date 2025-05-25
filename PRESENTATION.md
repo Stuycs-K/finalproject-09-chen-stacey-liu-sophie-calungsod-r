@@ -12,7 +12,15 @@ In order for this to work, we first needed to understand how Whitespace function
 
 - ASCII value 32 represents a space
 - ASCII value 9 represents a tab
-- ASCII value 10 represents *line feed*, or a new line. 
+- ASCII value 10 represents *line feed*, or a new line.
+
+Our interpreter is ran with one command in the terminal: make whitespace. The option added determines the outcome:
+
+Printing the whitespace in plain text:
+>make whitespace ARGS="-p'
+
+Executing the whitespace command:
+>make whitespace ARGS="-r' // i dont remember ???????
 
 Once we reviewed a few color-coded examples of Whitespace code, we dove into understanding Instruction Modification Parameters, or IMP. IMP is not a commonly used term, but it is used in documentation written for Whitespace (although official, original documentation has been unpublished since its creation). IMP refers to the beginning of a command, used to designate its purpose when interpreting code. For Whitespace, there are five different IMPs for five different categories of commands: Input/Output, stack manipulation, arithmetic, flow control, and heap access.
 
