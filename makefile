@@ -16,7 +16,7 @@ heap.o: heap.c stack.h
 math.o: math.c stack.h
 	@gcc -c math.c
 
-io_test.o: io.c stack.h heap.h
+io.o: io.c stack.h heap.h
 	@gcc -c io.c
 
 clean:
