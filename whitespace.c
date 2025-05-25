@@ -122,15 +122,19 @@ int whichFunc(char* line){
   else if (*ptr=="\t" && *ptr+1=="\n"){
     if (*ptr+2=="\t" && *ptr+3==" "){ 
       // call 1st IO function
+      input_char(&stack, &heap);
     }
     if (*ptr+2=="\t" && *ptr+3=="\t"){ 
       // call 2nd IO function
+      input_num(&stack, &heap);
     }
     if (*ptr+2==" " && *ptr+3==" "){ 
       // call 3rd IO function
+      output_char(&stack);
     }
     if (*ptr+2==" " && *ptr+3=="\t"){ 
       // call 4th IO function
+      output_num(&stack);
     }
   }
   // stack manipulation

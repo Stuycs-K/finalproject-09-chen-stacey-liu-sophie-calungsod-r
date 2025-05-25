@@ -1,10 +1,10 @@
 .PHONY: whitespace
 
-whitespace: whitespace.o stack.o heap.o math.o
-	@gcc -o whitespace whitespace.o stack.o heap.o math.o
+whitespace: whitespace.o stack.o heap.o math.o io.o
+	@gcc -o whitespace whitespace.o stack.o heap.o math.o io.o
 	@./whitespace $(ARGS)
 
-whitespace.o: whitespace.c whitespace.h stack.h heap.h math.h
+whitespace.o: whitespace.c whitespace.h stack.h heap.h math.h io.h
 	@gcc -c whitespace.c
 
 stack.o: stack.c
@@ -15,6 +15,9 @@ heap.o: heap.c stack.h
 
 math.o: math.c stack.h
 	@gcc -c math.c
+
+io_test.o: io.c stack.h heap.h
+	@gcc -c io.c
 
 clean:
 	@rm *.o

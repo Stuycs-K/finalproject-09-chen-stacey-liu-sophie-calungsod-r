@@ -31,3 +31,7 @@ This document must be updated daily every time you finish a work session.
 - Added heap code to makefile and updated the math operation functions to push the found value to a stack and added an error to division by 0 and mod 0 cases (40 min)
 - Updated print statements when encounter an error & updated comments to reflect above changes (15 min)
 - Wrote heap tests (20 min)
+- Merged branch with main and added function calls to main program (20 min)
+
+### 2025-05-24 - i/o implentation
+- Wrote and tested input char/num and output char/num functions (50 min)
