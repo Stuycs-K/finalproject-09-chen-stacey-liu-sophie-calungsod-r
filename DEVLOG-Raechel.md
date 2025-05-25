@@ -59,3 +59,5 @@ I spent 35 minutes in class writing the beginning of our presentation markdown f
 with the information that our group gathered on our shared Google Doc. Our group also
 spent time reviewing each other's code, debugging, and ensuring that we're on the same page.
 
+I spent 40 minutes at home continuing our presentation and reviewing our code. Our presentation
+is mostly complete (missing examples from our actual code).
