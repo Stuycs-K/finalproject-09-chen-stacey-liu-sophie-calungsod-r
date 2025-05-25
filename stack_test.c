@@ -40,9 +40,7 @@ void duplicate(Stack *stack) {
   stack->ary[stack->top] = stack->ary[stack->top-1];
 }
 
-/* Swap the top 2 items on stack. 
- * If stack size is less than 2, return error 
- */
+/* Swap the top 2 items on stack */
 void swap(Stack *stack) {
   if (stack->top < 1) {
     perror("Stack Error: Insufficient number of items in stack");

@@ -17,6 +17,10 @@ void input_char(Stack *stack, Heap *heap) {
     sscanf(input, "%c", &value);
 
     //store input to heap
+    if (isEmpty(stack)) {
+        perror("Input Error: Stack is empty");
+        return;
+    }
     int address = pop(stack);
     heap->ary[address] = value;
 }
@@ -33,18 +37,30 @@ void input_num(Stack *stack, Heap *heap) {
     sscanf(input, "%d", &value);
     
     //store input to heap
+    if (isEmpty(stack)) {
+        perror("Input Error: Stack is empty");
+        return;
+    }
     int address = pop(stack);
     heap->ary[address] = value;
 }
 
 /* Outputs top of stack as an ASCII character */
 void output_char(Stack *stack) {
+    if (isEmpty(stack)) {
+        perror("Output Error: Stack is empty");
+        return;
+    }
     fprintf(stdout, "%c", pop(stack));
     fflush(stdout);
 }
 
 /* Outputs top of stack as a number */
 void output_num(Stack *stack) {
+    if (isEmpty(stack)) {
+        perror("Output Error: Stack is empty");
+        return;
+    }
     fprintf(stdout, "%d", pop(stack));
     fflush(stdout);
 }
