@@ -94,6 +94,9 @@ int main() {
   Heap heap;
   print_heap(&heap);
 
+  retrieve(&heap, &stack);
+  print(&stack);
+
   store(&heap, &stack);
   print_heap(&heap);
 
