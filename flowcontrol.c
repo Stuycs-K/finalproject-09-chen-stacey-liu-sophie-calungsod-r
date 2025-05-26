@@ -5,51 +5,53 @@
 #define ARRAY_SIZE 100
 int main(){
   // code for flow control part of whitespace, reference whichFunc() in whitespace.c
-  char * testline = "\n  \t\n"; // placeholder string for now
+  char * testline = "\n  \t\n\n  \t  \n"; //\n \n\t\n"; <-- test unCondJump(infinite loop)
   char * ptr= testline; // points to where you are in string/Whitespace code
   struct labelInfo * label_ary = (struct labelInfo *)malloc(ARRAY_SIZE*sizeof(struct labelInfo)); // keeps track of labels & their pointers
   struct labelInfo * labelAry_ptr = label_ary;
   Stack stack;
   init(&stack);
+  while (ptr < testline + strlen(testline)){
+    if (*(ptr) == '\n'){ // if IMP is N, aka flow control
+      if (*(ptr+1) == ' ' && *(ptr+2) == ' '){ // mark location with the label
+        ptr+= 3;
+        char * label = findLabel(ptr);
+        markLoc(labelAry_ptr, label, ptr);
+        labelAry_ptr++;
+        ptr += strlen(label) + 1;
+      }
+      if (*(ptr+1) == ' ' && *(ptr+2) == '\t'){ // call subroutine
 
-  if (*(ptr) == '\n'){ // if IMP is N, aka flow control
-    if (*(ptr+1) == ' ' && *(ptr+2) == ' '){ // mark location with the label
-      ptr+= 3;
-      char * label = findLabel(ptr);
-      markLoc(labelAry_ptr, label, ptr);
-      // printLabelAry(labelAry_ptr);
-      labelAry_ptr++;
-      ptr += strlen(label) + 1;
-    }
-    if (*(ptr+1) == ' ' && *(ptr+2) == '\t'){ // call subroutine
+      }
+      if (*(ptr+1) == ' ' && *(ptr+2) == '\n'){ // jump unconditionally
+        ptr+= 3;
+        char * label = findLabel(ptr);
+        unCondJump(label, label_ary, &ptr);
+      }
+      if (*(ptr+1) == '\t' && *(ptr+2) == ' '){ // zero jump
+        ptr+= 3;
+        char * label = findLabel(ptr);
+        ptr += strlen(label);
+        //NTS[label]
+        if (stack.top == 0) unCondJump(label, label_ary, &ptr);
+      }
+      if (*(ptr+1) == '\t' && *(ptr+2) == '\t'){ // negative jump
+        ptr+= 3;
+        char * label = findLabel(ptr);
+        ptr += strlen(label);
+        //NTT[label]
+        if (stack.top < 0) unCondJump(label, label_ary, &ptr);
+      }
+      if (*(ptr+1) == '\t' && *(ptr+2) == '\n'){ // end subroutine
 
-    }
-    if (*(ptr+1) == ' ' && *(ptr+2) == '\n'){ // jump unconditionally
-      ptr+= 3;
-      char * label = findLabel(ptr);
-      unCondJump(label, label_ary, &ptr);
-    }
-    if (*(ptr+1) == '\t' && *(ptr+2) == ' '){ // zero jump
-      ptr+= 3;
-      char * label = findLabel(ptr);
-      ptr += strlen(label);
-      //NTS[label]
-      if (stack.top == 0) unCondJump(label, label_ary, &ptr);
-    }
-    if (*(ptr+1) == '\t' && *(ptr+2) == '\t'){ // negative jump
-      ptr+= 3;
-      char * label = findLabel(ptr);
-      ptr += strlen(label);
-      //NTT[label]
-      if (stack.top < 0) unCondJump(label, label_ary, &ptr);
-    }
-    if (*(ptr+1) == '\t' && *(ptr+2) == '\n'){ // end subroutine
+      }
+      if (*(ptr+1) == '\n' && *(ptr+2) == '\n'){ // end program
 
-    }
-    if (*(ptr+1) == '\n' && *(ptr+2) == '\n'){ // end program
-
+      }
     }
   }
+  // printLabelAry(label_ary);
+  // printf("%ld\n", (long int)ptr);
   return 0;
 }
 
@@ -73,6 +75,8 @@ char* findLabel(char * ptr){
    - ptr --> pointer to the location of the label in the code
 */
 void markLoc(struct labelInfo * label_ary, char* label, char* ptr){
+  if (ptr == NULL) perror("Error: Value of pointer is NULL\n");
+  if (label == NULL) perror("Error: Value of label is NULL\n");
   struct labelInfo * x = (struct labelInfo *)malloc(sizeof(struct labelInfo));
   x -> label_name = label;
   x -> label_ptr = ptr;
@@ -97,9 +101,10 @@ void unCondJump(char * label, struct labelInfo * label_ary, char ** currPtr){
     char * ptr = label_ary[i].label_ptr;
     if (!strcmp(label, name)){
       *currPtr = ptr;
-      break;
+      return;
     }
   }
+  perror("Error: Label not found.\n");
 }
 
 
@@ -121,5 +126,5 @@ void printLabelAry(struct labelInfo * label_ary){
   for (int i = 0; i<ARRAY_SIZE; i++){
     printf("[%s, %ld] ", (label_ary+i) -> label_name, (long int)((label_ary+ i) ->label_ptr));
   }
-  printf("}");
+  printf("}\n");
 }
