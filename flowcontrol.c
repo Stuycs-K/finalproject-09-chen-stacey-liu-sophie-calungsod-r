@@ -1,28 +1,23 @@
 #include "flowcontrol.h"
 #include "stack.h"
 
-struct labelInfo {
-    char * label_name;
-    char * label_ptr;
-};
 
 #define ARRAY_SIZE 100
 int main(){
   // code for flow control part of whitespace, reference whichFunc() in whitespace.c
   char * testline = "\n  \t\n"; // placeholder string for now
   char * ptr; // points to where you are in string/Whitespace code
-  struct labelInfo * label_ary = malloc(ARRAY_SIZE*sizeof(struct labelInfo)); // keeps track of labels & their pointers
+  struct labelInfo * label_ary = (struct labelInfo *)malloc(ARRAY_SIZE*sizeof(struct labelInfo)); // keeps track of labels & their pointers
   struct labelInfo * labelAry_ptr = label_ary;
   Stack stack;
-  Heap heap;
   init(&stack);
 
   if (*(ptr) == '\n'){ // if IMP is N, aka flow control
     if (*(ptr+1) == ' ' && *(ptr+2) == ' '){ // mark location with the label
       ptr+= 3;
       char * label = findLabel(ptr);
-      markLoc(labelary_ptr, label, &ptr);
-      labelary_ptr++;
+      markLoc(labelAry_ptr, label, ptr);
+      labelAry_ptr++;
       ptr += strlen(label) + 1;
     }
     if (*(ptr+1) == ' ' && *(ptr+2) == '\t'){ // call subroutine
@@ -38,14 +33,14 @@ int main(){
       char * label = findLabel(ptr);
       ptr += strlen(label);
       //NTS[label]
-      if (stack->top == 0) unCondJump(label, label_ary, &ptr);
+      if (stack.top == 0) unCondJump(label, label_ary, &ptr);
     }
     if (*(ptr+1) == '\t' && *(ptr+2) == '\t'){ // negative jump
       ptr+= 3;
       char * label = findLabel(ptr);
       ptr += strlen(label);
       //NTT[label]
-      if (stack->top < 0) unCondJump(label, label_ary, &ptr);
+      if (stack.top < 0) unCondJump(label, label_ary, &ptr);
     }
     if (*(ptr+1) == '\t' && *(ptr+2) == '\n'){ // end subroutine
 
@@ -95,10 +90,12 @@ void callSubRoutine(char ** label_ary, char * label, char* ptr){
     - label_ary --> the array of labels and their pointers
     - label --> the label we're jumping to
 */
-void unCondJump(char * label, char ** label_ary, char ** currPtr){
+void unCondJump(char * label, struct labelInfo * label_ary, char ** currPtr){
   for (int i = 0; i<ARRAY_SIZE; i++){
-    if (!strcmp(label, label_ary[i][0])){
-      *currPtr = label_ary[i][1];
+    char * name = (label_ary+i) -> label_name;
+    char * ptr = (label_ary+i) -> label_ptr;
+    if (!strcmp(label, name)){
+      *currPtr = ptr;
       break;
     }
   }
