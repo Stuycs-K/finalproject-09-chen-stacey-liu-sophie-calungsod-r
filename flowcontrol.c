@@ -37,14 +37,14 @@ int main(){
         //NTS[label]
         ptr+= 3;
         char * label = findLabel(ptr);
-        if (stack.top == 0) unCondJump(label, label_ary, &ptr);
+        if (pop(&stack) == 0) unCondJump(label, label_ary, &ptr);
         else ptr += strlen(label)+1;
       }
       if (*(ptr+1) == '\t' && *(ptr+2) == '\t'){ // negative jump
         //NTT[label]
         ptr+= 3;
         char * label = findLabel(ptr);
-        if (stack.top < 0) unCondJump(label, label_ary, &ptr);
+        if (pop(&stack) < 0) unCondJump(label, label_ary, &ptr);
         else ptr += strlen(label)+1;
       }
       if (*(ptr+1) == '\t' && *(ptr+2) == '\n'){ // end subroutine

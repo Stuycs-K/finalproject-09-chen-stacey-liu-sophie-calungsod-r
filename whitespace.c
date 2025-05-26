@@ -204,14 +204,14 @@ int whichFunc(char** p){ // points to where we are in the string
       // Jump to a label if the top of the stack is zero
       ptr+=3;
       char * label = findLabel(ptr);
-      if (stack.top == 0) unCondJump(label, label_ary, &ptr);
+      if (pop(&stack) == 0) unCondJump(label, label_ary, &ptr);
       else ptr += strlen(label)+1;
     }
     if (*(ptr+1)=='\t' && *(ptr+2)=='\t'){ // [TAB][TAB][LABEL]
       // Jump to label if the top of the stack is negative
       ptr+=3;
       char * label = findLabel(ptr);
-      if (stack.top < 0) unCondJump(label, label_ary, &ptr);
+      if (pop(&stack) < 0) unCondJump(label, label_ary, &ptr);
       else ptr += strlen(label)+1;
     }
     if (*(ptr+1)=='\t' && *(ptr+2)=='\n'){ // [TAB][LINEFEED]
