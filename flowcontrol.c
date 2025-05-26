@@ -1,4 +1,6 @@
 #include "flowcontrol.h"
+#include "stack.h"
+
 #define ARRAY_SIZE 100
 int main(){
   // code for flow control part of whitespace, reference whichFunc() in whitespace.c
@@ -6,6 +8,7 @@ int main(){
   char * ptr; // points to where you are in string/Whitespace code
   char ** label_ary; // keeps track of labels & their pointers
   Stack * stack;
+  printReadable(testline);
   if (*(ptr) == '\n'){ // if IMP is N, aka flow control
     if (*(ptr+1) == ' ' && *(ptr+2) == ' '){ // mark location with the label
       ptr+= 3;
@@ -47,8 +50,10 @@ int main(){
   return 0;
 }
 
+/* returns a label given the pointer to the beginning of the label */
 char * findLabel(char * ptr){
   int strlen = 0;
+  char* label;
   while (*ptr != '\n') {
     strlen++;
     ptr++;
@@ -57,26 +62,31 @@ char * findLabel(char * ptr){
   return label;
 }
 
-// flow control -- move this to another file eventually
-// in the main file, keep a 2d array (label_ary), which stores the labels & the pointer to that label
-// each array in label_ary -> [label, address]
+/* NSS[label]
+   adds the label and a pointer to that label to an array
+   - label_ary --> the array of labels and their pointers
+        => each array in label_ary -> [label, address]
+   - label --> the label we're looking for
+   - ptr --> pointer to the location of the label in the code
+*/
 void markLoc(char ** label_ary, char* label, char* ptr){
-  // NSS[label]
-  char[2] subary = {label, ptr};
-  *(label_ary) = subary
-  //maybe don't have this as a function -> just save pointer + label as pair in array
+  char* subary[2] = {label, ptr};
+  *(label_ary) = subary;
 }
 
+/* NST[label]
+*/
 void callSubRoutine(char ** label_ary, char * label, char* ptr){
-  // NST[label]
+
 }
 
+/* NSN[label]
+  changes the current pointer to the pointer attached to the given label
+    - currPtr --> address of the pointer denoting where we are in the Whitespace code
+    - label_ary --> the array of labels and their pointers
+    - label --> the label we're jumping to
+*/
 void unCondJump(char * label, char ** label_ary, char ** currPtr){
-  //NSN[label]
-  // currPtr is address of the pointer denoting where we are in the Whitespace code
-  // label_ary is the array of labels and their pointers
-  // label is the label we jump to
-  // loop through label_ary & if label is found, set currPtr(might need to be char **) to the pointer associated with that label
   for (int i = 0; i<ARRAY_SIZE; i++){
     if (!strcmp(label, label_ary[i][0])){
       *currPtr = label_ary[i][1];
@@ -85,19 +95,23 @@ void unCondJump(char * label, char ** label_ary, char ** currPtr){
   }
 }
 
+/* NTS[label]
+*/
 void zeroJump(Stack *stack, char * label){
-  //NTS[label]
   if (stack->ary[stack->top] == 0) unCondJump(label, label_ary, currPtr);
 }
 
+/* NTT[label]
+*/
 void negJump(Stack *stack, char * label){
-  //NTT[label]
   if (stack->ary[stack->top] < 0) unCondJump(stack, label);
 }
 
-// takes Whitespace code and prints it in NST
+
+/* for dev purposes; prints whitespace as N, S, or T
+*/
 void printReadable(char * str){
-  for (i = 0; i<strlen(str); i++){
+  for (int i = 0; i<strlen(str); i++){
     if (str[i] == '\t') printf("T");
     else if (str[i] == '\n') printf("N\n");
     else if (str[i] == ' ') printf("S");

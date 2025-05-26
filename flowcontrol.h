@@ -20,6 +20,7 @@ char * findLabel(char * ptr);
 void markLoc(char ** label_ary, char* label, char* ptr);
 void callSubRoutine(char ** label_ary, char * label, char* ptr);
 void unCondJump(char * label, char ** label_ary, char ** currPtr);
-void zeroJump(Stack *stack, char * label);
-void negJump(Stack *stack, char * label);
+// void zeroJump(Stack *stack, char * label);
+// void negJump(Stack *stack, char * label);
+void printReadable(char * str);
 #endif
