@@ -9,6 +9,7 @@ int main(){
   char * ptr= testline; // points to where you are in string/Whitespace code
   struct labelInfo * label_ary = (struct labelInfo *)malloc(ARRAY_SIZE*sizeof(struct labelInfo)); // keeps track of labels & their pointers
   struct labelInfo * labelAry_ptr = label_ary;
+  struct labelInfo * returnLabel = (struct labelInfo *)malloc(sizeof(struct labelInfo)); // label to go to when return (NTN) is called
   Stack stack;
   init(&stack);
   while (ptr < testline + strlen(testline)){
@@ -21,7 +22,9 @@ int main(){
         ptr += strlen(label) + 1;
       }
       if (*(ptr+1) == ' ' && *(ptr+2) == '\t'){ // call subroutine
-
+        ptr+= 3;
+        char * label = findLabel(ptr);
+        markLoc(returnLabel, label, ptr);
       }
       if (*(ptr+1) == ' ' && *(ptr+2) == '\n'){ // jump unconditionally
         ptr+= 3;
@@ -29,24 +32,24 @@ int main(){
         unCondJump(label, label_ary, &ptr);
       }
       if (*(ptr+1) == '\t' && *(ptr+2) == ' '){ // zero jump
+        //NTS[label]
         ptr+= 3;
         char * label = findLabel(ptr);
         ptr += strlen(label);
-        //NTS[label]
         if (stack.top == 0) unCondJump(label, label_ary, &ptr);
       }
       if (*(ptr+1) == '\t' && *(ptr+2) == '\t'){ // negative jump
+        //NTT[label]
         ptr+= 3;
         char * label = findLabel(ptr);
         ptr += strlen(label);
-        //NTT[label]
         if (stack.top < 0) unCondJump(label, label_ary, &ptr);
       }
       if (*(ptr+1) == '\t' && *(ptr+2) == '\n'){ // end subroutine
-
+        ptr = returnLabel -> label_ptr;
       }
       if (*(ptr+1) == '\n' && *(ptr+2) == '\n'){ // end program
-
+        return 0;
       }
     }
   }
