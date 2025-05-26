@@ -17,7 +17,7 @@ int main(){
       ptr+= 3;
       char * label = findLabel(ptr);
       markLoc(labelAry_ptr, label, ptr);
-      printLabelAry(labelAry_ptr);
+      // printLabelAry(labelAry_ptr);
       labelAry_ptr++;
       ptr += strlen(label) + 1;
     }
@@ -103,20 +103,6 @@ void unCondJump(char * label, struct labelInfo * label_ary, char ** currPtr){
 }
 
 
-/* NTS[label]
-*/
-// void zeroJump(Stack *stack, char * label){
-//   if (stack->ary[stack->top] == 0) unCondJump(label, label_ary, currPtr);
-// }
-
-/* NTT[label]
-*/
-// void negJump(Stack *stack, char * label){
-//   if (stack->ary[stack->top] < 0) unCondJump(stack, label);
-// }
-
-
-
 /* for dev purposes; prints whitespace as N, S, or T
 */
 void printReadable(char * str){
@@ -133,7 +119,7 @@ void printReadable(char * str){
 void printLabelAry(struct labelInfo * label_ary){
   printf("{");
   for (int i = 0; i<ARRAY_SIZE; i++){
-    printf("[%s, %d] ", (label_ary+i) -> label_name, (int)((label_ary+ i) ->label_ptr));
+    printf("[%s, %ld] ", (label_ary+i) -> label_name, (long int)((label_ary+ i) ->label_ptr));
   }
   printf("}");
 }
