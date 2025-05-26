@@ -25,4 +25,6 @@ int findNumber(char* str);
 void parse_args( char * line, char ** arg_ary );
 char * readFile(char* fileName);
 int whichFunc(char** p);
+void runProgram(char *code);
+struct labelInfo * retrieveLabels(char * ptr);
 #endif

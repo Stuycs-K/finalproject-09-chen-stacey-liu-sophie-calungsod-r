@@ -20,6 +20,7 @@ int main(int argc, char const *argv[]){
     char * stringOf = readFile("test.txt");
     //printf("here is the string from the file: %s\n",stringOf);
     printf("translated number: %d",findNumber(stringOf));
+    runProgram(stringOf);
   }
   if (argc>1 && strcmp(argv[1],"-r")==0){ // first argument is 'r', runs the translated command
     // uses function on a string and then calls execvp successfully
@@ -39,6 +40,44 @@ void runProgram(char *code){ // handles running commands sequentially
   }
 }
 
+/* goes through code and returns a labelInfo array with all labels in the code*/
+// is there a more efficient way to do this??
+struct labelInfo * retrieveLabels(char * ptr){
+  struct labelInfo * label_ary = (struct labelInfo *)malloc(ARRAY_SIZE*sizeof(struct labelInfo)); // keeps track of labels & their pointers
+  struct labelInfo * labelAry_ptr = label_ary;
+
+  while (*ptr != NULL){
+    if ((*ptr=='\t' && *(ptr+1)==' ') || (*ptr=='\t' && *(ptr+1)=='\n') ||) ptr += 4;
+    else if (*ptr=='\t' && *(ptr+1)=='\t') ptr += 3;
+    else if (*ptr == ' '){
+      if ((*(ptr+1)=='\n' && *(ptr+2)==' ') || (*(ptr+1)=='\n' && *(ptr+2)=='\t') || (*(ptr+1)=='\n' && *(ptr+2)=='\n')) ptr += 3;
+      else {
+        while (*ptr != \n || *ptr != '\0') ptr++;
+        ptr++;
+      }
+    }
+    else if (*ptr == '\n'){
+      if (*(ptr+1)==' ' && *(ptr+2)==' '){ // mark the label
+        ptr+=3;
+        char * label = findLabel(ptr);
+        ptr += strlen(label)+1;
+        markLoc(labelAry_ptr, label, ptr);
+        labelAry_ptr++;
+      }
+      else if (*(ptr+1)=='\t' && *(ptr+2)=='\n') ptr += 3;
+      else if (*(ptr+1)=='\n' && *(ptr+2)=='\n') return label_ary;
+      else if (*(ptr+1)==' ' && *(ptr+2)=='\t') {
+
+      }
+      else if ((*(ptr+1)==' ' && *(ptr+2)=='\n') ||
+               (*(ptr+1)=='\t' && *(ptr+2)==' ') ||
+               (*(ptr+1)=='\t' && *(ptr+2)=='\t')) {
+                 ptr += 3 + strlen(findLabel(ptr)) + 1;
+               }
+    }
+  }
+  return label_ary;
+}
 
 // gets the string of spaces, tabs, and new lines
 char * readFile(char* fileName){
