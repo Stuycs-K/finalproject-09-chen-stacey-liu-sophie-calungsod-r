@@ -8,7 +8,11 @@ int main(){
   char * ptr; // points to where you are in string/Whitespace code
   char ** label_ary; // keeps track of labels & their pointers
   Stack * stack;
-  printReadable(testline);
+
+  char * testlabel = " \t \t\t\t     \n \t\n  ";
+  char * label = findLabel(testlabel);
+  printReadable(label);
+  /*
   if (*(ptr) == '\n'){ // if IMP is N, aka flow control
     if (*(ptr+1) == ' ' && *(ptr+2) == ' '){ // mark location with the label
       ptr+= 3;
@@ -47,18 +51,19 @@ int main(){
 
     }
   }
+  */
   return 0;
 }
 
 /* returns a label given the pointer to the beginning of the label */
-char * findLabel(char * ptr){
+char* findLabel(char * ptr){
   int strlen = 0;
-  char* label;
-  while (*ptr != '\n') {
+  while (*(ptr+strlen) != '\n') {
     strlen++;
-    ptr++;
   }
-  strncpy(label, ptr-strlen, strlen);
+  char* label = malloc(strlen);
+  strncpy(label, ptr, strlen);
+  label[strlen] = '\0';
   return label;
 }
 
@@ -95,17 +100,19 @@ void unCondJump(char * label, char ** label_ary, char ** currPtr){
   }
 }
 
+
 /* NTS[label]
 */
-void zeroJump(Stack *stack, char * label){
-  if (stack->ary[stack->top] == 0) unCondJump(label, label_ary, currPtr);
-}
+// void zeroJump(Stack *stack, char * label){
+//   if (stack->ary[stack->top] == 0) unCondJump(label, label_ary, currPtr);
+// }
 
 /* NTT[label]
 */
-void negJump(Stack *stack, char * label){
-  if (stack->ary[stack->top] < 0) unCondJump(stack, label);
-}
+// void negJump(Stack *stack, char * label){
+//   if (stack->ary[stack->top] < 0) unCondJump(stack, label);
+// }
+
 
 
 /* for dev purposes; prints whitespace as N, S, or T
