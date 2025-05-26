@@ -84,6 +84,10 @@ int whichFunc(char** p){ // points to where we are in the string
 
   char *ptr = *p;
 
+  struct labelInfo * label_ary = (struct labelInfo *)malloc(ARRAY_SIZE*sizeof(struct labelInfo)); // keeps track of labels & their pointers
+  struct labelInfo * labelAry_ptr = label_ary; // for adding to label_ary
+  struct labelInfo * returnLabel = (struct labelInfo *)malloc(sizeof(struct labelInfo)); // for flow control subroutine
+
   // MATH
   if (*ptr=='\t' && *(ptr+1)==' '){ // [TAB][SPACE] beginning indicates math
     if (*(ptr+2)==' ' && *(ptr+3)==' '){ // [SPACE][SPACE] addition
@@ -173,36 +177,52 @@ int whichFunc(char** p){ // points to where we are in the string
     return 1;
   }
   // flow control
-  else if (*ptr=='\n'){
-    if (*(ptr+1)==' ' && *(ptr+2)==' ' && *(ptr+3)=="label?"){
+  else if (*ptr=='\n'){ // [LINEFEED] indicates flow control
+    if (*(ptr+1)==' ' && *(ptr+2)==' '){ // [SPACE][SPACE][LABEL]
       // Mark a location in program
       ptr+=3;
+      char * label = findLabel(ptr);
+      ptr += strlen(label)+1; // move pointer to code after the label
+      markLoc(labelAry_ptr, label, ptr);
+      labelAry_ptr++;
     }
-    if (*(ptr+1)==' ' && *(ptr+2)=='\t' && *(ptr+3)=="label?"){
+    if (*(ptr+1)==' ' && *(ptr+2)=='\t'){ // [SPACE][TAB][LABEL]
       // Call a subroutine
       ptr+=3;
+      char * label = findLabel(ptr);
+      ptr += strlen(label)+1;
+      markLoc(returnLabel, label, ptr);
+      unCondJump(label, label_ary, &ptr);
     }
-    if (*(ptr+1)==' ' && *(ptr+2)=='\n' && *(ptr+3)=="label?"){
+    if (*(ptr+1)==' ' && *(ptr+2)=='\n'){ // [SPACE][LINEFEED][LABEL]
       // Jump unconditionally to a label
       ptr+=3;
+      char * label = findLabel(ptr);
+      unCondJump(label, label_ary, &ptr);
     }
-    if (*(ptr+1)=='\t' && *(ptr+2)==' ' && *(ptr+3)=="label?"){
+    if (*(ptr+1)=='\t' && *(ptr+2)==' '){ // [TAB][SPACE][LABEL]
       // Jump to a label if the top of the stack is zero
       ptr+=3;
+      char * label = findLabel(ptr);
+      if (stack.top == 0) unCondJump(label, label_ary, &ptr);
+      else ptr += strlen(label)+1;
     }
-    if (*(ptr+1)=='\t' && *(ptr+2)=='\t' && *(ptr+3)=="label?"){
+    if (*(ptr+1)=='\t' && *(ptr+2)=='\t'){ // [TAB][TAB][LABEL]
       // Jump to label if the top of the stack is negative
       ptr+=3;
+      char * label = findLabel(ptr);
+      if (stack.top < 0) unCondJump(label, label_ary, &ptr);
+      else ptr += strlen(label)+1;
     }
-    if (*(ptr+1)=='\t' && *(ptr+2)=='\n'){
+    if (*(ptr+1)=='\t' && *(ptr+2)=='\n'){ // [TAB][LINEFEED]
       // End subroutine & transfer control back to caller
-      ptr+=2;
+      ptr = returnLabel -> label_ptr;
     }
-    if (*(ptr+1)=='\n' && *(ptr+2)=='\n'){
+    if (*(ptr+1)=='\n' && *(ptr+2)=='\n'){ // [LINEFEED][LINEFEED]
       // End program
-      ptr+=2;
+      return 1;
+      // ptr+=2;
     }
-    ptr+=1;
     return 1;
   }
 

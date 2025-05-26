@@ -2,7 +2,7 @@
 #include "stack.h"
 
 
-#define ARRAY_SIZE 100
+
 int main(){
   // code for flow control part of whitespace, reference whichFunc() in whitespace.c
   char * testline = "\n  \t\n\n  \t  \n"; //\n \n\t\n"; <-- test unCondJump(infinite loop)
@@ -17,9 +17,9 @@ int main(){
       if (*(ptr+1) == ' ' && *(ptr+2) == ' '){ // mark location with the label
         ptr+= 3;
         char * label = findLabel(ptr);
+        ptr += strlen(label) + 1;
         markLoc(labelAry_ptr, label, ptr);
         labelAry_ptr++;
-        ptr += strlen(label) + 1;
       }
       if (*(ptr+1) == ' ' && *(ptr+2) == '\t'){ // call subroutine
         ptr+= 3;
@@ -37,26 +37,26 @@ int main(){
         //NTS[label]
         ptr+= 3;
         char * label = findLabel(ptr);
-        ptr += strlen(label);
         if (stack.top == 0) unCondJump(label, label_ary, &ptr);
+        else ptr += strlen(label)+1;
       }
       if (*(ptr+1) == '\t' && *(ptr+2) == '\t'){ // negative jump
         //NTT[label]
         ptr+= 3;
         char * label = findLabel(ptr);
-        ptr += strlen(label);
         if (stack.top < 0) unCondJump(label, label_ary, &ptr);
+        else ptr += strlen(label)+1;
       }
       if (*(ptr+1) == '\t' && *(ptr+2) == '\n'){ // end subroutine
         ptr = returnLabel -> label_ptr;
       }
       if (*(ptr+1) == '\n' && *(ptr+2) == '\n'){ // end program
-        return 0;
+        return 1;
       }
     }
   }
-  // printLabelAry(label_ary);
-  // printf("%ld\n", (long int)ptr);
+  printLabelAry(label_ary);
+  printf("%ld\n", (long int)ptr);
   return 0;
 }
 
