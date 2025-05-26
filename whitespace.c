@@ -21,9 +21,11 @@ int main(int argc, char const *argv[]){
     //printf("here is the string from the file: %s\n",stringOf);
     printf("translated number: %d",findNumber(stringOf));
 
-    char * testingString = "\n  \t\n    \n \n \t\n\t \t\t\t\t\n  \n \n\t\n";
-    struct labelInfo * test_ary = retrieveLabels(testingString);
-    printLabelAry(test_ary);
+    // testing retrieveLabels()
+    // char * testingString = "\n  \t\n    \n \n \t\n\t \t\t\t\t\n  \n \n\t\n";
+    // struct labelInfo * testReturn = (struct labelInfo *)malloc(sizeof(struct labelInfo));
+    // struct labelInfo * test_ary = retrieveLabels(testingString, testReturn);
+    // printLabelAry(test_ary);
   }
   if (argc>1 && strcmp(argv[1],"-r")==0){ // first argument is 'r', runs the translated command
     // uses function on a string and then calls execvp successfully
@@ -43,13 +45,14 @@ void runProgram(char *code){ // handles running commands sequentially
   }
 }
 
-/* goes through code and returns a labelInfo array with all labels in the code*/
+/* goes through code and returns a labelInfo array with all labels in the code
+   marks returnLabel as well (the subroutine)
+*/
 // is there a more efficient way to do this??
-struct labelInfo * retrieveLabels(char * ptr){
+struct labelInfo * retrieveLabels(char * ptr, struct labelInfo * returnLabel){
   struct labelInfo * label_ary = (struct labelInfo *)malloc(ARRAY_SIZE*sizeof(struct labelInfo)); // keeps track of labels & their pointers
   struct labelInfo * labelAry_ptr = label_ary;
-  struct labelInfo * returnLabel = (struct labelInfo *)malloc(sizeof(struct labelInfo)); // label to go to when return (NTN) is called
-
+  
   while (*ptr != NULL){
     if ((*ptr=='\t' && *(ptr+1)==' ') || (*ptr=='\t' && *(ptr+1)=='\n')) ptr += 4;
     else if (*ptr=='\t' && *(ptr+1)=='\t') ptr += 3;
@@ -130,10 +133,10 @@ char * readFile(char* fileName){
 int whichFunc(char** p){ // points to where we are in the string
 
   char *ptr = *p;
+  char * labelPtr = *p;
 
-  struct labelInfo * label_ary = (struct labelInfo *)malloc(ARRAY_SIZE*sizeof(struct labelInfo)); // keeps track of labels & their pointers
-  struct labelInfo * labelAry_ptr = label_ary; // for adding to label_ary
   struct labelInfo * returnLabel = (struct labelInfo *)malloc(sizeof(struct labelInfo)); // for flow control subroutine
+  struct labelInfo * label_ary = retrieveLabels(labelPtr, returnLabel); // keeps track of labels & their pointers
 
   // MATH
   if (*ptr=='\t' && *(ptr+1)==' '){ // [TAB][SPACE] beginning indicates math
@@ -226,19 +229,16 @@ int whichFunc(char** p){ // points to where we are in the string
   // flow control
   else if (*ptr=='\n'){ // [LINEFEED] indicates flow control
     if (*(ptr+1)==' ' && *(ptr+2)==' '){ // [SPACE][SPACE][LABEL]
-      // Mark a location in program
+      // Mark a location in program (already done in retrieveLabels)
       ptr+=3;
       char * label = findLabel(ptr);
       ptr += strlen(label)+1; // move pointer to code after the label
-      markLoc(labelAry_ptr, label, ptr);
-      labelAry_ptr++;
     }
     if (*(ptr+1)==' ' && *(ptr+2)=='\t'){ // [SPACE][TAB][LABEL]
       // Call a subroutine
       ptr+=3;
       char * label = findLabel(ptr);
       ptr += strlen(label)+1;
-      markLoc(returnLabel, label, ptr);
       unCondJump(label, label_ary, &ptr);
     }
     if (*(ptr+1)==' ' && *(ptr+2)=='\n'){ // [SPACE][LINEFEED][LABEL]
