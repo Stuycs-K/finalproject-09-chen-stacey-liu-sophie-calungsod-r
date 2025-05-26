@@ -6,7 +6,7 @@
 int main(){
   // code for flow control part of whitespace, reference whichFunc() in whitespace.c
   char * testline = "\n  \t\n"; // placeholder string for now
-  char * ptr; // points to where you are in string/Whitespace code
+  char * ptr= testline; // points to where you are in string/Whitespace code
   struct labelInfo * label_ary = (struct labelInfo *)malloc(ARRAY_SIZE*sizeof(struct labelInfo)); // keeps track of labels & their pointers
   struct labelInfo * labelAry_ptr = label_ary;
   Stack stack;
@@ -17,6 +17,7 @@ int main(){
       ptr+= 3;
       char * label = findLabel(ptr);
       markLoc(labelAry_ptr, label, ptr);
+      printLabelAry(labelAry_ptr);
       labelAry_ptr++;
       ptr += strlen(label) + 1;
     }
@@ -72,10 +73,10 @@ char* findLabel(char * ptr){
    - ptr --> pointer to the location of the label in the code
 */
 void markLoc(struct labelInfo * label_ary, char* label, char* ptr){
-  struct labelInfo x;
-  x.label_name = label;
-  x.label_ptr = ptr;
-  *(label_ary) = x;
+  struct labelInfo * x = (struct labelInfo *)malloc(sizeof(struct labelInfo));
+  x -> label_name = label;
+  x -> label_ptr = ptr;
+  *(label_ary) = *x;
 }
 
 /* NST[label]
@@ -92,8 +93,8 @@ void callSubRoutine(char ** label_ary, char * label, char* ptr){
 */
 void unCondJump(char * label, struct labelInfo * label_ary, char ** currPtr){
   for (int i = 0; i<ARRAY_SIZE; i++){
-    char * name = (label_ary+i) -> label_name;
-    char * ptr = (label_ary+i) -> label_ptr;
+    char * name = label_ary[i].label_name;//*(label_ary+i) -> label_name;
+    char * ptr = label_ary[i].label_ptr;
     if (!strcmp(label, name)){
       *currPtr = ptr;
       break;
@@ -125,4 +126,14 @@ void printReadable(char * str){
     else if (str[i] == ' ') printf("S");
     else printf(" ");
   }
+}
+
+/* for dev purposes; prints label_ary
+*/
+void printLabelAry(struct labelInfo * label_ary){
+  printf("{");
+  for (int i = 0; i<ARRAY_SIZE; i++){
+    printf("[%s, %d] ", (label_ary+i) -> label_name, (int)((label_ary+ i) ->label_ptr));
+  }
+  printf("}");
 }
