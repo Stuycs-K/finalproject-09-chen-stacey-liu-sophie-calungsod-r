@@ -1,25 +1,29 @@
 #include "flowcontrol.h"
 #include "stack.h"
 
+struct labelInfo {
+    char * label_name;
+    char * label_ptr;
+};
+
 #define ARRAY_SIZE 100
 int main(){
   // code for flow control part of whitespace, reference whichFunc() in whitespace.c
   char * testline = "\n  \t\n"; // placeholder string for now
   char * ptr; // points to where you are in string/Whitespace code
-  char ** label_ary; // keeps track of labels & their pointers
-  Stack * stack;
+  struct labelInfo * label_ary = malloc(ARRAY_SIZE*sizeof(struct labelInfo)); // keeps track of labels & their pointers
+  struct labelInfo * labelAry_ptr = label_ary;
+  Stack stack;
+  Heap heap;
+  init(&stack);
 
-  char * testlabel = " \t \t\t\t     \n \t\n  ";
-  char * label = findLabel(testlabel);
-  printReadable(label);
-  /*
   if (*(ptr) == '\n'){ // if IMP is N, aka flow control
     if (*(ptr+1) == ' ' && *(ptr+2) == ' '){ // mark location with the label
       ptr+= 3;
       char * label = findLabel(ptr);
-      ptr += strlen(label);
-      markLoc(label_ary, label, &(ptr-strlen));
-      ptr++; // move pointer to after the /n
+      markLoc(labelary_ptr, label, &ptr);
+      labelary_ptr++;
+      ptr += strlen(label) + 1;
     }
     if (*(ptr+1) == ' ' && *(ptr+2) == '\t'){ // call subroutine
 
@@ -27,7 +31,6 @@ int main(){
     if (*(ptr+1) == ' ' && *(ptr+2) == '\n'){ // jump unconditionally
       ptr+= 3;
       char * label = findLabel(ptr);
-      ptr += strlen(label);
       unCondJump(label, label_ary, &ptr);
     }
     if (*(ptr+1) == '\t' && *(ptr+2) == ' '){ // zero jump
@@ -35,14 +38,14 @@ int main(){
       char * label = findLabel(ptr);
       ptr += strlen(label);
       //NTS[label]
-      if (stack->ary[stack->top] == 0) unCondJump(label, label_ary, &ptr);
+      if (stack->top == 0) unCondJump(label, label_ary, &ptr);
     }
     if (*(ptr+1) == '\t' && *(ptr+2) == '\t'){ // negative jump
       ptr+= 3;
       char * label = findLabel(ptr);
       ptr += strlen(label);
       //NTT[label]
-      if (stack->ary[stack->top] < 0) unCondJump(label, label_ary, &ptr);
+      if (stack->top < 0) unCondJump(label, label_ary, &ptr);
     }
     if (*(ptr+1) == '\t' && *(ptr+2) == '\n'){ // end subroutine
 
@@ -51,7 +54,6 @@ int main(){
 
     }
   }
-  */
   return 0;
 }
 
@@ -70,13 +72,15 @@ char* findLabel(char * ptr){
 /* NSS[label]
    adds the label and a pointer to that label to an array
    - label_ary --> the array of labels and their pointers
-        => each array in label_ary -> [label, address]
+        => each array in label_ary -> {label, address}
    - label --> the label we're looking for
    - ptr --> pointer to the location of the label in the code
 */
-void markLoc(char ** label_ary, char* label, char* ptr){
-  char* subary[2] = {label, ptr};
-  *(label_ary) = subary;
+void markLoc(struct labelInfo * label_ary, char* label, char* ptr){
+  struct labelInfo x;
+  x.label_name = label;
+  x.label_ptr = ptr;
+  *(label_ary) = x;
 }
 
 /* NST[label]
