@@ -24,7 +24,9 @@ int main(){
       if (*(ptr+1) == ' ' && *(ptr+2) == '\t'){ // call subroutine
         ptr+= 3;
         char * label = findLabel(ptr);
+        ptr += strlen(label)+1;
         markLoc(returnLabel, label, ptr);
+        unCondJump(label, label_ary, &ptr);
       }
       if (*(ptr+1) == ' ' && *(ptr+2) == '\n'){ // jump unconditionally
         ptr+= 3;
