@@ -20,3 +20,12 @@ Spent 30 minutes at home continuing with stack manipulation research and flow co
 
 ### 2024-05-22 - Worked on flow control conditional statements
 - Spent 30 minutes at home on unCondJump(), findLabel(), and reordered code to integrate zeroJump() and negJump() into main code.
+
+### 2024-05-23 - Worked on finding code examples in Whitespace that used flow control, added function for printing
+- Spent class period researching examples using flow control to gain better understanding of how flow control works in whitespace
+- Added a function for printing whitespace in readable text(N, S, T)
+
+### 2024-05-25 - Cleaned up code comments and debugged flowcontrol.c
+- Spent ~2.5 hours cleaning up code comments, debugging errors (mostly related to using pointer incorrectly), and testing
+- Modified program to use structs to store label information
+- Added function to print label_ary
