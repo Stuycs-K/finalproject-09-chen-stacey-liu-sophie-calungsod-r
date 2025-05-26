@@ -22,7 +22,7 @@ struct labelInfo {
 };
 char * findLabel(char * ptr);
 void markLoc(struct labelInfo * label_ary, char* label, char* ptr);
-void callSubRoutine(char ** label_ary, char * label, char* ptr);
+// void callSubRoutine(char ** label_ary, char * label, char* ptr);
 void unCondJump(char * label, struct labelInfo * label_ary, char ** currPtr);
 // void zeroJump(Stack *stack, char * label);
 // void negJump(Stack *stack, char * label);

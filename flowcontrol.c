@@ -86,12 +86,6 @@ void markLoc(struct labelInfo * label_ary, char* label, char* ptr){
   *(label_ary) = *x;
 }
 
-/* NST[label]
-*/
-void callSubRoutine(char ** label_ary, char * label, char* ptr){
-
-}
-
 /* NSN[label]
   changes the current pointer to the pointer attached to the given label
     - currPtr --> address of the pointer denoting where we are in the Whitespace code

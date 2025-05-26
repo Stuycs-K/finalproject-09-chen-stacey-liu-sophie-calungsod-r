@@ -29,3 +29,6 @@ Spent 30 minutes at home continuing with stack manipulation research and flow co
 - Spent ~2.5 hours cleaning up code comments, debugging errors (mostly related to using pointer incorrectly), and testing
 - Modified program to use structs to store label information
 - Added function to print label_ary
+
+### 2024-05-26 - Completed subroutine part for flow control
+- Spent 10 minutes figuring out the subroutine component for flow control
