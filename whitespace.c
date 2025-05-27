@@ -182,31 +182,42 @@ int whichFunc(char** p){ // points to where we are in the string
   }
   // stack manipulation
   else if (*ptr==' '){
-    if (*(ptr+1)==' ' && *(ptr+2)=="number"){ // should find number later
+    if (*(ptr+1)==' '){ // should find number later
       // push number onto stack
-      //push(&stack, number);
+      ptr+= 3;
+      int numLen = 0;
+      push(&stack, findNumber(ptr, &numLen));
+      ptr += numLen;
     }
     if (*(ptr+1)=='\n' && *(ptr+2)==' '){
       // duplicate top item on stack
       duplicate(&stack);
+      ptr+=3;
     }
     if (*(ptr+1)=='\n' && *(ptr+2)=='\t'){
       // swap 2 top items on stack
       swap(&stack);
+      ptr+=3;
     }
     if (*(ptr+1)=='\n' && *(ptr+2)=='\n'){
       // discard top item on stack
       discard(&stack);
+      ptr+=3;
     }
-    if (*(ptr+1)==' ' && *(ptr+2)=="number"){ // number later
+    if (*(ptr+1)==' '){ // number later
       // Copy nth item on the stack onto top of stack
-      //copy(&stack, number)
+      ptr+= 3;
+      int numLen = 0;
+      copy(&stack, findNumber(ptr, &numLen))
+      ptr += numLen;
     }
     if (*(ptr+1)=='\n' && *(ptr+2)=="number"){ // number later
       // Slide n items off the stack, keeping top item
-      //slide(&stack, number)
+      ptr+= 3;
+      int numLen = 0;
+      slide(&stack, findNumber(ptr, &numLen));
+      ptr += numLen;
     }
-    ptr+=3;
     return 1;
   }
   // heap access
