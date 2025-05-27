@@ -32,6 +32,7 @@ Spent 30 minutes at home continuing with stack manipulation research and flow co
 
 ### 2024-05-26 - Completed subroutine part for flow control
 - Spent 10 minutes figuring out the subroutine component for flow control
+- Spent ~1 hour integrating flow control code with main code and wrote a retrieveLabels() function to extract labels from the Whitespace code
 
 ### 2024-05-27 - Discussed code with partners and wrote test files
 - Spent class period discussing functions with group to figure out how to implement main code and started writing Whitespace test cases
