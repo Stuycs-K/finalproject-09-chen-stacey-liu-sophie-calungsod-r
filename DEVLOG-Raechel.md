@@ -62,7 +62,7 @@ spent time reviewing each other's code, debugging, and ensuring that we're on th
 I spent 40 minutes at home continuing our presentation and reviewing our code. Our presentation
 is mostly complete (missing examples from our actual code).
 
-### 2025-05-26 - Adding to main code
-I spent 35 minutes at home editing our main code. I created a function that would go through
-each command in the string containing the Whitespace code and modified the function that
-identifies which function should be used to fix the new framework.
+### 2025-05-23 - Fixing main code and consolidation
+I spent 40 minutes in class attempting to fix some of our Whitespace code because of
+inconsistencies between stack manipulation and the main file code. I also spoke to
+group members to try and help with errors and decide what to write for the presentation.
