@@ -2,6 +2,7 @@
 #include "stack.h"
 #include "heap.h"
 #include "math.h"
+#include "io.h"
 
 Stack stack;
 Heap heap;
@@ -17,15 +18,20 @@ int main(int argc, char const *argv[]){
     printf("%s", translated);*/
 
     char * stringOf = readFile("hw.txt");
+    printf("%s", stringOf); // prints empty space obviously... make a func to actually print
+    runProgram(stringOf);
     //printf("here is the string from the file: %s\n",stringOf);
     //printf("translated number: %d",findNumber(stringOf));
   }
   if (argc>1 && strcmp(argv[1],"-r")==0){ // first argument is 'r', runs the translated command
     // uses function on a string and then calls execvp successfully
-    char * args[1024*4]; // change later
+    /*char * args[1024*4]; // change later
     char line[] = "echo 'Hello World'"; // this line should come from 
     parse_args(line, args); // feeds in lines, returns args
-    execvp(args[0], args);
+    execvp(args[0], args);*/
+
+    char * stringOf = readFile("hw.txt");
+    runProgram(stringOf);
   }
 }
 
@@ -59,9 +65,9 @@ char * readFile(char* fileName){
     if(space==' ' || space=='\n' || space=='\t'){ // tabs?????
       buff[len]=space;
       len++;
-      if(space==' ') printf("[SPACE]");
-      if(space=='\n') printf("[LINEFEED]\n");
-      if(space=='\t') printf("[TAB]");
+      /*if(space==' ') printf("[Space]");
+      if(space=='\n') printf("[LF]\n");
+      if(space=='\t') printf("[Tab]");*/
     }
   }
 
@@ -69,53 +75,6 @@ char * readFile(char* fileName){
   close(file);
     return buff;
   }
-
-
-
-// ONLY WORKS for code formatted [Space] [Tab] [LF] with spaces in between
-  char * readWordFile(char* fileName){
-  int file = open(fileName, O_RDONLY , 0);
-  if(file == -1){
-    // prints "Error #: Error message here"
-    printf("Error %d: %s\n", errno, strerror(errno));
-  }
-
-char *line;
-char *arg_ary;
-
-  char* buff = malloc(1024*4); // make files later, see if we need more
-  // add error msg if the malloc didnt work
-  if (buff==NULL){
-    perror("didn't malloc buff correctly");
-  }
-  int len = 0; // used to go through the buffer
-
-  char* space;
-  while(read(file,&space,1)==1){ // while there's something to read
-    if(space=='[Space]' || space=='[Tab]' || space=='[LF]'){ // tabs?????
-      if(space=='[Space]'){
-        buff[len]=' ';
-      }
-      else if(space=='[Tab]'){
-        buff[len]='\t';
-      }
-      if(space=='[LF]'){
-        buff[len]='\n';
-      }
-      len++;
-      if(space=='[Space]') printf("[SPACE]");
-      if(space=='[LF]') printf("[LINEFEED]\n");
-      if(space=='[Tab]') printf("[TAB]");
-    }
-  }
-
-  buff[len] = '\0';
-  close(file);
-    return buff;
-  }
-
-
-
 
 
 
@@ -175,7 +134,7 @@ int whichFunc(char** p){ // points to where we are in the string
   }
   // stack manipulation
   else if (*ptr==' '){
-    if (*(ptr+1)==' ' && *(ptr+2)=="number"){ // from there until new line is the number
+    if (*(ptr+1)==' ' && *(ptr+2)=='i'){ // from there until new line is the number
       // push number onto stack
       //push(&stack, number);
     }
@@ -191,11 +150,11 @@ int whichFunc(char** p){ // points to where we are in the string
       // discard top item on stack
       discard(&stack);
     }
-    if (*(ptr+1)==' ' && *(ptr+2)=="number"){ // number later
+    if (*(ptr+1)==' ' && *(ptr+2)=='i'){ // number later
       // Copy nth item on the stack onto top of stack
       //copy(&stack, number)
     }
-    if (*(ptr+1)=='\n' && *(ptr+2)=="number"){ // number later
+    if (*(ptr+1)=='\n' && *(ptr+2)=='i'){ // number later
       // Slide n items off the stack, keeping top item
       //slide(&stack, number)
     }
@@ -217,23 +176,23 @@ int whichFunc(char** p){ // points to where we are in the string
   }
   // flow control
   else if (*ptr=='\n'){
-    if (*(ptr+1)==' ' && *(ptr+2)==' ' && *(ptr+3)=="label?"){ 
+    if (*(ptr+1)==' ' && *(ptr+2)==' ' && *(ptr+3)=='l'){ 
       // Mark a location in program
       ptr+=3;
     }
-    if (*(ptr+1)==' ' && *(ptr+2)=='\t' && *(ptr+3)=="label?"){ 
+    if (*(ptr+1)==' ' && *(ptr+2)=='\t' && *(ptr+3)=='l'){ 
       // Call a subroutine
       ptr+=3;
     }
-    if (*(ptr+1)==' ' && *(ptr+2)=='\n' && *(ptr+3)=="label?"){ 
+    if (*(ptr+1)==' ' && *(ptr+2)=='\n' && *(ptr+3)=='l'){ 
       // Jump unconditionally to a label
       ptr+=3;
     }
-    if (*(ptr+1)=='\t' && *(ptr+2)==' ' && *(ptr+3)=="label?"){ 
+    if (*(ptr+1)=='\t' && *(ptr+2)==' ' && *(ptr+3)=='l'){ 
       // Jump to a label if the top of the stack is zero
       ptr+=3;
     }
-    if (*(ptr+1)=='\t' && *(ptr+2)=='\t' && *(ptr+3)=="label?"){ 
+    if (*(ptr+1)=='\t' && *(ptr+2)=='\t' && *(ptr+3)=='l'){ 
       // Jump to label if the top of the stack is negative
       ptr+=3;
     }
@@ -260,7 +219,7 @@ int whichFunc(char** p){ // points to where we are in the string
 void parse_args( char * line, char ** arg_ary ){
   char *token;
   int i = 0;
-  while((token = strsep(&line, ' '))!=0){
+  while((token = strsep(&line, " "))!=0){
     // put token into array arg_ary
     arg_ary[i] = token;
     i++;
