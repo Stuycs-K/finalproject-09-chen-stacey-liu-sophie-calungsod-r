@@ -3,6 +3,7 @@
 #include "heap.h"
 #include "math.h"
 #include "flowcontrol.h"
+#include "io.h"
 
 Stack stack;
 Heap heap;
@@ -291,21 +292,23 @@ void parse_args( char * line, char ** arg_ary ){
 
 
 // might not need this here, was just used for testing in main
-int findNumber(char* str){
+int findNumber(char* str, int * numLen){
   int num = 0;
   int sign = 1;
+  int n; // keep track of how many spaces we shifted the pointer
   char * ptr = str;
   if (*ptr == '\t') sign=-1;
-  ptr++;
-  while (*ptr != '\n' && *ptr != '\0'){
-    if (*ptr == ' '){
+  n++;
+  while (*(ptr+n) != '\n' && *(ptr+n) != '\0'){
+    if (*(ptr+n) == ' '){
       num = num << 1;
     }
-    else if (*ptr == '\t'){
+    else if (*(ptr+n) == '\t'){
       num = num << 1;
       num++;
     }
-    ptr++;
+    n++;
   }
+  *numLen = n;
   return sign*num;
 }

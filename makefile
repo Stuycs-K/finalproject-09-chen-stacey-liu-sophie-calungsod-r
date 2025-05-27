@@ -19,9 +19,6 @@ math.o: math.c stack.h
 io.o: io.c stack.h heap.h
 	@gcc -c io.c
 
-numbertest.o: numbertest.c numbertest.h
-	@gcc -c numbertest.c
-
 flowcontrol.o: flowcontrol.c stack.h
 	@gcc -c flowcontrol.c
 

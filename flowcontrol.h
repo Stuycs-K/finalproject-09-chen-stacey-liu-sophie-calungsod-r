@@ -30,4 +30,5 @@ void unCondJump(char * label, struct labelInfo * label_ary, char ** currPtr);
 // void negJump(Stack *stack, char * label);
 void printReadable(char * str);
 void printLabelAry(struct labelInfo * label_ary);
+int findNumber(char* str, int * numLen)
 #endif
