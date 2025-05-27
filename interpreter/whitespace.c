@@ -2,6 +2,7 @@
 #include "stack.h"
 #include "heap.h"
 #include "math.h"
+#include "io.h"
 
 Stack stack;
 Heap heap;
@@ -23,7 +24,7 @@ int main(int argc, char const *argv[]){
   if (argc>1 && strcmp(argv[1],"-r")==0){ // first argument is 'r', runs the translated command
     // uses function on a string and then calls execvp successfully
     char * args[1024*4]; // change later
-    char line[] = "echo 'Hello World'"; // this line should come from 
+    char line[] = "echo 'Hello World'"; // this line should come from
     parse_args(line, args); // feeds in lines, returns args
     execvp(args[0], args);
   }
@@ -110,19 +111,19 @@ int whichFunc(char** p){ // points to where we are in the string
   }
   // input/output
   else if (*ptr=='\t' && *(ptr+1)=='\n'){
-    if (*(ptr+2)=='\t' && *(ptr+3)==' '){ 
+    if (*(ptr+2)=='\t' && *(ptr+3)==' '){
       // call 1st IO function
       input_char(&stack, &heap);
     }
-    if (*(ptr+2)=='\t' && *(ptr+3)=='\t'){ 
+    if (*(ptr+2)=='\t' && *(ptr+3)=='\t'){
       // call 2nd IO function
       input_num(&stack, &heap);
     }
-    if (*(ptr+2)==' ' && *(ptr+3)==' '){ 
+    if (*(ptr+2)==' ' && *(ptr+3)==' '){
       // call 3rd IO function
       output_char(&stack);
     }
-    if (*(ptr+2)==' ' && *(ptr+3)=='\t'){ 
+    if (*(ptr+2)==' ' && *(ptr+3)=='\t'){
       // call 4th IO function
       output_num(&stack);
     }
@@ -131,11 +132,12 @@ int whichFunc(char** p){ // points to where we are in the string
   }
   // stack manipulation
   else if (*ptr==' '){
-    if (*(ptr+1)==' ' && *(ptr+2)=="number"){ // should find number later
+    if (*(ptr+1)==' '){
       // push number onto stack
-      //push(&stack, number);
+      int number = findNumber((ptr+2));
+      push(&stack, number);
     }
-    if (*(ptr+1)=='\n' && *(ptr+2)==' '){ 
+    if (*(ptr+1)=='\n' && *(ptr+2)==' '){
       // duplicate top item on stack
       duplicate(&stack);
     }
@@ -147,24 +149,26 @@ int whichFunc(char** p){ // points to where we are in the string
       // discard top item on stack
       discard(&stack);
     }
-    if (*(ptr+1)==' ' && *(ptr+2)=="number"){ // number later
+    if (*(ptr+1)==' '){
       // Copy nth item on the stack onto top of stack
-      //copy(&stack, number)
+      int number = findNumber((ptr+2));
+      copy(&stack, number);
     }
-    if (*(ptr+1)=='\n' && *(ptr+2)=="number"){ // number later
+    if (*(ptr+1)=='\n'){
       // Slide n items off the stack, keeping top item
-      //slide(&stack, number)
+      int number = findNumber((ptr+2));
+      slide(&stack, number);
     }
     ptr+=3;
     return 1;
-  } 
+  }
   // heap access
   else if (*ptr=='\t' && *(ptr+1)=='\t'){
-    if (*(ptr+2)==' '){ 
+    if (*(ptr+2)==' '){
       // store in heap
       store(&heap, &stack);
     }
-    if (*(ptr+2)=='\t'){ 
+    if (*(ptr+2)=='\t'){
       // retrieve from heap
       retrieve(&heap, &stack);
     }
@@ -173,31 +177,31 @@ int whichFunc(char** p){ // points to where we are in the string
   }
   // flow control
   else if (*ptr=='\n'){
-    if (*(ptr+1)==' ' && *(ptr+2)==' ' && *(ptr+3)=="label?"){ 
+    if (*(ptr+1)==' ' && *(ptr+2)==' ' && *(ptr+3)=="label?"){
       // Mark a location in program
       ptr+=3;
     }
-    if (*(ptr+1)==' ' && *(ptr+2)=='\t' && *(ptr+3)=="label?"){ 
+    if (*(ptr+1)==' ' && *(ptr+2)=='\t' && *(ptr+3)=="label?"){
       // Call a subroutine
       ptr+=3;
     }
-    if (*(ptr+1)==' ' && *(ptr+2)=='\n' && *(ptr+3)=="label?"){ 
+    if (*(ptr+1)==' ' && *(ptr+2)=='\n' && *(ptr+3)=="label?"){
       // Jump unconditionally to a label
       ptr+=3;
     }
-    if (*(ptr+1)=='\t' && *(ptr+2)==' ' && *(ptr+3)=="label?"){ 
+    if (*(ptr+1)=='\t' && *(ptr+2)==' ' && *(ptr+3)=="label?"){
       // Jump to a label if the top of the stack is zero
       ptr+=3;
     }
-    if (*(ptr+1)=='\t' && *(ptr+2)=='\t' && *(ptr+3)=="label?"){ 
+    if (*(ptr+1)=='\t' && *(ptr+2)=='\t' && *(ptr+3)=="label?"){
       // Jump to label if the top of the stack is negative
       ptr+=3;
     }
-    if (*(ptr+1)=='\t' && *(ptr+2)=='\n'){ 
-      // End subroutine & transfer control back to caller  
+    if (*(ptr+1)=='\t' && *(ptr+2)=='\n'){
+      // End subroutine & transfer control back to caller
       ptr+=2;
     }
-    if (*(ptr+1)=='\n' && *(ptr+2)=='\n'){ 
+    if (*(ptr+1)=='\n' && *(ptr+2)=='\n'){
       // End program
       ptr+=2;
     }
