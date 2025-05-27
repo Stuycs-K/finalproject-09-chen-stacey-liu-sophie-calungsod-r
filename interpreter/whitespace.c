@@ -19,7 +19,6 @@ int main(int argc, char const *argv[]){
 
     char * stringOf = readFile("hw.txt");
     printf("%s", stringOf); // prints empty space obviously... make a func to actually print
-    runProgram(stringOf);
     //printf("here is the string from the file: %s\n",stringOf);
     //printf("translated number: %d",findNumber(stringOf));
   }
@@ -40,7 +39,9 @@ void runProgram(char *code){ // handles running commands sequentially
 
   while(*p!='\0'){ // while it's not at the end
     int command = whichFunc(&p);
-    if(command<0) printf("command didn't work/not found?");
+    if(command<0){
+      printf("Error %d: %s\n", errno, strerror(errno));
+    }
   }
 }
 
@@ -109,6 +110,7 @@ int whichFunc(char** p){ // points to where we are in the string
       modulo(&stack);
     }
     ptr+=4;
+    *p = ptr;
     return 1;
   }
   // input/output
@@ -130,6 +132,7 @@ int whichFunc(char** p){ // points to where we are in the string
       output_num(&stack);
     }
     ptr+=4;
+    *p = ptr;
     return 1;
   }
   // stack manipulation
@@ -162,6 +165,7 @@ int whichFunc(char** p){ // points to where we are in the string
       slide(&stack, number);
     }
     ptr+=3;
+    *p = ptr;
     return 1;
   }
   // heap access
@@ -175,6 +179,7 @@ int whichFunc(char** p){ // points to where we are in the string
       retrieve(&heap, &stack);
     }
     ptr+=3;
+    *p = ptr;
     return 1;
   }
   // flow control
@@ -208,6 +213,7 @@ int whichFunc(char** p){ // points to where we are in the string
       ptr+=2;
     }
     ptr+=1;
+    *p = ptr;
     return 1;
   }
 
