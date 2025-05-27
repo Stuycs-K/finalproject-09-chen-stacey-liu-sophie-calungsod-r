@@ -25,13 +25,8 @@ int main(int argc, char const *argv[]){
   }
   if (argc>1 && strcmp(argv[1],"-r")==0){ // first argument is 'r', runs the translated command
     // uses function on a string and then calls execvp successfully
-<<<<<<< HEAD:whitespace.c
     /*char * args[1024*4]; // change later
     char line[] = "echo 'Hello World'"; // this line should come from 
-=======
-    char * args[1024*4]; // change later
-    char line[] = "echo 'Hello World'"; // this line should come from
->>>>>>> f3e125f5c24977f81d1a137d5a1553cc3c2a074c:interpreter/whitespace.c
     parse_args(line, args); // feeds in lines, returns args
     execvp(args[0], args);*/
 
@@ -139,11 +134,7 @@ int whichFunc(char** p){ // points to where we are in the string
   }
   // stack manipulation
   else if (*ptr==' '){
-<<<<<<< HEAD:whitespace.c
     if (*(ptr+1)==' ' && *(ptr+2)=='i'){ // from there until new line is the number
-=======
-    if (*(ptr+1)==' '){
->>>>>>> f3e125f5c24977f81d1a137d5a1553cc3c2a074c:interpreter/whitespace.c
       // push number onto stack
       int number = findNumber((ptr+2));
       push(&stack, number);
@@ -160,20 +151,12 @@ int whichFunc(char** p){ // points to where we are in the string
       // discard top item on stack
       discard(&stack);
     }
-<<<<<<< HEAD:whitespace.c
-    if (*(ptr+1)==' ' && *(ptr+2)=='i'){ // number later
-=======
-    if (*(ptr+1)==' '){
->>>>>>> f3e125f5c24977f81d1a137d5a1553cc3c2a074c:interpreter/whitespace.c
+    if (*(ptr+1)==' ' && *(ptr+2)=='i'){ // // the 'i' is a placeholder for a number... not sure how to work that
       // Copy nth item on the stack onto top of stack
       int number = findNumber((ptr+2));
       copy(&stack, number);
     }
-<<<<<<< HEAD:whitespace.c
     if (*(ptr+1)=='\n' && *(ptr+2)=='i'){ // number later
-=======
-    if (*(ptr+1)=='\n'){
->>>>>>> f3e125f5c24977f81d1a137d5a1553cc3c2a074c:interpreter/whitespace.c
       // Slide n items off the stack, keeping top item
       int number = findNumber((ptr+2));
       slide(&stack, number);
@@ -196,8 +179,7 @@ int whichFunc(char** p){ // points to where we are in the string
   }
   // flow control
   else if (*ptr=='\n'){
-<<<<<<< HEAD:whitespace.c
-    if (*(ptr+1)==' ' && *(ptr+2)==' ' && *(ptr+3)=='l'){ 
+    if (*(ptr+1)==' ' && *(ptr+2)==' ' && *(ptr+3)=='l'){  // the 'l' is a placeholder for a label... not sure how to work that
       // Mark a location in program
       ptr+=3;
     }
@@ -214,25 +196,6 @@ int whichFunc(char** p){ // points to where we are in the string
       ptr+=3;
     }
     if (*(ptr+1)=='\t' && *(ptr+2)=='\t' && *(ptr+3)=='l'){ 
-=======
-    if (*(ptr+1)==' ' && *(ptr+2)==' ' && *(ptr+3)=="label?"){
-      // Mark a location in program
-      ptr+=3;
-    }
-    if (*(ptr+1)==' ' && *(ptr+2)=='\t' && *(ptr+3)=="label?"){
-      // Call a subroutine
-      ptr+=3;
-    }
-    if (*(ptr+1)==' ' && *(ptr+2)=='\n' && *(ptr+3)=="label?"){
-      // Jump unconditionally to a label
-      ptr+=3;
-    }
-    if (*(ptr+1)=='\t' && *(ptr+2)==' ' && *(ptr+3)=="label?"){
-      // Jump to a label if the top of the stack is zero
-      ptr+=3;
-    }
-    if (*(ptr+1)=='\t' && *(ptr+2)=='\t' && *(ptr+3)=="label?"){
->>>>>>> f3e125f5c24977f81d1a137d5a1553cc3c2a074c:interpreter/whitespace.c
       // Jump to label if the top of the stack is negative
       ptr+=3;
     }
