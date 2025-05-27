@@ -182,36 +182,36 @@ int whichFunc(char** p){ // points to where we are in the string
   }
   // stack manipulation
   else if (*ptr==' '){
-    if (*(ptr+1)==' '){ // should find number later
+    if (*(ptr+1)==' '){
       // push number onto stack
       ptr+= 3;
       int numLen = 0;
       push(&stack, findNumber(ptr, &numLen));
       ptr += numLen;
     }
-    if (*(ptr+1)=='\n' && *(ptr+2)==' '){
+    else if (*(ptr+1)=='\n' && *(ptr+2)==' '){
       // duplicate top item on stack
       duplicate(&stack);
       ptr+=3;
     }
-    if (*(ptr+1)=='\n' && *(ptr+2)=='\t'){
+    else if (*(ptr+1)=='\n' && *(ptr+2)=='\t'){
       // swap 2 top items on stack
       swap(&stack);
       ptr+=3;
     }
-    if (*(ptr+1)=='\n' && *(ptr+2)=='\n'){
+    else if (*(ptr+1)=='\n' && *(ptr+2)=='\n'){
       // discard top item on stack
       discard(&stack);
       ptr+=3;
     }
-    if (*(ptr+1)==' '){ // number later
+    else if (*(ptr+1)==' '){
       // Copy nth item on the stack onto top of stack
       ptr+= 3;
       int numLen = 0;
       copy(&stack, findNumber(ptr, &numLen))
       ptr += numLen;
     }
-    if (*(ptr+1)=='\n' && *(ptr+2)=="number"){ // number later
+    else if (*(ptr+1)=='\n'){
       // Slide n items off the stack, keeping top item
       ptr+= 3;
       int numLen = 0;
@@ -241,38 +241,38 @@ int whichFunc(char** p){ // points to where we are in the string
       char * label = findLabel(ptr);
       ptr += strlen(label)+1; // move pointer to code after the label
     }
-    if (*(ptr+1)==' ' && *(ptr+2)=='\t'){ // [SPACE][TAB][LABEL]
+    else if (*(ptr+1)==' ' && *(ptr+2)=='\t'){ // [SPACE][TAB][LABEL]
       // Call a subroutine
       ptr+=3;
       char * label = findLabel(ptr);
       ptr += strlen(label)+1;
       unCondJump(label, label_ary, &ptr);
     }
-    if (*(ptr+1)==' ' && *(ptr+2)=='\n'){ // [SPACE][LINEFEED][LABEL]
+    else if (*(ptr+1)==' ' && *(ptr+2)=='\n'){ // [SPACE][LINEFEED][LABEL]
       // Jump unconditionally to a label
       ptr+=3;
       char * label = findLabel(ptr);
       unCondJump(label, label_ary, &ptr);
     }
-    if (*(ptr+1)=='\t' && *(ptr+2)==' '){ // [TAB][SPACE][LABEL]
+    else if (*(ptr+1)=='\t' && *(ptr+2)==' '){ // [TAB][SPACE][LABEL]
       // Jump to a label if the top of the stack is zero
       ptr+=3;
       char * label = findLabel(ptr);
       if (pop(&stack) == 0) unCondJump(label, label_ary, &ptr);
       else ptr += strlen(label)+1;
     }
-    if (*(ptr+1)=='\t' && *(ptr+2)=='\t'){ // [TAB][TAB][LABEL]
+    else if (*(ptr+1)=='\t' && *(ptr+2)=='\t'){ // [TAB][TAB][LABEL]
       // Jump to label if the top of the stack is negative
       ptr+=3;
       char * label = findLabel(ptr);
       if (pop(&stack) < 0) unCondJump(label, label_ary, &ptr);
       else ptr += strlen(label)+1;
     }
-    if (*(ptr+1)=='\t' && *(ptr+2)=='\n'){ // [TAB][LINEFEED]
+    else if (*(ptr+1)=='\t' && *(ptr+2)=='\n'){ // [TAB][LINEFEED]
       // End subroutine & transfer control back to caller
       ptr = returnLabel -> label_ptr;
     }
-    if (*(ptr+1)=='\n' && *(ptr+2)=='\n'){ // [LINEFEED][LINEFEED]
+    else if (*(ptr+1)=='\n' && *(ptr+2)=='\n'){ // [LINEFEED][LINEFEED]
       // End program
       return 1;
       // ptr+=2;
