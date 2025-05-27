@@ -21,11 +21,6 @@ int main(int argc, char const *argv[]){
     //printf("here is the string from the file: %s\n",stringOf);
     printf("translated number: %d",findNumber(stringOf));
 
-    // testing retrieveLabels()
-    // char * testingString = "\n  \t\n    \n \n \t\n\t \t\t\t\t\n  \n \n\t\n";
-    // struct labelInfo * testReturn = (struct labelInfo *)malloc(sizeof(struct labelInfo));
-    // struct labelInfo * test_ary = retrieveLabels(testingString, testReturn);
-    // printLabelAry(test_ary);
   }
   if (argc>1 && strcmp(argv[1],"-r")==0){ // first argument is 'r', runs the translated command
     // uses function on a string and then calls execvp successfully
@@ -52,7 +47,7 @@ void runProgram(char *code){ // handles running commands sequentially
 struct labelInfo * retrieveLabels(char * ptr, struct labelInfo * returnLabel){
   struct labelInfo * label_ary = (struct labelInfo *)malloc(ARRAY_SIZE*sizeof(struct labelInfo)); // keeps track of labels & their pointers
   struct labelInfo * labelAry_ptr = label_ary;
-  
+
   while (*ptr != NULL){
     if ((*ptr=='\t' && *(ptr+1)==' ') || (*ptr=='\t' && *(ptr+1)=='\n')) ptr += 4;
     else if (*ptr=='\t' && *(ptr+1)=='\t') ptr += 3;

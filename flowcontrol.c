@@ -6,6 +6,7 @@
 // int main(){
 //   // code for flow control part of whitespace, reference whichFunc() in whitespace.c
 //   char * testline = "\n  \t\n\n  \t  \n"; //\n \n\t\n"; <-- test unCondJump(infinite loop)
+//   char * testing = "\n  \t"
 //   char * ptr= testline; // points to where you are in string/Whitespace code
 //   struct labelInfo * label_ary = (struct labelInfo *)malloc(ARRAY_SIZE*sizeof(struct labelInfo)); // keeps track of labels & their pointers
 //   struct labelInfo * labelAry_ptr = label_ary;
