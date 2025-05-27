@@ -16,9 +16,9 @@ int main(int argc, char const *argv[]){
     /*char translated[] = "hi"; // replace with function call
     printf("%s", translated);*/
 
-    char * stringOf = readFile("test.txt");
+    char * stringOf = readFile("hw.txt");
     //printf("here is the string from the file: %s\n",stringOf);
-    printf("translated number: %d",findNumber(stringOf));
+    //printf("translated number: %d",findNumber(stringOf));
   }
   if (argc>1 && strcmp(argv[1],"-r")==0){ // first argument is 'r', runs the translated command
     // uses function on a string and then calls execvp successfully
@@ -62,6 +62,50 @@ char * readFile(char* fileName){
       if(space==' ') printf("[SPACE]");
       if(space=='\n') printf("[LINEFEED]\n");
       if(space=='\t') printf("[TAB]");
+    }
+  }
+
+  buff[len] = '\0';
+  close(file);
+    return buff;
+  }
+
+
+
+// ONLY WORKS for code formatted [Space] [Tab] [LF] with spaces in between
+  char * readWordFile(char* fileName){
+  int file = open(fileName, O_RDONLY , 0);
+  if(file == -1){
+    // prints "Error #: Error message here"
+    printf("Error %d: %s\n", errno, strerror(errno));
+  }
+
+char *line;
+char *arg_ary;
+
+  char* buff = malloc(1024*4); // make files later, see if we need more
+  // add error msg if the malloc didnt work
+  if (buff==NULL){
+    perror("didn't malloc buff correctly");
+  }
+  int len = 0; // used to go through the buffer
+
+  char* space;
+  while(read(file,&space,1)==1){ // while there's something to read
+    if(space=='[Space]' || space=='[Tab]' || space=='[LF]'){ // tabs?????
+      if(space=='[Space]'){
+        buff[len]=' ';
+      }
+      else if(space=='[Tab]'){
+        buff[len]='\t';
+      }
+      if(space=='[LF]'){
+        buff[len]='\n';
+      }
+      len++;
+      if(space=='[Space]') printf("[SPACE]");
+      if(space=='[LF]') printf("[LINEFEED]\n");
+      if(space=='[Tab]') printf("[TAB]");
     }
   }
 
@@ -131,7 +175,7 @@ int whichFunc(char** p){ // points to where we are in the string
   }
   // stack manipulation
   else if (*ptr==' '){
-    if (*(ptr+1)==' ' && *(ptr+2)=="number"){ // should find number later
+    if (*(ptr+1)==' ' && *(ptr+2)=="number"){ // from there until new line is the number
       // push number onto stack
       //push(&stack, number);
     }
@@ -209,6 +253,8 @@ int whichFunc(char** p){ // points to where we are in the string
   return -1; // nothing worked
 
 }
+
+
 
 // used for execvp
 void parse_args( char * line, char ** arg_ary ){
