@@ -20,7 +20,7 @@
 /*struct space_node{
   struct space_node *next;
 };*/
-int main(int argc, char const *argv[]);
+int main(int argc, char *argv[]);
 int findNumber(char* str, int * numLen);
 void parse_args( char * line, char ** arg_ary );
 char * readFile(char* fileName);

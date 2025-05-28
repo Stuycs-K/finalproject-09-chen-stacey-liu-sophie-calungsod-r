@@ -8,7 +8,7 @@
 Stack stack;
 Heap heap;
 
-int main(int argc, char const *argv[]){
+int main(int argc, char *argv[]){
   init(&stack);
   if (argc<=1){
     printf("\nUse either option '-p' to print the translated Whitespace or '-r' to run the translated command.");
