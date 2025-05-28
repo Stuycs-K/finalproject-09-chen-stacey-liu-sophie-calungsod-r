@@ -11,7 +11,7 @@ Heap heap;
 int main(int argc, char *argv[]){
   init(&stack);
   if (argc<=1){
-    printf("\nUse either option '-p' to print the translated Whitespace or '-r' to run the translated command.");
+    printf("Use either option '-p' to print the translated Whitespace or '-r' to run the translated command.\n");
   }
   if (argc>2 && strcmp(argv[1],"-p")==0){ // first argument is 'p', print the translated
     char * fileName = argv[2];
@@ -289,7 +289,7 @@ int whichFunc(char** p){ // points to where we are in the string
 int findNumber(char* str, int * numLen){
   int num = 0;
   int sign = 1;
-  int n; // keep track of how many spaces we shifted the pointer
+  int n = 0; // keep track of how many spaces we shifted the pointer
   char * ptr = str;
   if (*ptr == '\t') sign=-1;
   n++;
