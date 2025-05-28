@@ -33,7 +33,7 @@ int main(int argc, char const *argv[]){
     parse_args(line, args); // feeds in lines, returns args
     execvp(args[0], args);*/
 
-    char * stringOf = readFile("hw.txt");
+    char * stringOf = readFile("testfc.txt");
     runProgram(stringOf);
   }
 }
