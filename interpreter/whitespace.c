@@ -10,30 +10,23 @@ Heap heap;
 
 int main(int argc, char const *argv[]){
   init(&stack);
-
   if (argc<=1){
     printf("\nUse either option '-p' to print the translated Whitespace or '-r' to run the translated command.");
   }
-  if (argc>1 && strcmp(argv[1],"-p")==0){ // first argument is 'p', print the translated
+  if (argc>2 && strcmp(argv[1],"-p")==0){ // first argument is 'p', print the translated
     /*char translated[] = "hi"; // replace with function call
     printf("%s", translated);*/
-
-    char * stringOf = readFile("hw.txt");
-    printf("%s", stringOf); // prints empty space obviously... make a func to actually print
+    char * fileName = argv[2];
+    char * stringOf = readFile(fileName);
     printReadable(stringOf); // should print in N,S,T
 
     // int numLen = 0;
     //printf("here is the string from the file: %s\n",stringOf);
     // printf("translated number: %d",findNumber(stringOf, &numLen));
   }
-  if (argc>1 && strcmp(argv[1],"-r")==0){ // first argument is 'r', runs the translated command
-    // uses function on a string and then calls execvp successfully
-    /*char * args[1024*4]; // change later
-    char line[] = "echo 'Hello World'"; // this line should come from
-    parse_args(line, args); // feeds in lines, returns args
-    execvp(args[0], args);*/
-
-    char * stringOf = readFile("hw.txt");
+  if (argc>2 && strcmp(argv[1],"-r")==0){ // first argument is 'r', runs the translated command
+    char * fileName = argv[2];
+    char * stringOf = readFile(fileName);
     runProgram(stringOf);
   }
 }
@@ -48,6 +41,18 @@ void runProgram(char *code){ // handles running commands sequentially
     }
   }
 }
+
+/* for dev purposes; prints whitespace as N, S, or T
+*/
+void printReadable(char * str){
+  for (int i = 0; i<strlen(str); i++){
+    if (str[i] == '\t') printf("[Tab]");
+    else if (str[i] == '\n') printf("[LF]\n");
+    else if (str[i] == ' ') printf("[Space]");
+    else printf(" ");
+  }
+}
+
 
 /* goes through code and returns a labelInfo array with all labels in the code
    marks returnLabel as well (the subroutine)
@@ -103,7 +108,6 @@ char * readFile(char* fileName){
   }
 
   char* buff = malloc(1024*4); // make files later, see if we need more
-  // add error msg if the malloc didnt work
   if (buff==NULL){
     perror("didn't malloc buff correctly");
   }
@@ -111,7 +115,7 @@ char * readFile(char* fileName){
 
   char space;
   while(read(file,&space,1)==1){ // while there's something to read
-    if(space==' ' || space=='\n' || space=='\t'){ // tabs?????
+    if(space==' ' || space=='\n' || space=='\t'){
       buff[len]=space;
       len++;
       /*if(space==' ') printf("[Space]");
@@ -124,11 +128,6 @@ char * readFile(char* fileName){
   close(file);
     return buff;
   }
-
-
-
-
-
 
 
 int whichFunc(char** p){ // points to where we are in the string

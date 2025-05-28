@@ -107,18 +107,6 @@ void unCondJump(char * label, struct labelInfo * label_ary, char ** currPtr){
   perror("Error: Label not found.\n");
 }
 
-
-/* for dev purposes; prints whitespace as N, S, or T
-*/
-void printReadable(char * str){
-  for (int i = 0; i<strlen(str); i++){
-    if (str[i] == '\t') printf("T");
-    else if (str[i] == '\n') printf("N\n");
-    else if (str[i] == ' ') printf("S");
-    else printf(" ");
-  }
-}
-
 /* for dev purposes; prints label_ary
 */
 void printLabelAry(struct labelInfo * label_ary){
