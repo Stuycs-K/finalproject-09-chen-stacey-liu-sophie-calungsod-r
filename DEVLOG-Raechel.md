@@ -62,7 +62,7 @@ spent time reviewing each other's code, debugging, and ensuring that we're on th
 I spent 40 minutes at home continuing our presentation and reviewing our code. Our presentation
 is mostly complete (missing examples from our actual code).
 
-### 2025-05-23 - Fixing main code and consolidation
+### 2025-05-27 - Fixing main code and consolidation
 I spent 40 minutes in class attempting to fix some of our Whitespace code because of
 inconsistencies between stack manipulation and the main file code. I also spoke to
 group members to try and help with errors and decide what to write for the presentation.
@@ -70,3 +70,8 @@ group members to try and help with errors and decide what to write for the prese
 I spent an hour at home resolving errors with printing out the Whitespace code (still an 
 infinite recursion issue) and with executing the code through the functions that Stacey 
 and Sophie wrote (new issues with the variables to be resolved).
+
+### 2025-05-28 - Clean up and fixing errors
+I spent 40 minutes in class fixing errors in our main code, working with my group to
+figure out the accuracy of our results, and dealing with organization and cleaning up our 
+files. I also changed user input to allow a file name.
