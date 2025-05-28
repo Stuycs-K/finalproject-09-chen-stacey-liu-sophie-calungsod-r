@@ -39,3 +39,7 @@ This document must be updated daily every time you finish a work session.
 ### 2025-05-25 - merges & heap fixes
 - Added i/o files to main and added i/o function calls to main program (15 min)
 - Updated error print statements to add clarity on which IMP is causing the issue & fixed the catch if statement for the math functions to detect for < 2 items rather than < 1 & added more catch statements to the heap, stack, io, and math functions (35 min)
+
+### 2025-05-27
+- Discussed with group on their thoughts on how we would ask for user input. Worked on getting a number parameter in main program to finish stack implentation in main code. (20 min)
+- Drew some diagrams to help explain stack manipulation and heap access (20 min)
