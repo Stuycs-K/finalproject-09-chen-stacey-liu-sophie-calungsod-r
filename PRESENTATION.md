@@ -29,7 +29,7 @@ Once we reviewed a few color-coded examples of Whitespace code, we dove into und
 - flow control
 - input/output (I/O)
 
-#### stack manipulation
+### stack manipulation
 
 For stack manipulation, the IMP at the beginning of each command is just a [SPACE]. Stack manipulation commands are used to modify the stack---pushing items, duplicating items, swapping items, discarding items, etc.
 
@@ -44,31 +44,31 @@ operator | parameter | command
 
 \* *pop is not a command that can be called by the user, but it is used in other commands*
 
-![stack diagram](diagrams/stack.jpg)
+<img src="diagrams/stack.jpg" alt="stack diagram" width="400"/>
 
-#### arithmetic
+### arithmetic
 
 For arithmetic, the IMP at the beginning of each command is [TAB][SPACE]. Whitespace handles simple arithmetic, including addition, subtraction, multiplication, integer division, and modulo. The numbers used for these commands come from the stack in the order *second value popped* [operation] *first value popped*.
 
-![arithmetic diagram](diagrams/arithmetic-division.jpg)
+<img src="diagrams/arithmetic-division.jpg" alt="arithmetic diagram" width="400"/>
 
-#### heap access
+### heap access
 
 For heap access, the IMP at the beginning of each command is [TAB][TAB]. There are only two commands for heaps: storing a value in a heap and retrieving a value from a heap. When storing a value in the heap, the value and address is popped from the stack. When retrieving a value from the heap, an address is popped from the stack and the corresponding value from the heap is pushed to the stack. 
 
-![heap diagram](diagrams/heap.jpg)
+<img src="diagrams/heap.jpg" alt="heap diagram" width="400"/>
 
-#### flow control
+### flow control
 
 For flow control, the IMP at the beginning of each command is [LINEFEED]. Flow control, essentially, is regulating data flow in order to prevent overwhelming the receiver (what is the receiver?? regulate how??). Somebody explain this......
 
 [show examples and explain the commands specifically]
 
-#### input/output
+### input/output
 
 Finally, for input/output, the IMP at the beginning of each command is [TAB][LINEFEED]. Input/output commands pop a value from a stack and performs an action with it, whether it be using it as an address for a user inputted value or as the value to be outputted.
 
-![stack diagram](diagrams/io.jpg)
+<img src="diagrams/io.jpg" alt="i/o diagram" width="400"/>
 
 
 <br>
