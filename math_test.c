@@ -2,7 +2,7 @@
 #include "stack_test.h"
 
 /* 
--> second number popper [operator] first number popped
+-> second number popped [operator] first number popped
 -> Returns an error if less than 2 items in stack
 */
 
