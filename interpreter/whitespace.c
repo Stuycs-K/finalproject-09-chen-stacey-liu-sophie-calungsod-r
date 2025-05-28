@@ -33,7 +33,7 @@ int main(int argc, char const *argv[]){
     parse_args(line, args); // feeds in lines, returns args
     execvp(args[0], args);*/
 
-    char * stringOf = readFile("../hw.txt");
+    char * stringOf = readFile("hw.txt");
     runProgram(stringOf);
   }
 }
@@ -57,7 +57,7 @@ struct labelInfo * retrieveLabels(char * ptr, struct labelInfo * returnLabel){
   struct labelInfo * label_ary = (struct labelInfo *)malloc(ARRAY_SIZE*sizeof(struct labelInfo)); // keeps track of labels & their pointers
   struct labelInfo * labelAry_ptr = label_ary;
 
-  while (*ptr != NULL){
+  while (*ptr != '\0'){
     if ((*ptr=='\t' && *(ptr+1)==' ') || (*ptr=='\t' && *(ptr+1)=='\n')) ptr += 4;
     else if (*ptr=='\t' && *(ptr+1)=='\t') ptr += 3;
     else if (*ptr == ' '){
@@ -284,7 +284,7 @@ int whichFunc(char** p){ // points to where we are in the string
     }
     else if (*(ptr+1)=='\n' && *(ptr+2)=='\n'){ // [LINEFEED][LINEFEED]
       // End program
-      **p = NULL;
+      **p = '\0';
       return 1;
       // ptr+=2;
     }
@@ -296,22 +296,6 @@ int whichFunc(char** p){ // points to where we are in the string
   return -1; // nothing worked
 
 }
-
-
-
-// used for execvp
-void parse_args( char * line, char ** arg_ary ){
-  char *token;
-  int i = 0;
-  while((token = strsep(&line, " "))!=0){
-    // put token into array arg_ary
-    arg_ary[i] = token;
-    i++;
-  }
-  arg_ary[i] = NULL;
-}
-
-
 
 
 
