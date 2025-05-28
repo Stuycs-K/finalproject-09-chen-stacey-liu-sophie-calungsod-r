@@ -19,8 +19,9 @@ int main(int argc, char const *argv[]){
     printf("%s", translated);*/
 
     char * stringOf = readFile("test.txt");
+    // int numLen = 0;
     //printf("here is the string from the file: %s\n",stringOf);
-    printf("translated number: %d",findNumber(stringOf));
+    // printf("translated number: %d",findNumber(stringOf, &numLen));
 
   }
   if (argc>1 && strcmp(argv[1],"-r")==0){ // first argument is 'r', runs the translated command
@@ -37,7 +38,9 @@ void runProgram(char *code){ // handles running commands sequentially
 
   while(*p!='\0'){ // while it's not at the end
     int command = whichFunc(&p);
-    if(command<0) printf("command didn't work/not found?");
+    if(command<0){
+      printf("Error %d: %s\n", errno, strerror(errno));
+    }
   }
 }
 
@@ -106,9 +109,9 @@ char * readFile(char* fileName){
     if(space==' ' || space=='\n' || space=='\t'){ // tabs?????
       buff[len]=space;
       len++;
-      if(space==' ') printf("[SPACE]");
+      /*if(space==' ') printf("[SPACE]");
       if(space=='\n') printf("[LINEFEED]\n");
-      if(space=='\t') printf("[TAB]");
+      if(space=='\t') printf("[TAB]");*/
     }
   }
 
@@ -157,6 +160,7 @@ int whichFunc(char** p){ // points to where we are in the string
       modulo(&stack);
     }
     ptr+=4;
+    *p = ptr;
     return 1;
   }
   // input/output
@@ -178,6 +182,7 @@ int whichFunc(char** p){ // points to where we are in the string
       output_num(&stack);
     }
     ptr+=4;
+    *p = ptr;
     return 1;
   }
   // stack manipulation
@@ -208,7 +213,7 @@ int whichFunc(char** p){ // points to where we are in the string
       // Copy nth item on the stack onto top of stack
       ptr+= 3;
       int numLen = 0;
-      copy(&stack, findNumber(ptr, &numLen))
+      copy(&stack, findNumber(ptr, &numLen));
       ptr += numLen;
     }
     else if (*(ptr+1)=='\n'){
@@ -218,6 +223,7 @@ int whichFunc(char** p){ // points to where we are in the string
       slide(&stack, findNumber(ptr, &numLen));
       ptr += numLen;
     }
+    *p = ptr;
     return 1;
   }
   // heap access
@@ -231,6 +237,7 @@ int whichFunc(char** p){ // points to where we are in the string
       retrieve(&heap, &stack);
     }
     ptr+=3;
+    *p = ptr;
     return 1;
   }
   // flow control
@@ -274,9 +281,11 @@ int whichFunc(char** p){ // points to where we are in the string
     }
     else if (*(ptr+1)=='\n' && *(ptr+2)=='\n'){ // [LINEFEED][LINEFEED]
       // End program
+      *p = NULL;
       return 1;
       // ptr+=2;
     }
+    *p = ptr;
     return 1;
   }
 
@@ -320,6 +329,6 @@ int findNumber(char* str, int * numLen){
     }
     n++;
   }
-  *numLen = n;
+  *numLen = n+1;
   return sign*num;
 }

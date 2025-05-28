@@ -21,7 +21,7 @@
   struct space_node *next;
 };*/
 int main(int argc, char const *argv[]);
-int findNumber(char* str);
+int findNumber(char* str, int * numLen);
 void parse_args( char * line, char ** arg_ary );
 char * readFile(char* fileName);
 int whichFunc(char** p);
