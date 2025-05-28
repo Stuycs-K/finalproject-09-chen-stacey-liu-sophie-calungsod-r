@@ -2,6 +2,7 @@
 #include "stack.h"
 #include "heap.h"
 #include "math.h"
+#include "flowcontrol.h"
 #include "io.h"
 
 Stack stack;
@@ -19,17 +20,20 @@ int main(int argc, char const *argv[]){
 
     char * stringOf = readFile("hw.txt");
     printf("%s", stringOf); // prints empty space obviously... make a func to actually print
+    printReadable(stringOf); // should print in N,S,T
+
+    // int numLen = 0;
     //printf("here is the string from the file: %s\n",stringOf);
-    //printf("translated number: %d",findNumber(stringOf));
+    // printf("translated number: %d",findNumber(stringOf, &numLen));
   }
   if (argc>1 && strcmp(argv[1],"-r")==0){ // first argument is 'r', runs the translated command
     // uses function on a string and then calls execvp successfully
     /*char * args[1024*4]; // change later
-    char line[] = "echo 'Hello World'"; // this line should come from 
+    char line[] = "echo 'Hello World'"; // this line should come from
     parse_args(line, args); // feeds in lines, returns args
     execvp(args[0], args);*/
 
-    char * stringOf = readFile("hw.txt");
+    char * stringOf = readFile("../hw.txt");
     runProgram(stringOf);
   }
 }
@@ -45,6 +49,50 @@ void runProgram(char *code){ // handles running commands sequentially
   }
 }
 
+/* goes through code and returns a labelInfo array with all labels in the code
+   marks returnLabel as well (the subroutine)
+*/
+// is there a more efficient way to do this??
+struct labelInfo * retrieveLabels(char * ptr, struct labelInfo * returnLabel){
+  struct labelInfo * label_ary = (struct labelInfo *)malloc(ARRAY_SIZE*sizeof(struct labelInfo)); // keeps track of labels & their pointers
+  struct labelInfo * labelAry_ptr = label_ary;
+
+  while (*ptr != NULL){
+    if ((*ptr=='\t' && *(ptr+1)==' ') || (*ptr=='\t' && *(ptr+1)=='\n')) ptr += 4;
+    else if (*ptr=='\t' && *(ptr+1)=='\t') ptr += 3;
+    else if (*ptr == ' '){
+      if ((*(ptr+1)=='\n' && *(ptr+2)==' ') || (*(ptr+1)=='\n' && *(ptr+2)=='\t') || (*(ptr+1)=='\n' && *(ptr+2)=='\n')) ptr += 3;
+      else {
+        while (*ptr != '\n') ptr++;
+        ptr++;
+      }
+    }
+    else if (*ptr == '\n'){
+      if (*(ptr+1)==' ' && *(ptr+2)==' '){ // mark the label
+        ptr+=3;
+        char * label = findLabel(ptr);
+        ptr += strlen(label)+1;
+        markLoc(labelAry_ptr, label, ptr);
+        labelAry_ptr++;
+      }
+      else if (*(ptr+1)=='\t' && *(ptr+2)=='\n') ptr += 3;
+      else if (*(ptr+1)=='\n' && *(ptr+2)=='\n') return label_ary;
+      else if (*(ptr+1)==' ' && *(ptr+2)=='\t') {
+        ptr+= 3;
+        char * label = findLabel(ptr);
+        ptr += strlen(label)+1;
+        markLoc(returnLabel, label, ptr);
+      }
+      else if ((*(ptr+1)==' ' && *(ptr+2)=='\n') ||
+               (*(ptr+1)=='\t' && *(ptr+2)==' ') ||
+               (*(ptr+1)=='\t' && *(ptr+2)=='\t')) {
+                 ptr += 3;
+                 ptr += strlen(findLabel(ptr)) + 1;
+               }
+    }
+  }
+  return label_ary;
+}
 
 // gets the string of spaces, tabs, and new lines
 char * readFile(char* fileName){
@@ -84,8 +132,11 @@ char * readFile(char* fileName){
 
 
 int whichFunc(char** p){ // points to where we are in the string
-
   char *ptr = *p;
+  char * labelPtr = *p;
+
+  struct labelInfo * returnLabel = (struct labelInfo *)malloc(sizeof(struct labelInfo)); // for flow control subroutine
+  struct labelInfo * label_ary = retrieveLabels(labelPtr, returnLabel); // keeps track of labels & their pointers
 
   // MATH
   if (*ptr=='\t' && *(ptr+1)==' '){ // [TAB][SPACE] beginning indicates math
@@ -137,34 +188,44 @@ int whichFunc(char** p){ // points to where we are in the string
   }
   // stack manipulation
   else if (*ptr==' '){
-    if (*(ptr+1)==' ' && *(ptr+2)=='i'){ // from there until new line is the number
+    if (*(ptr+1)==' '){
       // push number onto stack
-      int number = findNumber((ptr+2));
-      push(&stack, number);
+      ptr+= 2;
+      int numLen = 0;
+      // int number = findNumber(ptr, &numLen);
+      // printf("\n%d ", number);
+      push(&stack, findNumber(ptr, &numLen));
+      ptr += numLen;
     }
-    if (*(ptr+1)=='\n' && *(ptr+2)==' '){
+    else if (*(ptr+1)=='\n' && *(ptr+2)==' '){
       // duplicate top item on stack
       duplicate(&stack);
+      ptr+=3;
     }
-    if (*(ptr+1)=='\n' && *(ptr+2)=='\t'){
+    else if (*(ptr+1)=='\n' && *(ptr+2)=='\t'){
       // swap 2 top items on stack
       swap(&stack);
+      ptr+=3;
     }
-    if (*(ptr+1)=='\n' && *(ptr+2)=='\n'){
+    else if (*(ptr+1)=='\n' && *(ptr+2)=='\n'){
       // discard top item on stack
       discard(&stack);
+      ptr+=3;
     }
-    if (*(ptr+1)==' ' && *(ptr+2)=='i'){ // // the 'i' is a placeholder for a number... not sure how to work that
+    else if (*(ptr+1)==' '){
       // Copy nth item on the stack onto top of stack
-      int number = findNumber((ptr+2));
-      copy(&stack, number);
+      ptr+= 3;
+      int numLen = 0;
+      copy(&stack, findNumber(ptr, &numLen));
+      ptr += numLen;
     }
-    if (*(ptr+1)=='\n' && *(ptr+2)=='i'){ // number later
+    else if (*(ptr+1)=='\n'){
       // Slide n items off the stack, keeping top item
-      int number = findNumber((ptr+2));
-      slide(&stack, number);
+      ptr+= 3;
+      int numLen = 0;
+      slide(&stack, findNumber(ptr, &numLen));
+      ptr += numLen;
     }
-    ptr+=3;
     *p = ptr;
     return 1;
   }
@@ -183,36 +244,50 @@ int whichFunc(char** p){ // points to where we are in the string
     return 1;
   }
   // flow control
-  else if (*ptr=='\n'){
-    if (*(ptr+1)==' ' && *(ptr+2)==' ' && *(ptr+3)=='l'){  // the 'l' is a placeholder for a label... not sure how to work that
-      // Mark a location in program
+  else if (*ptr=='\n'){ // [LINEFEED] indicates flow control
+    if (*(ptr+1)==' ' && *(ptr+2)==' '){ // [SPACE][SPACE][LABEL]
+      // Mark a location in program (already done in retrieveLabels)
       ptr+=3;
+      char * label = findLabel(ptr);
+      ptr += strlen(label)+1; // move pointer to code after the label
     }
-    if (*(ptr+1)==' ' && *(ptr+2)=='\t' && *(ptr+3)=='l'){ 
+    else if (*(ptr+1)==' ' && *(ptr+2)=='\t'){ // [SPACE][TAB][LABEL]
       // Call a subroutine
       ptr+=3;
+      char * label = findLabel(ptr);
+      ptr += strlen(label)+1;
+      unCondJump(label, label_ary, &ptr);
     }
-    if (*(ptr+1)==' ' && *(ptr+2)=='\n' && *(ptr+3)=='l'){ 
+    else if (*(ptr+1)==' ' && *(ptr+2)=='\n'){ // [SPACE][LINEFEED][LABEL]
       // Jump unconditionally to a label
       ptr+=3;
+      char * label = findLabel(ptr);
+      unCondJump(label, label_ary, &ptr);
     }
-    if (*(ptr+1)=='\t' && *(ptr+2)==' ' && *(ptr+3)=='l'){ 
+    else if (*(ptr+1)=='\t' && *(ptr+2)==' '){ // [TAB][SPACE][LABEL]
       // Jump to a label if the top of the stack is zero
       ptr+=3;
+      char * label = findLabel(ptr);
+      if (pop(&stack) == 0) unCondJump(label, label_ary, &ptr);
+      else ptr += strlen(label)+1;
     }
-    if (*(ptr+1)=='\t' && *(ptr+2)=='\t' && *(ptr+3)=='l'){ 
+    else if (*(ptr+1)=='\t' && *(ptr+2)=='\t'){ // [TAB][TAB][LABEL]
       // Jump to label if the top of the stack is negative
       ptr+=3;
+      char * label = findLabel(ptr);
+      if (pop(&stack) < 0) unCondJump(label, label_ary, &ptr);
+      else ptr += strlen(label)+1;
     }
-    if (*(ptr+1)=='\t' && *(ptr+2)=='\n'){
+    else if (*(ptr+1)=='\t' && *(ptr+2)=='\n'){ // [TAB][LINEFEED]
       // End subroutine & transfer control back to caller
-      ptr+=2;
+      ptr = returnLabel -> label_ptr;
     }
-    if (*(ptr+1)=='\n' && *(ptr+2)=='\n'){
+    else if (*(ptr+1)=='\n' && *(ptr+2)=='\n'){ // [LINEFEED][LINEFEED]
       // End program
-      ptr+=2;
+      **p = NULL;
+      return 1;
+      // ptr+=2;
     }
-    ptr+=1;
     *p = ptr;
     return 1;
   }
@@ -242,21 +317,23 @@ void parse_args( char * line, char ** arg_ary ){
 
 
 // might not need this here, was just used for testing in main
-int findNumber(char* str){
+int findNumber(char* str, int * numLen){
   int num = 0;
   int sign = 1;
+  int n; // keep track of how many spaces we shifted the pointer
   char * ptr = str;
   if (*ptr == '\t') sign=-1;
-  ptr++;
-  while (*ptr != '\n' && *ptr != '\0'){
-    if (*ptr == ' '){
+  n++;
+  while (*(ptr+n) != '\n' && *(ptr+n) != '\0'){
+    if (*(ptr+n) == ' '){
       num = num << 1;
     }
-    else if (*ptr == '\t'){
+    else if (*(ptr+n) == '\t'){
       num = num << 1;
       num++;
     }
-    ptr++;
+    n++;
   }
+  *numLen = n+1;
   return sign*num;
 }

@@ -66,3 +66,7 @@ is mostly complete (missing examples from our actual code).
 I spent 40 minutes in class attempting to fix some of our Whitespace code because of
 inconsistencies between stack manipulation and the main file code. I also spoke to
 group members to try and help with errors and decide what to write for the presentation.
+
+I spent an hour at home resolving errors with printing out the Whitespace code (still an 
+infinite recursion issue) and with executing the code through the functions that Stacey 
+and Sophie wrote (new issues with the variables to be resolved).

@@ -16,6 +16,8 @@
 
 #ifndef flowcontrol
 #define flowcontrol
+
+#define ARRAY_SIZE 100
 struct labelInfo {
     char * label_name;
     char * label_ptr;
