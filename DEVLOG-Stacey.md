@@ -37,3 +37,6 @@
 ### 2024-05-27 - Discussed code with partners and wrote test files
 - Spent class period discussing functions with group to figure out how to implement main code and started writing Whitespace test cases
 - Spent 50 minutes working on making the main code run properly, especially the areas that required reading numbers
+
+### 2024-05-28 - Started brainstorming more test cases
+- Spent class period coming up with more test cases for flow control
