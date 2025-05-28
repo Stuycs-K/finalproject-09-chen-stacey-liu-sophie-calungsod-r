@@ -18,7 +18,8 @@ int main(int argc, char const *argv[]){
     /*char translated[] = "hi"; // replace with function call
     printf("%s", translated);*/
 
-    char * stringOf = readFile("test.txt");
+    char * stringOf = readFile("hw.txt");
+    printReadable(stringOf);
     // int numLen = 0;
     //printf("here is the string from the file: %s\n",stringOf);
     // printf("translated number: %d",findNumber(stringOf, &numLen));
@@ -26,10 +27,13 @@ int main(int argc, char const *argv[]){
   }
   if (argc>1 && strcmp(argv[1],"-r")==0){ // first argument is 'r', runs the translated command
     // uses function on a string and then calls execvp successfully
-    char * args[1024*4]; // change later
+    /*char * args[1024*4]; // change later
     char line[] = "echo 'Hello World'"; // this line should come from
     parse_args(line, args); // feeds in lines, returns args
-    execvp(args[0], args);
+    execvp(args[0], args);*/
+
+    char * stringOf = readFile("hw.txt");
+    runProgram(stringOf);
   }
 }
 
@@ -130,7 +134,6 @@ char * readFile(char* fileName){
 
 
 int whichFunc(char** p){ // points to where we are in the string
-
   char *ptr = *p;
   char * labelPtr = *p;
 
@@ -189,8 +192,10 @@ int whichFunc(char** p){ // points to where we are in the string
   else if (*ptr==' '){
     if (*(ptr+1)==' '){
       // push number onto stack
-      ptr+= 3;
+      ptr+= 2;
       int numLen = 0;
+      // int number = findNumber(ptr, &numLen);
+      // printf("\n%d ", number);
       push(&stack, findNumber(ptr, &numLen));
       ptr += numLen;
     }
@@ -281,7 +286,7 @@ int whichFunc(char** p){ // points to where we are in the string
     }
     else if (*(ptr+1)=='\n' && *(ptr+2)=='\n'){ // [LINEFEED][LINEFEED]
       // End program
-      *p = NULL;
+      **p = NULL;
       return 1;
       // ptr+=2;
     }
