@@ -78,3 +78,7 @@ files. I also changed user input to allow a file name.
 
 I spent 25 minutes at home reviewing code and past commits, updating our presentation file,
 and editing our README file.
+
+### 2025-05-28 - Testing and writing presentation
+I spent 35 minutes in class creating new testing files (truth machine and character echo)
+and writing more of the presentation and README.
