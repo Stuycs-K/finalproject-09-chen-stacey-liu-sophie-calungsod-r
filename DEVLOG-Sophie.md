@@ -48,3 +48,6 @@ This document must be updated daily every time you finish a work session.
 - Drew diagrams for i/o and math. Added diagrams to presentation markdown file, did some formatting changes to it and added some additional content explaining further some concepts. (45 min)
 - Fixed a grammar issue in a comment (< 1 min)
 - Fixed some bugs that prevented the interpreter from working on macs (15 min)
+
+### 2025-05-29
+- Added tables on the whitespace syntax for each command & made some formatting changes to the markdown files (40 min)
