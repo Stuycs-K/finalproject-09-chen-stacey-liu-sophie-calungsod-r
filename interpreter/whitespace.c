@@ -257,7 +257,7 @@ int whichFunc(char** p){ // points to where we are in the string
       // Jump to a label if the top of the stack is zero
       ptr+=3;
       char * label = findLabel(ptr);
-      if (pop(&stack) == 0) {
+      if ((isEmpty(&stack) == 0) && (pop(&stack) == 0)) {
         unCondJump(label, label_ary, &ptr);
       }
       else ptr += strlen(label)+1;
@@ -266,7 +266,7 @@ int whichFunc(char** p){ // points to where we are in the string
       // Jump to label if the top of the stack is negative
       ptr+=3;
       char * label = findLabel(ptr);
-      if (pop(&stack) < 0) {
+      if ((isEmpty(&stack) == 0) && (pop(&stack) < 0)) {
         unCondJump(label, label_ary, &ptr);
       }
       else ptr += strlen(label)+1;
