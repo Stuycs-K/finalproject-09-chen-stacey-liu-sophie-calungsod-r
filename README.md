@@ -18,9 +18,13 @@ in a file containing Whitespace and run the code.
 
 First, cd into the interpreter directory.
 
+```shell
+cd interpreter/
+```
+
 In order to compile and run the program, the user can use one of two commands:
-1. make whitespace ARGS="-p [file name]"
-2. make whitespace ARGS="-r [file name]"
+1. `make whitespace ARGS="-p [file name]"`
+2. `make whitespace ARGS="-r [file name]"`
 
 In both commands, the file should contain properly written whitespace code. The -p option will print the tabs, spaces, and line feeds (new lines) that make up the whitespace code, while the -r option will run the code written.
 
