@@ -16,7 +16,7 @@ in a file containing Whitespace and run the code.
   
 ### Instructions:
 
-How does the user install/compile/run the program. (CHANGE THIS!!!!!)
+First, cd into the interpreter directory.
 
 In order to compile and run the program, the user can use one of two commands:
 1. make whitespace ARGS="-p [file name]"
