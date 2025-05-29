@@ -54,11 +54,24 @@ operator | parameter | command
 
 For arithmetic, the IMP at the beginning of each command is [TAB][SPACE]. Whitespace handles simple arithmetic, including addition, subtraction, multiplication, integer division, and modulo. The numbers used for these commands come from the stack in the order *second value popped* [operation] *first value popped*.
 
+operator | parameter | command
+--- | --- | ---
+[SPACE][SPACE] |  | **additon**
+[SPACE][TAB] |  | **subtraction**
+[SPACE][LF] |  | **multiplication**
+[TAB][SPACE] |  | **division**
+[TAB][TAB] |  | **modulo**
+
 <img src="diagrams/arithmetic-division.jpg" alt="arithmetic diagram" width="400"/>
 
 ### Heap Access
 
 For heap access, the IMP at the beginning of each command is [TAB][TAB]. There are only two commands for heaps: storing a value in a heap and retrieving a value from a heap. When storing a value in the heap, the value and address is popped from the stack. When retrieving a value from the heap, an address is popped from the stack and the corresponding value from the heap is pushed to the stack. 
+
+operator | parameter | command
+--- | --- | ---
+[SPACE] |  | **store**
+[TAB] |  | **retrieve**
 
 <img src="diagrams/heap.jpg" alt="heap diagram" width="400"/>
 
@@ -68,9 +81,26 @@ For flow control, the IMP at the beginning of each command is [LINEFEED]. Flow c
 
 [show examples and explain the commands specifically]
 
+operator | parameter | command
+--- | --- | ---
+[SPACE][SPACE] | label | **mark a location in program**
+[SPACE][TAB] | label | **call a subroutine**
+[SPACE][LF] | label | **jump unconditionally to a label**
+[TAB][SPACE] | label | **jump to a label if the top of the stack is zero**
+[TAB][TAB] | label | **jump to label if the top of stack is negative**
+[TAB][LF] |  | **end subroutine & transfer control back to caller**
+[LF][LF] |  | **end program**
+
 ### Input/Output
 
 Finally, for input/output, the IMP at the beginning of each command is [TAB][LINEFEED]. Input/output commands pop a value from a stack and performs an action with it, whether it be using it as an address for a user inputted value or as the value to be outputted.
+
+operator | parameter | command
+--- | --- | ---
+[TAB][SPACE] |  | **input ascii character**
+[TAB][TAB] |  | **input number**
+[SPACE][SPACE] |  | **output ascii character**
+[SPACE][TAB] |  | **output number**
 
 <img src="diagrams/io.jpg" alt="i/o diagram" width="400"/>
 
