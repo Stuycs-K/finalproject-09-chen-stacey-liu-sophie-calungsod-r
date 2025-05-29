@@ -4,7 +4,6 @@
 
 An esoteric programming language is an experimental programming language written for reasons other than its practicality. Often, esoteric languages (or esolangs) are written as a joke, to test the capabilities of a programmer, to play with new ideas, or to try obfuscation (making it as hard to read as possible).
 
-
 **What is Whitespace?**:
 
 ***Whitespace*** is an esoteric language written by Edwin Brady and Chris Morris in 2003. In a strange diversion from typical programming, Whitespace coding only uses spaces, tabs, and new lines -- all other characters are completely ignored. For our project, we coded an interpreter that can do two things:
@@ -116,7 +115,6 @@ operator | parameter | command
 [SPACE][TAB] |  | **output number**
 
 <img src="diagrams/io.jpg" alt="i/o diagram" width="400"/>
-
 
 <br>
 
