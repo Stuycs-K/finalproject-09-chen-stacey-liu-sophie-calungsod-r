@@ -10,8 +10,9 @@ Raechel Calungsod, Stacey Chen, Sophie Liu
 This project is a Whitespace interpreter. Whitespace, an esoteric programming language written 
 by Edwin Brady and Chris Morris in 2002. Whitespace only takes in spaces, tabs, and new lines
 that can be translated back into plaintext using a set algorithm. Our Whitespace interpreter
-can do two things: take in a file containing Whitespace and print out what it spells in ASCII, or take in a file containing Whitespace and run the command that it is calling in ASCII. The function of the
-interpreter depends on the flag used along with it.
+can do two things depending on the option used: take in a file containing Whitespace and print 
+out the code consisting of "[Tab]", "[Space]", or "[LF]" (for line feed, or new lines), or take 
+in a file containing Whitespace and run the code.
   
 ### Instructions:
 
@@ -21,15 +22,14 @@ In order to compile and run the program, the user can use one of two commands:
 1. make whitespace ARGS="-p [file name]"
 2. make whitespace ARGS="-r [file name]"
 
-In both commands, the file should contain properly written whitespace code. The -p option will print the tabs, spaces, and line feeds (new lines) that make up the whitespace code, while the -r option will run the actual code written.
+In both commands, the file should contain properly written whitespace code. The -p option will print the tabs, spaces, and line feeds (new lines) that make up the whitespace code, while the -r option will run the code written.
 
 For testing, users may use a number of test files included in our interpreter directory:
-1. hw.txt
-2. mroe more more
+1. hw.txt - Prints "Hello, World!"
+2. truth.txt - A typical truth machine used to test esoteric languages. If 1 is inputted, 1 will be printed infinitely (use ^C to exit). If 0 is inputted, 0 is printed once. 
+3. charEcho.txt - Type one character and press enter. The character will be echoed back. Use ^C to exit.
 
 ### Resources/ References:
-
-will change this to better md !!!!!!!!!!
 
 1. [Esolangs Wiki - Whitespace page](https://esolangs.org/wiki/Whitespace)
 2. [Esolangs Wiki - Esoteric programming language](https://esolangs.org/wiki/Esoteric_programming_language)
