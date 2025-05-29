@@ -8,6 +8,8 @@
 Stack stack;
 Heap heap;
 
+struct labelInfo * globalreturnLabel; 
+struct labelInfo * globallabel_ary;
 int main(int argc, char *argv[]){
   init(&stack);
   if (argc<=1){
@@ -21,6 +23,8 @@ int main(int argc, char *argv[]){
   if (argc>2 && strcmp(argv[1],"-r")==0){ // first argument is 'r', runs the translated command
     char * fileName = argv[2];
     char * stringOf = readFile(fileName);
+    globalreturnLabel = (struct labelInfo *)malloc(sizeof(struct labelInfo)); // for flow control subroutine
+    globallabel_ary =  retrieveLabels(stringOf, globalreturnLabel); // keeps track of labels & their pointers
     runProgram(stringOf);
   }
 }
@@ -122,8 +126,8 @@ int whichFunc(char** p){ // points to where we are in the string
   char *ptr = *p;
   char * labelPtr = *p;
 
-  struct labelInfo * returnLabel = (struct labelInfo *)malloc(sizeof(struct labelInfo)); // for flow control subroutine
-  struct labelInfo * label_ary = retrieveLabels(labelPtr, returnLabel); // keeps track of labels & their pointers
+  struct labelInfo * returnLabel = globalreturnLabel; // for flow control subroutine
+  struct labelInfo * label_ary = globallabel_ary;
 
   // MATH
   if (*ptr=='\t' && *(ptr+1)==' '){ // [TAB][SPACE] beginning indicates math
