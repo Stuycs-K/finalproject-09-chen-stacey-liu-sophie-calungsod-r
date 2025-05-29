@@ -119,3 +119,9 @@ operator | parameter | command
 
 
 <br>
+
+## Testing
+1. hw.txt - Prints "Hello, World!"
+2. truth.txt - A typical truth machine used to test esoteric languages. If 1 is inputted, 1 will be printed infinitely (use ^C to exit). If 0 is inputted, 0 is printed once.
+3. charEcho.txt - Type one character and press enter. The character will be echoed back. Use ^C to exit.
+
