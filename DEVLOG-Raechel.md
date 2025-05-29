@@ -75,3 +75,6 @@ and Sophie wrote (new issues with the variables to be resolved).
 I spent 40 minutes in class fixing errors in our main code, working with my group to
 figure out the accuracy of our results, and dealing with organization and cleaning up our 
 files. I also changed user input to allow a file name.
+
+I spent 25 minutes at home reviewing code and past commits, updating our presentation file,
+and editing our README file.
