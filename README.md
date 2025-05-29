@@ -31,9 +31,9 @@ For testing, users may use a number of test files included in our interpreter di
 
 will change this to better md !!!!!!!!!!
 
-[Esolangs Wiki - Whitespace page](https://esolangs.org/wiki/Whitespace)
-[Esolangs Wiki - Esoteric programming language](https://esolangs.org/wiki/Esoteric_programming_language)
-[Esolangs Wiki - Truth machine test](https://esolangs.org/wiki/Truth-machine)
-[Whitespace decoder from dcode](https://www.dcode.fr/whitespace-language)
-[Whitespace tutorial from Hackage](https://hackage.haskell.org/package/whitespace-0.4/src/docs/tutorial.html)
-[Whitespace | Esolang Showcase by The Zip Creator (video)](https://www.youtube.com/watch?v=O406bEHAOcc)
+1. [Esolangs Wiki - Whitespace page](https://esolangs.org/wiki/Whitespace)
+2. [Esolangs Wiki - Esoteric programming language](https://esolangs.org/wiki/Esoteric_programming_language)
+3. [Esolangs Wiki - Truth machine test](https://esolangs.org/wiki/Truth-machine)
+4. [Whitespace decoder from dcode](https://www.dcode.fr/whitespace-language)
+5. [Whitespace tutorial from Hackage](https://hackage.haskell.org/package/whitespace-0.4/src/docs/tutorial.html)
+6. [Whitespace | Esolang Showcase by The Zip Creator (video)](https://www.youtube.com/watch?v=O406bEHAOcc)
