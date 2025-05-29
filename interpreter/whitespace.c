@@ -8,7 +8,7 @@
 Stack stack;
 Heap heap;
 
-struct labelInfo * globalreturnLabel; 
+struct labelInfo * globalreturnLabel;
 struct labelInfo * globallabel_ary;
 int main(int argc, char *argv[]){
   init(&stack);
@@ -246,16 +246,12 @@ int whichFunc(char** p){ // points to where we are in the string
       char * label = findLabel(ptr);
       ptr += strlen(label)+1;
       unCondJump(label, label_ary, &ptr);
-      *p = ptr;
-      return 1;
     }
     else if (*(ptr+1)==' ' && *(ptr+2)=='\n'){ // [SPACE][LINEFEED][LABEL]
       // Jump unconditionally to a label
       ptr+=3;
       char * label = findLabel(ptr);
       unCondJump(label, label_ary, &ptr);
-      *p = ptr;
-      return 1;
     }
     else if (*(ptr+1)=='\t' && *(ptr+2)==' '){ // [TAB][SPACE][LABEL]
       // Jump to a label if the top of the stack is zero
@@ -263,8 +259,6 @@ int whichFunc(char** p){ // points to where we are in the string
       char * label = findLabel(ptr);
       if (pop(&stack) == 0) {
         unCondJump(label, label_ary, &ptr);
-        *p = ptr;
-        return 1;
       }
       else ptr += strlen(label)+1;
     }
@@ -274,8 +268,6 @@ int whichFunc(char** p){ // points to where we are in the string
       char * label = findLabel(ptr);
       if (pop(&stack) < 0) {
         unCondJump(label, label_ary, &ptr);
-        *p = ptr;
-        return 1;
       }
       else ptr += strlen(label)+1;
     }
