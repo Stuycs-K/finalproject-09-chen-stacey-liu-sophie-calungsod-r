@@ -33,6 +33,19 @@ Once we reviewed a few color-coded examples of Whitespace code, we dove into und
 4. Flow control
 5. Input/output (I/O)
 
+
+### Numbers
+- Works through binary: space represents 0, tab represents 1
+- A linefeed signals the end of a number
+- Space in front → number is positive
+- Tab in front → number is negative
+
+Example:
+[space][tab][space][space][tab][space][tab][tab][linefeed] (STSSTSTTL) → 1001011 (positive) → 75
+[tab][tab][tab][space][space][tab][space][linefeed] (TTTSSTSL) → -110010 → -50
+
+
+
 ### Stack Manipulation
 
 For stack manipulation, the IMP at the beginning of each command is just a [SPACE]. Stack manipulation commands are used to modify the stack---pushing items, duplicating items, swapping items, discarding items, etc.
@@ -106,14 +119,3 @@ operator | parameter | command
 
 
 <br>
-
-### Numbers
-- Works through binary: space represents 0, tab represents 1
-- A linefeed signals the end of a number
-- Space in front → number is positive
-- Tab in front → number is negative
-
-Example:
-[space][tab][space][space][tab][space][tab][tab][linefeed] (STSSTSTTL) → 1001011 (positive) → 75
-[tab][tab][tab][space][space][tab][space][linefeed] (TTTSSTSL) → -110010 → -50
-
