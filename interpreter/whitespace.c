@@ -8,32 +8,19 @@
 Stack stack;
 Heap heap;
 
-int main(int argc, char const *argv[]){
+int main(int argc, char *argv[]){
   init(&stack);
-
   if (argc<=1){
-    printf("\nUse either option '-p' to print the translated Whitespace or '-r' to run the translated command.");
+    printf("Use either option '-p' to print the translated Whitespace or '-r' to run the translated command.\n");
   }
-  if (argc>1 && strcmp(argv[1],"-p")==0){ // first argument is 'p', print the translated
-    /*char translated[] = "hi"; // replace with function call
-    printf("%s", translated);*/
-
-    char * stringOf = readFile("hw.txt");
-    printf("%s", stringOf); // prints empty space obviously... make a func to actually print
+  if (argc>2 && strcmp(argv[1],"-p")==0){ // first argument is 'p', print the translated
+    char * fileName = argv[2];
+    char * stringOf = readFile(fileName);
     printReadable(stringOf); // should print in N,S,T
-
-    // int numLen = 0;
-    //printf("here is the string from the file: %s\n",stringOf);
-    // printf("translated number: %d",findNumber(stringOf, &numLen));
   }
-  if (argc>1 && strcmp(argv[1],"-r")==0){ // first argument is 'r', runs the translated command
-    // uses function on a string and then calls execvp successfully
-    /*char * args[1024*4]; // change later
-    char line[] = "echo 'Hello World'"; // this line should come from
-    parse_args(line, args); // feeds in lines, returns args
-    execvp(args[0], args);*/
-
-    char * stringOf = readFile("testfc.txt");
+  if (argc>2 && strcmp(argv[1],"-r")==0){ // first argument is 'r', runs the translated command
+    char * fileName = argv[2];
+    char * stringOf = readFile(fileName);
     runProgram(stringOf);
   }
 }
@@ -49,10 +36,19 @@ void runProgram(char *code){ // handles running commands sequentially
   }
 }
 
-/* goes through code and returns a labelInfo array with all labels in the code
-   marks returnLabel as well (the subroutine)
-*/
-// is there a more efficient way to do this??
+// prints whitespace code in readable [Tab][LF][Space] format
+void printReadable(char * str){
+  for (int i = 0; i<strlen(str); i++){
+    if (str[i] == '\t') printf("[Tab]");
+    else if (str[i] == '\n') printf("[LF]\n");
+    else if (str[i] == ' ') printf("[Space]");
+    else printf(" ");
+  }
+}
+
+
+/* goes through code and returns a labelInfo array with all labels
+in the code marks returnLabel as well (the subroutine) */
 struct labelInfo * retrieveLabels(char * ptr, struct labelInfo * returnLabel){
   struct labelInfo * label_ary = (struct labelInfo *)malloc(ARRAY_SIZE*sizeof(struct labelInfo)); // keeps track of labels & their pointers
   struct labelInfo * labelAry_ptr = label_ary;
@@ -94,7 +90,7 @@ struct labelInfo * retrieveLabels(char * ptr, struct labelInfo * returnLabel){
   return label_ary;
 }
 
-// gets the string of spaces, tabs, and new lines
+// turns the file into a string
 char * readFile(char* fileName){
   int file = open(fileName, O_RDONLY , 0);
   if(file == -1){
@@ -103,7 +99,6 @@ char * readFile(char* fileName){
   }
 
   char* buff = malloc(1024*4); // make files later, see if we need more
-  // add error msg if the malloc didnt work
   if (buff==NULL){
     perror("didn't malloc buff correctly");
   }
@@ -111,12 +106,9 @@ char * readFile(char* fileName){
 
   char space;
   while(read(file,&space,1)==1){ // while there's something to read
-    if(space==' ' || space=='\n' || space=='\t'){ // tabs?????
+    if(space==' ' || space=='\n' || space=='\t'){
       buff[len]=space;
       len++;
-      /*if(space==' ') printf("[Space]");
-      if(space=='\n') printf("[LF]\n");
-      if(space=='\t') printf("[Tab]");*/
     }
   }
 
@@ -124,11 +116,6 @@ char * readFile(char* fileName){
   close(file);
     return buff;
   }
-
-
-
-
-
 
 
 int whichFunc(char** p){ // points to where we are in the string
@@ -192,8 +179,6 @@ int whichFunc(char** p){ // points to where we are in the string
       // push number onto stack
       ptr+= 2;
       int numLen = 0;
-      // int number = findNumber(ptr, &numLen);
-      // printf("\n%d ", number);
       push(&stack, findNumber(ptr, &numLen));
       ptr += numLen;
     }
@@ -304,7 +289,7 @@ int whichFunc(char** p){ // points to where we are in the string
 int findNumber(char* str, int * numLen){
   int num = 0;
   int sign = 1;
-  int n; // keep track of how many spaces we shifted the pointer
+  int n = 0; // keep track of how many spaces we shifted the pointer
   char * ptr = str;
   if (*ptr == '\t') sign=-1;
   n++;

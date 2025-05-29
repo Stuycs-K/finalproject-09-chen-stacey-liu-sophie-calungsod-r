@@ -22,32 +22,55 @@ Printing the whitespace in plain text:
 Executing the whitespace command:
 >make whitespace ARGS="-r' // i dont remember ???????
 
-Once we reviewed a few color-coded examples of Whitespace code, we dove into understanding Instruction Modification Parameters, or IMP. IMP is not a commonly used term, but it is used in documentation written for Whitespace (although official, original documentation has been unpublished since its creation). IMP refers to the beginning of a command, used to designate its purpose when interpreting code. For Whitespace, there are five different IMPs for five different categories of commands: Input/Output, stack manipulation, arithmetic, flow control, and heap access.
+Once we reviewed a few color-coded examples of Whitespace code, we dove into understanding Instruction Modification Parameters, or IMP. IMP is not a commonly used term, but it is used in documentation written for Whitespace (although official, original documentation has been unpublished since its creation). IMP refers to the beginning of a command, used to designate its purpose when interpreting code. For Whitespace, there are five different IMPs for five different categories of commands: 
+- stack manipulation
+- arithmetic
+- heap access
+- flow control
+- input/output (I/O)
 
---> explain what our stack system is and how it works here
-
-For input/output, the IMP at the beginning of each command is [TAB][LINEFEED]. Input/output commands generally pop values from a stack, perform an action on it, and outputs it or stores it to be used for later.
-
-[show examples and explain the commands specifically]
+### stack manipulation
 
 For stack manipulation, the IMP at the beginning of each command is just a [SPACE]. Stack manipulation commands are used to modify the stack---pushing items, duplicating items, swapping items, discarding items, etc.
 
-[show examples and explain the commands specifically]
+operator | parameter | command
+--- | --- | ---
+[SPACE] | number | **push**
+[LF][SPACE] |  | **duplicate**
+[LF][LF] |  | **discard**
+[LF][TAB] | | **swap**
+[TAB][SPACE] | number | **copy**
+[TAB][LF] | number | **slide**
 
+\* *pop is not a command that can be called by the user, but it is used in other commands*
 
-For arithmetic, the IMP at the beginning of each command is [TAB][SPACE]. Whitespace handles simple arithmetic, including addition, subtraction, multiplication, integer division, and modulo. The numbers used for these commands come from the stack in the order *first value popped* + operation + *second value popped*.
+<img src="diagrams/stack.jpg" alt="stack diagram" width="400"/>
 
-[show examples and explain the commands specifically]
+### arithmetic
+
+For arithmetic, the IMP at the beginning of each command is [TAB][SPACE]. Whitespace handles simple arithmetic, including addition, subtraction, multiplication, integer division, and modulo. The numbers used for these commands come from the stack in the order *second value popped* [operation] *first value popped*.
+
+<img src="diagrams/arithmetic-division.jpg" alt="arithmetic diagram" width="400"/>
+
+### heap access
+
+For heap access, the IMP at the beginning of each command is [TAB][TAB]. There are only two commands for heaps: storing a value in a heap and retrieving a value from a heap. When storing a value in the heap, the value and address is popped from the stack. When retrieving a value from the heap, an address is popped from the stack and the corresponding value from the heap is pushed to the stack. 
+
+<img src="diagrams/heap.jpg" alt="heap diagram" width="400"/>
+
+### flow control
 
 For flow control, the IMP at the beginning of each command is [LINEFEED]. Flow control, essentially, is regulating data flow in order to prevent overwhelming the receiver (what is the receiver?? regulate how??). Somebody explain this......
 
 [show examples and explain the commands specifically]
 
+### input/output
 
-Finally, for heap access, the IMP at the beginning of each command is a [TAB][TAB]. There are only two commands for heap control: storing a value in heap and retrieving a value from heap. (should this be moved to the beginning??? im not sure)
+Finally, for input/output, the IMP at the beginning of each command is [TAB][LINEFEED]. Input/output commands pop a value from a stack and performs an action with it, whether it be using it as an address for a user inputted value or as the value to be outputted.
 
-[show examples and explain the commands specifically]
+<img src="diagrams/io.jpg" alt="i/o diagram" width="400"/>
 
 
+<br>
 
-- how numbers work... should that be moved up as well
+how numbers work... should that be moved up as well
