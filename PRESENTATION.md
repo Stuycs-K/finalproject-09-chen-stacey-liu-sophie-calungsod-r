@@ -26,6 +26,7 @@ Executing the Whitespace code from a file:
 >make whitespace ARGS="-r [FILE NAME]'
 
 Once we reviewed a few color-coded examples of Whitespace code, we dove into understanding Instruction Modification Parameters, or IMP. IMP is not a commonly used term, but it is used in documentation written for Whitespace (although official, original documentation has been unpublished since its creation). IMP refers to the beginning of a command, used to designate its purpose when interpreting code. For Whitespace, there are five different IMPs for five different categories of commands: 
+
 1. Stack manipulation
 2. Arithmetic
 3. Heap access
@@ -40,9 +41,8 @@ Once we reviewed a few color-coded examples of Whitespace code, we dove into und
 - Tab in front → number is negative
 
 Example: <br>
-- [space][tab][space][space][tab][space][tab][tab][linefeed] (STSSTSTTL) → +1001011 → 75 <br>
-- [tab][tab][tab][space][space][tab][space][linefeed] (TTTSSTSL) → -110010 → -50
-
+- [SPACE][TAB][SPACE][SPACE][TAB][SPACE][TAB][TAB][LINEFEED] (STSSTSTTL) → +1001011 → 75 <br>
+- [TAB][TAB][TAB][SPACE][SPACE][TAB][SPACE][LINEFEED] (TTTSSTSL) → -110010 → -50
 
 
 ### Stack Manipulation
