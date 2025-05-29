@@ -26,6 +26,9 @@ int main(int argc, char *argv[]){
     globalreturnLabel = (struct labelInfo *)malloc(sizeof(struct labelInfo)); // for flow control subroutine
     globallabel_ary =  retrieveLabels(stringOf, globalreturnLabel); // keeps track of labels & their pointers
     runProgram(stringOf);
+    free(globalreturnLabel);
+    free(globallabel_ary);
+    free(stringOf);
   }
 }
 
@@ -125,9 +128,6 @@ char * readFile(char* fileName){
 int whichFunc(char** p){ // points to where we are in the string
   char *ptr = *p;
   char * labelPtr = *p;
-
-  struct labelInfo * returnLabel = globalreturnLabel; // for flow control subroutine
-  struct labelInfo * label_ary = globallabel_ary;
 
   // MATH
   if (*ptr=='\t' && *(ptr+1)==' '){ // [TAB][SPACE] beginning indicates math
@@ -234,6 +234,9 @@ int whichFunc(char** p){ // points to where we are in the string
   }
   // flow control
   else if (*ptr=='\n'){ // [LINEFEED] indicates flow control
+    struct labelInfo * returnLabel = globalreturnLabel; // for flow control subroutine
+    struct labelInfo * label_ary = globallabel_ary;
+
     if (*(ptr+1)==' ' && *(ptr+2)==' '){ // [SPACE][SPACE][LABEL]
       // Mark a location in program (already done in retrieveLabels)
       ptr+=3;
