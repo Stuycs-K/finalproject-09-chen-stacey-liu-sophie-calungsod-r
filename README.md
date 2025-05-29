@@ -28,7 +28,7 @@ In order to compile and run the program, the user can use one of two commands:
 
 In both commands, the file should contain properly written whitespace code. The -p option will print the tabs, spaces, and line feeds (new lines) that make up the whitespace code, while the -r option will run the code written.
 
-For testing, users may use a number of test files included in interpreter/tests:
+For testing, users may use a number of test files included in `interpreter/tests`:
 1. hw.txt - Prints "Hello, World!"
 2. truth.txt - A typical truth machine used to test esoteric languages. If 1 is inputted, 1 will be printed infinitely (use ^C to exit). If 0 is inputted, 0 is printed once. 
 3. charEcho.txt - Type one character and press enter. The character will be echoed back. Use ^C to exit.
