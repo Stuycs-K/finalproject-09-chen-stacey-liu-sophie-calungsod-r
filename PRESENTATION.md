@@ -107,4 +107,13 @@ operator | parameter | command
 
 <br>
 
-how numbers work... should that be moved up as well
+### Numbers
+- Works through binary: space represents 0, tab represents 1
+- A linefeed signals the end of a number
+- Space in front → number is positive
+- Tab in front → number is negative
+
+Example:
+[space][tab][space][space][tab][space][tab][tab][linefeed] (STSSTSTTL) → 1001011 (positive) → 75
+[tab][tab][tab][space][space][tab][space][linefeed] (TTTSSTSL) → -110010 → -50
+
