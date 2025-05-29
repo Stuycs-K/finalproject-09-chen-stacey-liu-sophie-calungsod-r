@@ -41,8 +41,8 @@ Once we reviewed a few color-coded examples of Whitespace code, we dove into und
 - Tab in front → number is negative
 
 Example: <br>
-- [SPACE][TAB][SPACE][SPACE][TAB][SPACE][TAB][TAB][LINEFEED] (STSSTSTTL) → +1001011 → 75 <br>
-- [TAB][TAB][TAB][SPACE][SPACE][TAB][SPACE][LINEFEED] (TTTSSTSL) → -110010 → -50
+- [SPACE]**[TAB][SPACE][SPACE][TAB][SPACE][TAB][TAB][LINEFEED]** (S**TSSTSTTL**) → +**1001011** → 75 <br>
+- [TAB]**[TAB][TAB][SPACE][SPACE][TAB][SPACE][LINEFEED**] (T**TTSSTSL**) → -**110010** → -50
 
 
 ### Stack Manipulation
