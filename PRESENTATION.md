@@ -40,9 +40,9 @@ Once we reviewed a few color-coded examples of Whitespace code, we dove into und
 - Space in front → number is positive
 - Tab in front → number is negative
 
-Example:
-[space][tab][space][space][tab][space][tab][tab][linefeed] (STSSTSTTL) → 1001011 (positive) → 75
-[tab][tab][tab][space][space][tab][space][linefeed] (TTTSSTSL) → -110010 → -50
+Example: <br>
+- [space][tab][space][space][tab][space][tab][tab][linefeed] (STSSTSTTL) → 1001011 (positive) → 75 <br>
+- [tab][tab][tab][space][space][tab][space][linefeed] (TTTSSTSL) → -110010 → -50
 
 
 
