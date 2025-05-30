@@ -44,6 +44,9 @@ int main(int argc, char *argv[]){
     globalreturnLabel = (struct labelInfo *)malloc(sizeof(struct labelInfo)); // for flow control subroutine
     globallabel_ary =  retrieveLabels(stringOf, globalreturnLabel); // keeps track of labels & their pointers
     runProgram(stringOf);
+    free(globalreturnLabel);
+    free(globallabel_ary);
+    free(stringOf);
   }
 }
 
@@ -180,9 +183,6 @@ int whichFunc(char** p){ // points to where we are in the string
   char *ptr = *p;
   char * labelPtr = *p;
 
-  struct labelInfo * returnLabel = globalreturnLabel; // for flow control subroutine
-  struct labelInfo * label_ary = globallabel_ary;
-
   // MATH
   if (*ptr=='\t' && *(ptr+1)==' '){ // [TAB][SPACE] beginning indicates math
     if (*(ptr+2)==' ' && *(ptr+3)==' '){ // [SPACE][SPACE] addition
@@ -288,6 +288,9 @@ int whichFunc(char** p){ // points to where we are in the string
   }
   // flow control
   else if (*ptr=='\n'){ // [LINEFEED] indicates flow control
+    struct labelInfo * returnLabel = globalreturnLabel; // for flow control subroutine
+    struct labelInfo * label_ary = globallabel_ary;
+
     if (*(ptr+1)==' ' && *(ptr+2)==' '){ // [SPACE][SPACE][LABEL]
       // Mark a location in program (already done in retrieveLabels)
       ptr+=3;
@@ -311,7 +314,7 @@ int whichFunc(char** p){ // points to where we are in the string
       // Jump to a label if the top of the stack is zero
       ptr+=3;
       char * label = findLabel(ptr);
-      if (pop(&stack) == 0) {
+      if ((isEmpty(&stack) == 0) && (pop(&stack) == 0)) {
         unCondJump(label, label_ary, &ptr);
       }
       else ptr += strlen(label)+1;
@@ -320,7 +323,7 @@ int whichFunc(char** p){ // points to where we are in the string
       // Jump to label if the top of the stack is negative
       ptr+=3;
       char * label = findLabel(ptr);
-      if (pop(&stack) < 0) {
+      if ((isEmpty(&stack) == 0) && (pop(&stack) < 0)) {
         unCondJump(label, label_ary, &ptr);
       }
       else ptr += strlen(label)+1;
