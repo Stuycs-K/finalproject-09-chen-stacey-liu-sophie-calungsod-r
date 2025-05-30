@@ -8,21 +8,39 @@
 Stack stack;
 Heap heap;
 
+/*
+argv[0]: nothing
+argv[1]: letterFile or spaceFile (-l or -s)
+argv[2]: print or run (-p or -r)
+argv[3]: file name
+
+*/
 struct labelInfo * globalreturnLabel;
 struct labelInfo * globallabel_ary;
 int main(int argc, char *argv[]){
   init(&stack);
-  if (argc<=1){
-    printf("Use either option '-p' to print the translated Whitespace or '-r' to run the translated command.\n");
+  char * fileName;
+  char * stringOf;
+
+  if (argc<=2){
+    printf("\nTwo flags and a file name are needed. Flag 1: Use '-l' if your file is written with the letters T, S, and L/N in place of tabs, spaces, and new lines. Use '-s' if your file is written with tabs, spaces, and new lines. \nFlag 2: Use either option '-p' to print the translated Whitespace or '-r' to run the translated command.\nThe third argument should be your whitespace file name.\n");
   }
-  if (argc>2 && strcmp(argv[1],"-p")==0){ // first argument is 'p', print the translated
-    char * fileName = argv[2];
+
+  // flag 1: retrieve file contents
+  if(argc>3 && strcmp(argv[1],"-s")==0){ // get file when it's written with tabs, spaces, new lines
+    char * fileName = argv[3];
     char * stringOf = readFile(fileName);
+  }
+  else if(argc>3 && strcmp(argv[1],"-l")==0){ // get file when it's written with T,S,L/N
+    char * fileName = argv[3];
+    char * stringOf = readLetterFile(fileName);
+  }
+
+  // flag 2: run or print
+  if (argc>3 && strcmp(argv[2],"-p")==0){ // first argument is 'p', print the translated
     printReadable(stringOf); // should print in N,S,T
   }
-  if (argc>2 && strcmp(argv[1],"-r")==0){ // first argument is 'r', runs the translated command
-    char * fileName = argv[2];
-    char * stringOf = readFile(fileName);
+  if (argc>3 && strcmp(argv[2],"-r")==0){ // first argument is 'r', runs the translated command
     globalreturnLabel = (struct labelInfo *)malloc(sizeof(struct labelInfo)); // for flow control subroutine
     globallabel_ary =  retrieveLabels(stringOf, globalreturnLabel); // keeps track of labels & their pointers
     runProgram(stringOf);
@@ -94,7 +112,7 @@ struct labelInfo * retrieveLabels(char * ptr, struct labelInfo * returnLabel){
   return label_ary;
 }
 
-// turns the file into a string
+// turns the file of spaces, tabs, and newlines into a string
 char * readFile(char* fileName){
   int file = open(fileName, O_RDONLY , 0);
   if(file == -1){
@@ -119,7 +137,43 @@ char * readFile(char* fileName){
   buff[len] = '\0';
   close(file);
     return buff;
+}
+
+// turns the file of S, T, L or N into a string of tabs, spaces, and linefeeds
+char * readLetterFile(char* fileName){
+  int file = open(fileName, O_RDONLY , 0);
+  if(file == -1){
+    // prints "Error #: Error message here"
+    printf("Error %d: %s\n", errno, strerror(errno));
   }
+
+  char* buff = malloc(1024*4); // make files later, see if we need more
+  if (buff==NULL){
+    perror("didn't malloc buff correctly");
+  }
+  int len = 0; // used to go through the buffer
+
+  char space;
+  while(read(file,&space,1)==1){ // while there's something to read
+    if(space=='S'){
+      buff[len]=' ';
+      len++;
+    }
+    else if(space=='T'){
+      buff[len]='\t';
+      len++;
+    }
+    else if(space=='N' || space=='L'){
+      buff[len]='\n';
+      len++;
+    }
+  }
+  buff[len] = '\0';
+  close(file);
+  return buff;
+}
+
+
 
 
 int whichFunc(char** p){ // points to where we are in the string
