@@ -82,3 +82,5 @@ and editing our README file.
 ### 2025-05-28 - Testing and writing presentation
 I spent 35 minutes in class creating new testing files (truth machine and character echo)
 and writing more of the presentation and README.
+
+I spent 15 minutes at home reviewing and making minor edits on the presentation.
