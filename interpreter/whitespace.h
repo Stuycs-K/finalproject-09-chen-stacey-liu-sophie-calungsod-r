@@ -24,6 +24,7 @@ int main(int argc, char *argv[]);
 int findNumber(char* str, int * numLen);
 void parse_args( char * line, char ** arg_ary );
 char * readFile(char* fileName);
+char * readLetterFile(char* fileName);
 void printReadable(char * str);
 int whichFunc(char** p);
 void runProgram(char *code);
