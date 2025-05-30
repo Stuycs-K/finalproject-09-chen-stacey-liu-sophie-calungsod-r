@@ -2,7 +2,7 @@
 
 **What is an esoteric language?**:
 
-An esoteric programming language is an experimental programming language written for reasons other than its practicality. Often, esoteric languages (or esolangs) are written as a joke, to test the capabilities of a programmer, to play with new ideas, or to try obfuscation (making it as hard to read as possible).
+An esoteric programming language is an experimental programming language written for reasons other than its practicality. Often, esoteric languages (or esolangs) are written to test a programmer's capabilities, to play with new ideas, to try obfuscation (making it as hard to read as possible), or even as a joke.
 
 **What is Whitespace?**:
 
@@ -11,13 +11,7 @@ An esoteric programming language is an experimental programming language written
 1) Translate Whitespace to plain text and print out the result
 2) Translate a command written in Whitespace and execute it directly
 
-In order for this to work, we first needed to understand how Whitespace functions. There are three important values that Whitespace uses
-
-- ASCII value 32 represents a space
-- ASCII value 9 represents a tab
-- ASCII value 10 represents *line feed*, or a new line.
-
-Our interpreter is ran with one command in the terminal: make whitespace. The option added determines the outcome:
+Our interpreter runs with one command in the terminal: make whitespace. The option added determines what is printed as a result:
 
 Printing the Whitespace from a file in plain text:
 >make whitespace ARGS="-p [FILE NAME]'
