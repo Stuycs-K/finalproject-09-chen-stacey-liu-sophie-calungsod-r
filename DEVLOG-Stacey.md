@@ -46,3 +46,6 @@
 - Spent 10 minutes editing jump functions to handle empty Stack
 - Spent 10 minutes freeing memory
 - Spent 10 minutes thinking of more test cases
+
+### 2024-05-30 - Wrote test cases for subroutine
+- Spent class period writing test cases for subroutine and making sure it works as expected
