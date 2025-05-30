@@ -28,12 +28,12 @@ int main(int argc, char *argv[]){
 
   // flag 1: retrieve file contents
   if(argc>3 && strcmp(argv[1],"-s")==0){ // get file when it's written with tabs, spaces, new lines
-    char * fileName = argv[3];
-    char * stringOf = readFile(fileName);
+    fileName = argv[3];
+    stringOf = readFile(fileName);
   }
   else if(argc>3 && strcmp(argv[1],"-l")==0){ // get file when it's written with T,S,L/N
-    char * fileName = argv[3];
-    char * stringOf = readLetterFile(fileName);
+    fileName = argv[3];
+    stringOf = readLetterFile(fileName);
   }
 
   // flag 2: run or print
