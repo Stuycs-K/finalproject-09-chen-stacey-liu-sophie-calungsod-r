@@ -8,111 +8,59 @@
 Stack stack;
 Heap heap;
 
-/*
-argv[0]: nothing
-argv[1]: letterFile or spaceFile (-l or -s)
-argv[2]: print or run (-p or -r)
-argv[3]: file name
-
-*/
 struct labelInfo * globalreturnLabel;
 struct labelInfo * globallabel_ary;
+
+/*
+  argv[0]: nothing
+  argv[1]: letterFile or spaceFile (-l or -s)
+  argv[2]: print or run (-p or -r)
+  argv[3]: file name
+*/
 int main(int argc, char *argv[]){
   init(&stack);
   char * fileName;
   char * stringOf;
 
   if (argc<=2){
-    printf("\nTwo flags and a file name are needed. Flag 1: Use '-l' if your file is written with the letters T, S, and L/N in place of tabs, spaces, and new lines. Use '-s' if your file is written with tabs, spaces, and new lines. \nFlag 2: Use either option '-p' to print the translated Whitespace or '-r' to run the translated command.\nThe third argument should be your whitespace file name.\n");
-  }
+    printf("\nTwo flags and a file name are needed.\n"
+             "------\n"
+             "Flag 1: \n"
+             "~ Use '-l' if your file is written with the letters T, S, and L/N in place of tabs, spaces, and new lines.\n"
+             "~ Use '-s' if your file is written with tabs, spaces, and new lines.\n"
+             "------\n"
+             "Flag 2: \n"
+             "Use either option '-p' to print the translated Whitespace or '-r' to run the translated command.\n"
+             "------\n"
+             "The third argument should be your whitespace file name.\n\n");
+  
+  } else{
 
-  // flag 1: retrieve file contents
-  if(argc>3 && strcmp(argv[1],"-s")==0){ // get file when it's written with tabs, spaces, new lines
-    fileName = argv[3];
-    stringOf = readFile(fileName);
-  }
-  else if(argc>3 && strcmp(argv[1],"-l")==0){ // get file when it's written with T,S,L/N
-    fileName = argv[3];
-    stringOf = readLetterFile(fileName);
-  }
+    // flag 1: retrieve file contents
+    if(strcmp(argv[1],"-s")==0){ // get file when it's written with tabs, spaces, new lines
+      fileName = argv[3];
+      stringOf = readFile(fileName);
+    }
+    else if(strcmp(argv[1],"-l")==0){ // get file when it's written with T,S,L/N
+      fileName = argv[3];
+      stringOf = readLetterFile(fileName);
+    }
 
-  // flag 2: run or print
-  if (argc>3 && strcmp(argv[2],"-p")==0){ // first argument is 'p', print the translated
-    printReadable(stringOf); // should print in N,S,T
-  }
-  if (argc>3 && strcmp(argv[2],"-r")==0){ // first argument is 'r', runs the translated command
-    globalreturnLabel = (struct labelInfo *)malloc(sizeof(struct labelInfo)); // for flow control subroutine
-    globallabel_ary =  retrieveLabels(stringOf, globalreturnLabel); // keeps track of labels & their pointers
-    runProgram(stringOf);
-    free(globalreturnLabel);
-    free(globallabel_ary);
-    free(stringOf);
-  }
-}
-
-void runProgram(char *code){ // handles running commands sequentially
-  char *p = code; // pointer at the beginning
-
-  while(*p!='\0'){ // while it's not at the end
-    int command = whichFunc(&p);
-    if(command<0){
-      printf("Error %d: %s\n", errno, strerror(errno));
+    // flag 2: run or print
+    if (strcmp(argv[2],"-p")==0){ // first argument is 'p', print the translated
+      printReadable(stringOf); // should print in N,S,T
+    }
+    if (strcmp(argv[2],"-r")==0){ // first argument is 'r', runs the translated command
+      globalreturnLabel = (struct labelInfo *)malloc(sizeof(struct labelInfo)); // for flow control subroutine
+      globallabel_ary =  retrieveLabels(stringOf, globalreturnLabel); // keeps track of labels & their pointers
+      runProgram(stringOf);
+      free(globalreturnLabel);
+      free(globallabel_ary);
+      free(stringOf);
     }
   }
-}
 
-// prints whitespace code in readable [Tab][LF][Space] format
-void printReadable(char * str){
-  for (int i = 0; i<strlen(str); i++){
-    if (str[i] == '\t') printf("[Tab]");
-    else if (str[i] == '\n') printf("[LF]\n");
-    else if (str[i] == ' ') printf("[Space]");
-    else printf(" ");
-  }
-}
-
-
-/* goes through code and returns a labelInfo array with all labels
-in the code marks returnLabel as well (the subroutine) */
-struct labelInfo * retrieveLabels(char * ptr, struct labelInfo * returnLabel){
-  struct labelInfo * label_ary = (struct labelInfo *)malloc(ARRAY_SIZE*sizeof(struct labelInfo)); // keeps track of labels & their pointers
-  struct labelInfo * labelAry_ptr = label_ary;
-
-  while (*ptr != '\0'){
-    if ((*ptr=='\t' && *(ptr+1)==' ') || (*ptr=='\t' && *(ptr+1)=='\n')) ptr += 4;
-    else if (*ptr=='\t' && *(ptr+1)=='\t') ptr += 3;
-    else if (*ptr == ' '){
-      if ((*(ptr+1)=='\n' && *(ptr+2)==' ') || (*(ptr+1)=='\n' && *(ptr+2)=='\t') || (*(ptr+1)=='\n' && *(ptr+2)=='\n')) ptr += 3;
-      else {
-        while (*ptr != '\n') ptr++;
-        ptr++;
-      }
-    }
-    else if (*ptr == '\n'){
-      if (*(ptr+1)==' ' && *(ptr+2)==' '){ // mark the label
-        ptr+=3;
-        char * label = findLabel(ptr);
-        ptr += strlen(label)+1;
-        markLoc(labelAry_ptr, label, ptr);
-        labelAry_ptr++;
-      }
-      else if (*(ptr+1)=='\t' && *(ptr+2)=='\n') ptr += 3;
-      else if (*(ptr+1)=='\n' && *(ptr+2)=='\n') return label_ary;
-      else if (*(ptr+1)==' ' && *(ptr+2)=='\t') {
-        ptr+= 3;
-        char * label = findLabel(ptr);
-        ptr += strlen(label)+1;
-        markLoc(returnLabel, label, ptr);
-      }
-      else if ((*(ptr+1)==' ' && *(ptr+2)=='\n') ||
-               (*(ptr+1)=='\t' && *(ptr+2)==' ') ||
-               (*(ptr+1)=='\t' && *(ptr+2)=='\t')) {
-                 ptr += 3;
-                 ptr += strlen(findLabel(ptr)) + 1;
-               }
-    }
-  }
-  return label_ary;
+  return 0;
 }
 
 // turns the file of spaces, tabs, and newlines into a string
@@ -177,6 +125,71 @@ char * readLetterFile(char* fileName){
 }
 
 
+// handles running commands sequentially
+void runProgram(char *code){
+  char *p = code; // pointer at the beginning
+
+  while(*p!='\0'){ // while it's not at the end
+    int command = whichFunc(&p);
+    if(command<0){
+      printf("Error %d: %s\n", errno, strerror(errno));
+    }
+  }
+}
+
+// prints whitespace code in readable [Tab][LF][Space] format
+void printReadable(char * str){
+  for (int i = 0; i<strlen(str); i++){
+    if (str[i] == '\t') printf("[Tab]");
+    else if (str[i] == '\n') printf("[LF]\n");
+    else if (str[i] == ' ') printf("[Space]");
+    else printf(" ");
+  }
+}
+
+
+/* goes through code and returns a labelInfo array with all labels
+in the code marks returnLabel as well (the subroutine) */
+struct labelInfo * retrieveLabels(char * ptr, struct labelInfo * returnLabel){
+  struct labelInfo * label_ary = (struct labelInfo *)malloc(ARRAY_SIZE*sizeof(struct labelInfo)); // keeps track of labels & their pointers
+  struct labelInfo * labelAry_ptr = label_ary;
+
+  while (*ptr != '\0'){
+    if ((*ptr=='\t' && *(ptr+1)==' ') || (*ptr=='\t' && *(ptr+1)=='\n')) ptr += 4;
+    else if (*ptr=='\t' && *(ptr+1)=='\t') ptr += 3;
+    else if (*ptr == ' '){
+      if ((*(ptr+1)=='\n' && *(ptr+2)==' ') || (*(ptr+1)=='\n' && *(ptr+2)=='\t') || (*(ptr+1)=='\n' && *(ptr+2)=='\n')) ptr += 3;
+      else {
+        while (*ptr != '\n') ptr++;
+        ptr++;
+      }
+    }
+    else if (*ptr == '\n'){
+      if (*(ptr+1)==' ' && *(ptr+2)==' '){ // mark the label
+        ptr+=3;
+        char * label = findLabel(ptr);
+        ptr += strlen(label)+1;
+        markLoc(labelAry_ptr, label, ptr);
+        labelAry_ptr++;
+      }
+      else if (*(ptr+1)=='\t' && *(ptr+2)=='\n') ptr += 3;
+      else if (*(ptr+1)=='\n' && *(ptr+2)=='\n') return label_ary;
+      else if (*(ptr+1)==' ' && *(ptr+2)=='\t') {
+        ptr+= 3;
+        char * label = findLabel(ptr);
+        ptr += strlen(label)+1;
+        markLoc(returnLabel, label, ptr);
+      }
+      else if ((*(ptr+1)==' ' && *(ptr+2)=='\n') ||
+               (*(ptr+1)=='\t' && *(ptr+2)==' ') ||
+               (*(ptr+1)=='\t' && *(ptr+2)=='\t')) {
+                 ptr += 3;
+                 ptr += strlen(findLabel(ptr)) + 1;
+               }
+    }
+  }
+  return label_ary;
+}
 
 
 int whichFunc(char** p){ // points to where we are in the string
@@ -348,9 +361,6 @@ int whichFunc(char** p){ // points to where we are in the string
 }
 
 
-
-
-// might not need this here, was just used for testing in main
 int findNumber(char* str, int * numLen){
   int num = 0;
   int sign = 1;
