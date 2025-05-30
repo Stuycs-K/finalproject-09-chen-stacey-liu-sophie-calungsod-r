@@ -41,3 +41,8 @@
 ### 2024-05-28 - Started brainstorming more test cases
 - Spent class period coming up with more test cases for flow control
 - Spent 30 minutes at home coming up with more test cases and debugging unCondJump()
+
+### 2024-05-29 - Edited jump functions to handle empty stack and freed memory
+- Spent 10 minutes editing jump functions to handle empty Stack
+- Spent 10 minutes freeing memory
+- Spent 10 minutes thinking of more test cases
