@@ -52,3 +52,6 @@ This document must be updated daily every time you finish a work session.
 ### 2025-05-29
 - Added tables on the whitespace syntax for each command & made some formatting changes to the markdown files (40 min)
 - Added the print statements asking for input (3 min)
+
+### 2025-05-30
+- Wrote some test cases for arithmetic operations and inputting numbers (60 min)
