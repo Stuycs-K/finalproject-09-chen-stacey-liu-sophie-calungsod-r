@@ -39,7 +39,7 @@ Example: <br>
 - [TAB]**[TAB][TAB][SPACE][SPACE][TAB][SPACE][LINEFEED**] (T**TTSSTSL**) → -**110010** → -50
 
 
-### Stack Manipulation
+## Stack Manipulation
 
 For stack manipulation, the IMP at the beginning of each command is just a [SPACE]. Stack manipulation commands are used to modify the stack---pushing items, duplicating items, swapping items, discarding items, etc.
 
@@ -56,7 +56,7 @@ Operator | Parameter | Command
 
 <img src="diagrams/stack.jpg" alt="stack diagram" width="400"/>
 
-### Arithmetic
+## Arithmetic
 
 For arithmetic, the IMP at the beginning of each command is [TAB][SPACE]. Whitespace handles simple arithmetic, including addition, subtraction, multiplication, integer division, and modulo. The numbers used for these commands come from the stack in the order *second value popped* [operation] *first value popped*.
 
@@ -70,7 +70,7 @@ Operator | Parameter | Command
 
 <img src="diagrams/arithmetic-division.jpg" alt="arithmetic diagram" width="400"/>
 
-### Heap Access
+## Heap Access
 
 For heap access, the IMP at the beginning of each command is [TAB][TAB]. There are only two commands for heaps: storing a value in a heap and retrieving a value from a heap. When storing a value in the heap, the value and address is popped from the stack. When retrieving a value from the heap, an address is popped from the stack and the corresponding value from the heap is pushed to the stack. 
 
@@ -81,7 +81,7 @@ Operator | Parameter | Command
 
 <img src="diagrams/heap.jpg" alt="heap diagram" width="400"/>
 
-### Input/Output
+## Input/Output
 
 Finally, for input/output, the IMP at the beginning of each command is [TAB][LINEFEED]. Input/output commands pop a value from a stack and performs an action with it, whether it be using it as an address for a user inputted value or as the value to be outputted.
 
@@ -105,7 +105,7 @@ charEcho.txt - Type one character and press enter. The character will be echoed 
 make whitespace ARGS="-s -r tests/charEcho.txt"
 ```
 
-### Flow Control
+## Flow Control
 
 For flow control, the IMP at the beginning of each command is [LINEFEED]. Flow control, essentially, is regulating data flow in order to prevent overwhelming the receiver (what is the receiver?? regulate how??). Somebody explain this......
 
