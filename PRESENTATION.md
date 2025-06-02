@@ -11,13 +11,15 @@ An esoteric programming language is an experimental programming language written
 1) Translate Whitespace to plain text and print out the result
 2) Translate a command written in Whitespace and execute it directly
 
-Our interpreter runs with one command in the terminal: make whitespace. The option added determines what is printed as a result:
+Our interpreter runs with one command in the terminal: make whitespace. The options added determine the result:
 
 Printing the Whitespace from a file in plain text:
->make whitespace ARGS="-p [FILE NAME]'
+>make whitespace ARGS="-s -p [FILE NAME]'
 
 Executing the Whitespace code from a file:
->make whitespace ARGS="-r [FILE NAME]'
+>make whitespace ARGS="-s -r [FILE NAME]'
+
+* The '-s' reads files written with spaces, tabs, and new lines, but can be replaced with a '-l', which reads files written with letters 'S', 'T', and 'N' or 'L' to represent the spaces.
 
 Once we reviewed a few color-coded examples of Whitespace code, we dove into understanding Instruction Modification Parameters, or IMP. IMP is not a commonly used term, but it is used in documentation written for Whitespace (although official, original documentation has been unpublished since its creation). IMP refers to the beginning of a command, used to designate its purpose when interpreting code. For Whitespace, there are five different IMPs for five different categories of commands:
 
