@@ -48,7 +48,7 @@ make whitespace ARGS="-l -r tests/arithmetic_letters.txt"
 ```
 2. arithmetic2.txt - Adds, subtracts, multiplies, divides, and mods numbers, and outputs their ASCII equivalents to create the word Pizza.
 ```shell
-make whitespace ARGS="-l -r tests/arithmetic_letters.txt"
+make whitespace ARGS="-l -r tests/arithmetic2.txt"
 ```
 3. charEcho_letters.txt - Type one character and press enter. The character will be echoed back. Use ^C to exit.
 ```shell
