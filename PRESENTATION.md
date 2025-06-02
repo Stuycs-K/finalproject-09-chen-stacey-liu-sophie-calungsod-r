@@ -94,7 +94,7 @@ Operator | Parameter | Command
 
 <img src="diagrams/io.jpg" alt="i/o diagram" width="400"/>
 
-**Heap access, stack, i/o and arithmetic test:**
+**Heap access, stack, i/o and arithmetic test:** <br>
 ex. arithmetic_letters.txt - Returns the sum of two inputted numbers.
 ```shell
 make whitespace ARGS="-l -r tests/arithmetic_letters.txt"
