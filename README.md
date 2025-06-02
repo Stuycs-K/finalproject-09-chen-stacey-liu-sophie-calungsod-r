@@ -1,19 +1,19 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/am3xLbu5)
 
 # Whitespace Language Interpreter
- 
+
 ### GROUP NAME: "[&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]"
 
 Raechel Calungsod, Stacey Chen, Sophie Liu
-       
+
 ### Project Description:
-This project is a Whitespace interpreter. Whitespace, an esoteric programming language written 
+This project is a Whitespace interpreter. Whitespace, an esoteric programming language written
 by Edwin Brady and Chris Morris in 2002. Whitespace only takes in spaces, tabs, and new lines
 that can be translated back into plaintext using a set algorithm. Our Whitespace interpreter
-can do two things depending on the option used: take in a file containing Whitespace and print 
-out the code consisting of "[Tab]", "[Space]", or "[LF]" (for line feed, or new lines), or take 
+can do two things depending on the option used: take in a file containing Whitespace and print
+out the code consisting of "[Tab]", "[Space]", or "[LF]" (for line feed, or new lines), or take
 in a file containing Whitespace and run the code.
-  
+
 ## Instructions:
 
 First, cd into the interpreter directory.
@@ -58,7 +58,11 @@ make whitespace ARGS="-l -r tests/charEcho_letters.txt"
 ```shell
 make whitespace ARGS="-l -r tests/hw_letters.txt"
 ```
-5. truth_letters.txt - A typical truth machine used to test esoteric languages. If 1 is inputted, 1 will be printed infinitely (use ^C to exit). If 0 is inputted, 0 is printed once.
+5. subroutine2_letters.txt - Tests flow control subroutines, prints "30" (the sum of the numbers pushed onto the stack) if it works correctly.
+```shell
+make whitespace ARGS="-l -r tests/subroutine2_letters.txt"  
+```
+6. truth_letters.txt - A typical truth machine used to test esoteric languages. If 1 is inputted, 1 will be printed infinitely (use ^C to exit). If 0 is inputted, 0 is printed once.
 ```shell
 make whitespace ARGS="-l -r tests/truth_letters.txt"  
 ```
@@ -72,19 +76,23 @@ make whitespace ARGS="-s -r tests/charEcho.txt"
 ```shell
 make whitespace ARGS="-s -r tests/hw.txt"
 ```
-3. testfc.txt - Tests flow control jumps and labels, prints "abc" (the letters pushed onto the stack) if it works correctly.
+3. subroutine.txt - Tests flow control subroutines, prints "-15" (the result after performing operations on the stack) if it works correctly.
+```shell
+make whitespace ARGS="-s -r tests/subroutine.txt"
+```
+4. testfc.txt - Tests flow control jumps and labels, prints "abc" (the letters pushed onto the stack) if it works correctly.
 ```shell
 make whitespace ARGS="-s -r tests/testfc.txt"
 ```
-4. testfc2.txt - Tests flow control jumps and labels, prints "ababc" (the letters pushed onto the stack) if it works correctly.
+5. testfc2.txt - Tests flow control jumps and labels, prints "ababc" (the letters pushed onto the stack) if it works correctly.
 ```shell
 make whitespace ARGS="-s -r tests/testfc2.txt"
 ```
-5. testfc3.txt - Tests flow control jumps and labels, prints "ababab..." indefinitely (the letters pushed onto the stack) if it works correctly.
+6. testfc3.txt - Tests flow control jumps and labels, prints "ababab..." indefinitely (the letters pushed onto the stack) if it works correctly.
 ```shell
 make whitespace ARGS="-s -r tests/testfc3.txt"
 ```
-6. truth.txt - A typical truth machine used to test esoteric languages. If 1 is inputted, 1 will be printed infinitely (use ^C to exit). If 0 is inputted, 0 is printed once.
+7. truth.txt - A typical truth machine used to test esoteric languages. If 1 is inputted, 1 will be printed infinitely (use ^C to exit). If 0 is inputted, 0 is printed once.
 ```shell
 make whitespace ARGS="-s -r tests/truth.txt"  
 ```
