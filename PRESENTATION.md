@@ -19,7 +19,7 @@ Printing the Whitespace from a file in plain text:
 Executing the Whitespace code from a file:
 >make whitespace ARGS="-r [FILE NAME]'
 
-Once we reviewed a few color-coded examples of Whitespace code, we dove into understanding Instruction Modification Parameters, or IMP. IMP is not a commonly used term, but it is used in documentation written for Whitespace (although official, original documentation has been unpublished since its creation). IMP refers to the beginning of a command, used to designate its purpose when interpreting code. For Whitespace, there are five different IMPs for five different categories of commands: 
+Once we reviewed a few color-coded examples of Whitespace code, we dove into understanding Instruction Modification Parameters, or IMP. IMP is not a commonly used term, but it is used in documentation written for Whitespace (although official, original documentation has been unpublished since its creation). IMP refers to the beginning of a command, used to designate its purpose when interpreting code. For Whitespace, there are five different IMPs for five different categories of commands:
 
 1. Stack manipulation
 2. Arithmetic
@@ -72,7 +72,7 @@ Operator | Parameter | Command
 
 ## Heap Access
 
-For heap access, the IMP at the beginning of each command is [TAB][TAB]. There are only two commands for heaps: storing a value in a heap and retrieving a value from a heap. When storing a value in the heap, the value and address is popped from the stack. When retrieving a value from the heap, an address is popped from the stack and the corresponding value from the heap is pushed to the stack. 
+For heap access, the IMP at the beginning of each command is [TAB][TAB]. There are only two commands for heaps: storing a value in a heap and retrieving a value from a heap. When storing a value in the heap, the value and address is popped from the stack. When retrieving a value from the heap, an address is popped from the stack and the corresponding value from the heap is pushed to the stack.
 
 Operator | Parameter | Command
 --- | --- | ---
@@ -107,9 +107,7 @@ make whitespace ARGS="-s -r tests/charEcho.txt"
 
 ## Flow Control
 
-For flow control, the IMP at the beginning of each command is [LINEFEED]. Flow control, essentially, is regulating data flow in order to prevent overwhelming the receiver (what is the receiver?? regulate how??). Somebody explain this......
-
-[show examples and explain the commands specifically]
+For flow control, the IMP at the beginning of each command is [LINEFEED]. Flow control, essentially, determines how the program moves from one statement to another, based on given conditions. This involves handling things like loops and conditional statements. Some flow control operations take a label, which, similar to a number, is a sequence of tabs and spaces terminated by a linefeed. With this label, we can mark down certain locations in the program to “jump” to when the label is called. Calling a subroutine is similar to jumping to a label, except that subroutines are terminated by a return statement.
 
 Operator | Parameter | Command
 --- | --- | ---
@@ -132,5 +130,3 @@ make whitespace ARGS="-s -r tests/truth.txt"
 ```
 
 <br>
-
-
