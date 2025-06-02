@@ -89,3 +89,8 @@ I spent 15 minutes at home reviewing and making minor edits on the presentation.
 I spent 40 minutes in class rewriting code to create an option for the Whitespace code to be
 written with T, S, and L/N. I also rewrote our test cases in this version of the code for 
 testing.
+
+### 2025-06-02 - Writing README/reorganizing presentation
+I spent 40 minutes in class writing explanations for our new test cases in the README. In
+addition, I worked with my group to rearrange our presentation and go into more detail for
+our testing segments.
