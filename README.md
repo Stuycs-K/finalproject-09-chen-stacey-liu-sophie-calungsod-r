@@ -7,12 +7,14 @@
 Raechel Calungsod, Stacey Chen, Sophie Liu
 
 ### Project Description:
-This project is a Whitespace interpreter. Whitespace, an esoteric programming language written
+This project is a Whitespace interpreter. Whitespace is an esoteric programming language written
 by Edwin Brady and Chris Morris in 2002. Whitespace only takes in spaces, tabs, and new lines
-that can be translated back into plaintext using a set algorithm. Our Whitespace interpreter
+and translates it into plaintext or executable code using a set algorithm. Our Whitespace interpreter
 can do two things depending on the option used: take in a file containing Whitespace and print
 out the code consisting of "[Tab]", "[Space]", or "[LF]" (for line feed, or new lines), or take
 in a file containing Whitespace and run the code.
+
+***
 
 ## Instructions:
 
@@ -32,7 +34,7 @@ cd interpreter/
 1. -p: Prints the tabs, spaces, and line feeds (new lines) that make up the whitespace code in a readable format.
 2. -r: Runs the whitespace code written.
 
-***All Options***
+**All Options**
 1. `make whitespace ARGS="-l -p [file name]"` -> Prints the contents of a file written with letters in a readable format.
 2. `make whitespace ARGS="-l -r [file name]"` -> Runs the code from a file written with letters.
 3. `make whitespace ARGS="-s -p [file name]"` -> Prints the contents of a file written with spaces in a readable format.
@@ -66,6 +68,7 @@ make whitespace ARGS="-l -r tests/subroutine2_letters.txt"
 ```shell
 make whitespace ARGS="-l -r tests/truth_letters.txt"  
 ```
+***
 
 ### Requires the -s option:
 1. charEcho.txt - Type one character and press enter. The character will be echoed back. Use ^C to exit.
