@@ -33,7 +33,7 @@ int main(int argc, char *argv[]){
              "Use either option '-p' to print the translated Whitespace or '-r' to run the translated command.\n"
              "------\n"
              "The third argument should be your whitespace file name.\n\n");
-  
+
   } else{
 
     // flag 1: retrieve file contents
@@ -52,7 +52,8 @@ int main(int argc, char *argv[]){
     }
     if (strcmp(argv[2],"-r")==0){ // first argument is 'r', runs the translated command
       globalreturnLabel = (struct labelInfo *)malloc(sizeof(struct labelInfo)); // for flow control subroutine
-      globallabel_ary =  retrieveLabels(stringOf, globalreturnLabel); // keeps track of labels & their pointers
+      globalreturnLabel -> label_ptr = NULL;
+      globallabel_ary =  retrieveLabels(stringOf);//, globalreturnLabel); // keeps track of labels & their pointers
       runProgram(stringOf);
       free(globalreturnLabel);
       free(globallabel_ary);
@@ -150,7 +151,7 @@ void printReadable(char * str){
 
 /* goes through code and returns a labelInfo array with all labels
 in the code marks returnLabel as well (the subroutine) */
-struct labelInfo * retrieveLabels(char * ptr, struct labelInfo * returnLabel){
+struct labelInfo * retrieveLabels(char * ptr){//, struct labelInfo * returnLabel){
   struct labelInfo * label_ary = (struct labelInfo *)malloc(ARRAY_SIZE*sizeof(struct labelInfo)); // keeps track of labels & their pointers
   struct labelInfo * labelAry_ptr = label_ary;
 
@@ -173,16 +174,17 @@ struct labelInfo * retrieveLabels(char * ptr, struct labelInfo * returnLabel){
         labelAry_ptr++;
       }
       else if (*(ptr+1)=='\t' && *(ptr+2)=='\n') ptr += 3;
-      else if (*(ptr+1)=='\n' && *(ptr+2)=='\n') return label_ary;
-      else if (*(ptr+1)==' ' && *(ptr+2)=='\t') {
-        ptr+= 3;
-        char * label = findLabel(ptr);
-        ptr += strlen(label)+1;
-        markLoc(returnLabel, label, ptr);
-      }
+      else if (*(ptr+1)=='\n' && *(ptr+2)=='\n') ptr += 3;//return label_ary;
+      // else if (*(ptr+1)==' ' && *(ptr+2)=='\t') { // initially the subroutine stuff
+      //   ptr+= 3;
+      //   char * label = findLabel(ptr);
+      //   ptr += strlen(label)+1;
+      //   markLoc(returnLabel, label, ptr);
+      // }
       else if ((*(ptr+1)==' ' && *(ptr+2)=='\n') ||
                (*(ptr+1)=='\t' && *(ptr+2)==' ') ||
-               (*(ptr+1)=='\t' && *(ptr+2)=='\t')) {
+               (*(ptr+1)=='\t' && *(ptr+2)=='\t') ||
+               (*(ptr+1)==' ' && *(ptr+2)=='\t')) {
                  ptr += 3;
                  ptr += strlen(findLabel(ptr)) + 1;
                }
@@ -315,7 +317,9 @@ int whichFunc(char** p){ // points to where we are in the string
       ptr+=3;
       char * label = findLabel(ptr);
       ptr += strlen(label)+1;
+      markLoc(returnLabel, label, ptr);
       unCondJump(label, label_ary, &ptr);
+      printf("hi\n");
     }
     else if (*(ptr+1)==' ' && *(ptr+2)=='\n'){ // [SPACE][LINEFEED][LABEL]
       // Jump unconditionally to a label
@@ -343,7 +347,11 @@ int whichFunc(char** p){ // points to where we are in the string
     }
     else if (*(ptr+1)=='\t' && *(ptr+2)=='\n'){ // [TAB][LINEFEED]
       // End subroutine & transfer control back to caller
-      ptr = returnLabel -> label_ptr;
+      if (returnLabel -> label_ptr == NULL) ptr+=3;
+      else {
+        ptr = returnLabel -> label_ptr;
+        returnLabel -> label_ptr = NULL;
+      }
     }
     else if (*(ptr+1)=='\n' && *(ptr+2)=='\n'){ // [LINEFEED][LINEFEED]
       // End program
