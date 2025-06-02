@@ -38,11 +38,14 @@ Example:
 make whitespace ARGS='-r tests/hw.txt'
 ```
 
-### Resources/ References:
+### Resources / References:
 
 1. [Esolangs Wiki - Whitespace page](https://esolangs.org/wiki/Whitespace)
 2. [Esolangs Wiki - Esoteric programming language](https://esolangs.org/wiki/Esoteric_programming_language)
 3. [Esolangs Wiki - Truth machine test](https://esolangs.org/wiki/Truth-machine)
-4. [Whitespace decoder from dcode](https://www.dcode.fr/whitespace-language)
-5. [Whitespace tutorial from Hackage](https://hackage.haskell.org/package/whitespace-0.4/src/docs/tutorial.html)
-6. [Whitespace | Esolang Showcase by The Zip Creator (video)](https://www.youtube.com/watch?v=O406bEHAOcc)
+4. [Wikipedia - Whitespace (programming language)](https://en.wikipedia.org/wiki/Whitespace_(programming_language))
+5. [Whitespace decoder from dcode](https://www.dcode.fr/whitespace-language)
+6. [Whitespace tutorial from Hackage](https://hackage.haskell.org/package/whitespace-0.4/src/docs/tutorial.html)
+7. [Whitespace | Esolang Showcase by The Zip Creator (video)](https://www.youtube.com/watch?v=O406bEHAOcc)
+8. [Whitespace Programming Language Tutorial by Script Kiddie (video)](https://www.youtube.com/watch?v=ea7HZ96dwqs)
+9. [ Whitespace! by Truttle1 (video)](https://www.youtube.com/watch?v=dIZM68voaY8)
