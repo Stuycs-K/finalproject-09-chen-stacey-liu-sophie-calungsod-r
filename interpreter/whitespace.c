@@ -319,7 +319,6 @@ int whichFunc(char** p){ // points to where we are in the string
       ptr += strlen(label)+1;
       markLoc(returnLabel, label, ptr);
       unCondJump(label, label_ary, &ptr);
-      printf("hi\n");
     }
     else if (*(ptr+1)==' ' && *(ptr+2)=='\n'){ // [SPACE][LINEFEED][LABEL]
       // Jump unconditionally to a label
