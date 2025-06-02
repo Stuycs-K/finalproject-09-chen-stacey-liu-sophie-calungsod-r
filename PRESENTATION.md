@@ -81,6 +81,30 @@ Operator | Parameter | Command
 
 <img src="diagrams/heap.jpg" alt="heap diagram" width="400"/>
 
+### Input/Output
+
+Finally, for input/output, the IMP at the beginning of each command is [TAB][LINEFEED]. Input/output commands pop a value from a stack and performs an action with it, whether it be using it as an address for a user inputted value or as the value to be outputted.
+
+Operator | Parameter | Command
+--- | --- | ---
+[TAB][SPACE] |  | **input ascii character**
+[TAB][TAB] |  | **input number**
+[SPACE][SPACE] |  | **output ascii character**
+[SPACE][TAB] |  | **output number**
+
+<img src="diagrams/io.jpg" alt="i/o diagram" width="400"/>
+
+**Heap access, stack, i/o and arithmetic test:**
+ex. arithmetic_letters.txt - Returns the sum of two inputted numbers.
+```shell
+make whitespace ARGS="-l -r tests/arithmetic_letters.txt"
+```
+
+charEcho.txt - Type one character and press enter. The character will be echoed back. Use ^C to exit.
+```shell
+make whitespace ARGS="-s -r tests/charEcho.txt"
+```
+
 ### Flow Control
 
 For flow control, the IMP at the beginning of each command is [LINEFEED]. Flow control, essentially, is regulating data flow in order to prevent overwhelming the receiver (what is the receiver?? regulate how??). Somebody explain this......
@@ -97,25 +121,16 @@ Operator | Parameter | Command
 [TAB][LF] |  | **end subroutine & transfer control back to caller**
 [LF][LF] |  | **end program**
 
-### Input/Output
+ex. testfc3.txt - Tests flow control jumps and labels, prints "ababab..." indefinitely (the letters pushed onto the stack) if it works correctly.
+```shell
+make whitespace ARGS="-s -r tests/testfc3.txt"
+```
 
-Finally, for input/output, the IMP at the beginning of each command is [TAB][LINEFEED]. Input/output commands pop a value from a stack and performs an action with it, whether it be using it as an address for a user inputted value or as the value to be outputted.
-
-Operator | Parameter | Command
---- | --- | ---
-[TAB][SPACE] |  | **input ascii character**
-[TAB][TAB] |  | **input number**
-[SPACE][SPACE] |  | **output ascii character**
-[SPACE][TAB] |  | **output number**
-
-<img src="diagrams/io.jpg" alt="i/o diagram" width="400"/>
+ex. truth.txt - A typical truth machine used to test esoteric languages. If 1 is inputted, 1 will be printed infinitely (use ^C to exit). If 0 is inputted, 0 is printed once.
+```shell
+make whitespace ARGS="-s -r tests/truth.txt"  
+```
 
 <br>
 
-## Testing
-<img src="diagrams/hw.png" alt="hello world program colored" width="400"/>
-
-1. hw.txt - Prints "Hello, World!"
-2. truth.txt - A typical truth machine used to test esoteric languages. If 1 is inputted, 1 will be printed infinitely (use ^C to exit). If 0 is inputted, 0 is printed once.
-3. charEcho.txt - Type one character and press enter. The character will be echoed back. Use ^C to exit.
 
