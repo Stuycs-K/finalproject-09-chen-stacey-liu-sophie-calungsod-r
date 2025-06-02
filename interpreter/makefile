@@ -1,5 +1,8 @@
 .PHONY: whitespace
 
+noargs:
+	@echo "usage: make whitespace ARGS='<flags> [filename]' / make clean"
+
 whitespace: whitespace.o stack.o heap.o math.o io.o flowcontrol.o
 	@gcc -o whitespace whitespace.o stack.o heap.o math.o io.o flowcontrol.o
 	@./whitespace $(ARGS)

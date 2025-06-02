@@ -9,9 +9,9 @@
 void input_char(Stack *stack, Heap *heap) {
     //get user input
     char value;
-    char input[3];
+    char input[256];
     printf("/Input a character/: ");
-    fgets(input, 2, stdin);
+    fgets(input, 255, stdin);
     sscanf(input, "%c", &value);
     fflush(stdin);
 
@@ -35,7 +35,7 @@ void input_num(Stack *stack, Heap *heap) {
     fgets(input, 255, stdin);
     sscanf(input, "%d", &value);
     fflush(stdin);
-    
+
     //store input to heap
     if (isEmpty(stack)) {
         perror("Input Error: Stack is empty");

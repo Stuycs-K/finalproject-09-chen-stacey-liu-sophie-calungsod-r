@@ -15,6 +15,6 @@ char * readLetterFile(char* fileName);
 void printReadable(char * str);
 int whichFunc(char** p);
 void runProgram(char *code);
-struct labelInfo * retrieveLabels(char * ptr, struct labelInfo * returnLabel);
+struct labelInfo * retrieveLabels(char * ptr); //, struct labelInfo * returnLabel);
 
 #endif
