@@ -49,3 +49,6 @@
 
 ### 2024-05-30 - Wrote test cases for subroutine
 - Spent class period writing test cases for subroutine and making sure it works as expected
+
+### 2024-06-01 - Debugged subroutine and added test cases
+- Spent 30 minutes debugging subroutine and added some test cases (letter versions)
