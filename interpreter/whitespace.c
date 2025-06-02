@@ -10,29 +10,123 @@ Heap heap;
 
 struct labelInfo * globalreturnLabel;
 struct labelInfo * globallabel_ary;
+
+/*
+  argv[0]: nothing
+  argv[1]: letterFile or spaceFile (-l or -s)
+  argv[2]: print or run (-p or -r)
+  argv[3]: file name
+*/
 int main(int argc, char *argv[]){
   init(&stack);
-  if (argc<=1){
-    printf("Use either option '-p' to print the translated Whitespace or '-r' to run the translated command.\n");
+  char * fileName;
+  char * stringOf;
+
+  if (argc<=2){
+    printf("\nTwo flags and a file name are needed.\n"
+             "------\n"
+             "Flag 1: \n"
+             "~ Use '-l' if your file is written with the letters T, S, and L/N in place of tabs, spaces, and new lines.\n"
+             "~ Use '-s' if your file is written with tabs, spaces, and new lines.\n"
+             "------\n"
+             "Flag 2: \n"
+             "Use either option '-p' to print the translated Whitespace or '-r' to run the translated command.\n"
+             "------\n"
+             "The third argument should be your whitespace file name.\n\n");
+  
+  } else{
+
+    // flag 1: retrieve file contents
+    if(strcmp(argv[1],"-s")==0){ // get file when it's written with tabs, spaces, new lines
+      fileName = argv[3];
+      stringOf = readFile(fileName);
+    }
+    else if(strcmp(argv[1],"-l")==0){ // get file when it's written with T,S,L/N
+      fileName = argv[3];
+      stringOf = readLetterFile(fileName);
+    }
+
+    // flag 2: run or print
+    if (strcmp(argv[2],"-p")==0){ // first argument is 'p', print the translated
+      printReadable(stringOf); // should print in N,S,T
+    }
+    if (strcmp(argv[2],"-r")==0){ // first argument is 'r', runs the translated command
+      globalreturnLabel = (struct labelInfo *)malloc(sizeof(struct labelInfo)); // for flow control subroutine
+      globallabel_ary =  retrieveLabels(stringOf, globalreturnLabel); // keeps track of labels & their pointers
+      runProgram(stringOf);
+      free(globalreturnLabel);
+      free(globallabel_ary);
+      free(stringOf);
+    }
   }
-  if (argc>2 && strcmp(argv[1],"-p")==0){ // first argument is 'p', print the translated
-    char * fileName = argv[2];
-    char * stringOf = readFile(fileName);
-    printReadable(stringOf); // should print in N,S,T
-  }
-  if (argc>2 && strcmp(argv[1],"-r")==0){ // first argument is 'r', runs the translated command
-    char * fileName = argv[2];
-    char * stringOf = readFile(fileName);
-    globalreturnLabel = (struct labelInfo *)malloc(sizeof(struct labelInfo)); // for flow control subroutine
-    globallabel_ary =  retrieveLabels(stringOf, globalreturnLabel); // keeps track of labels & their pointers
-    runProgram(stringOf);
-    free(globalreturnLabel);
-    free(globallabel_ary);
-    free(stringOf);
-  }
+
+  return 0;
 }
 
-void runProgram(char *code){ // handles running commands sequentially
+// turns the file of spaces, tabs, and newlines into a string
+char * readFile(char* fileName){
+  int file = open(fileName, O_RDONLY , 0);
+  if(file == -1){
+    // prints "Error #: Error message here"
+    printf("Error %d: %s\n", errno, strerror(errno));
+  }
+
+  char* buff = malloc(1024*4); // make files later, see if we need more
+  if (buff==NULL){
+    perror("didn't malloc buff correctly");
+  }
+  int len = 0; // used to go through the buffer
+
+  char space;
+  while(read(file,&space,1)==1){ // while there's something to read
+    if(space==' ' || space=='\n' || space=='\t'){
+      buff[len]=space;
+      len++;
+    }
+  }
+
+  buff[len] = '\0';
+  close(file);
+    return buff;
+}
+
+// turns the file of S, T, L or N into a string of tabs, spaces, and linefeeds
+char * readLetterFile(char* fileName){
+  int file = open(fileName, O_RDONLY , 0);
+  if(file == -1){
+    // prints "Error #: Error message here"
+    printf("Error %d: %s\n", errno, strerror(errno));
+  }
+
+  char* buff = malloc(1024*4); // make files later, see if we need more
+  if (buff==NULL){
+    perror("didn't malloc buff correctly");
+  }
+  int len = 0; // used to go through the buffer
+
+  char space;
+  while(read(file,&space,1)==1){ // while there's something to read
+    if(space=='S'){
+      buff[len]=' ';
+      len++;
+    }
+    else if(space=='T'){
+      buff[len]='\t';
+      len++;
+    }
+    else if(space=='N' || space=='L'){
+      buff[len]='\n';
+      len++;
+    }
+  }
+  buff[len] = '\0';
+  close(file);
+  return buff;
+}
+
+
+// handles running commands sequentially
+void runProgram(char *code){
   char *p = code; // pointer at the beginning
 
   while(*p!='\0'){ // while it's not at the end
@@ -96,33 +190,6 @@ struct labelInfo * retrieveLabels(char * ptr, struct labelInfo * returnLabel){
   }
   return label_ary;
 }
-
-// turns the file into a string
-char * readFile(char* fileName){
-  int file = open(fileName, O_RDONLY , 0);
-  if(file == -1){
-    // prints "Error #: Error message here"
-    printf("Error %d: %s\n", errno, strerror(errno));
-  }
-
-  char* buff = malloc(1024*4); // make files later, see if we need more
-  if (buff==NULL){
-    perror("didn't malloc buff correctly");
-  }
-  int len = 0; // used to go through the buffer
-
-  char space;
-  while(read(file,&space,1)==1){ // while there's something to read
-    if(space==' ' || space=='\n' || space=='\t'){
-      buff[len]=space;
-      len++;
-    }
-  }
-
-  buff[len] = '\0';
-  close(file);
-    return buff;
-  }
 
 
 int whichFunc(char** p){ // points to where we are in the string
@@ -294,9 +361,6 @@ int whichFunc(char** p){ // points to where we are in the string
 }
 
 
-
-
-// might not need this here, was just used for testing in main
 int findNumber(char* str, int * numLen){
   int num = 0;
   int sign = 1;

@@ -1,0 +1,12 @@
+SSSSSSSSSSL
+TLTT
+SSSSSSSSSTL
+TLTT
+SSSSSSSSSSL
+TTT
+SSSSSSSSSTL
+TTT
+TSSS
+TLST
+
+takes user input twice (number), adds them together, and outputs the result

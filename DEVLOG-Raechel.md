@@ -79,8 +79,13 @@ files. I also changed user input to allow a file name.
 I spent 25 minutes at home reviewing code and past commits, updating our presentation file,
 and editing our README file.
 
-### 2025-05-28 - Testing and writing presentation
+### 2025-05-29 - Testing and writing presentation
 I spent 35 minutes in class creating new testing files (truth machine and character echo)
 and writing more of the presentation and README.
 
 I spent 15 minutes at home reviewing and making minor edits on the presentation.
+
+### 2025-05-30 - Testing and changing flag input
+I spent 40 minutes in class rewriting code to create an option for the Whitespace code to be
+written with T, S, and L/N. I also rewrote our test cases in this version of the code for 
+testing.

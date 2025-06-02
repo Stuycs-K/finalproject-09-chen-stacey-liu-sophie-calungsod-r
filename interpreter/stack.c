@@ -24,6 +24,7 @@ void push(Stack *stack, int n) {
   }
   stack->top++;
   stack->ary[stack->top] = n;
+  //print(stack); //for dev
 }
 
 /* Duplicate top item on stack */
