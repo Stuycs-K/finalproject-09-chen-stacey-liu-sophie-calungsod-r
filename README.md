@@ -46,7 +46,7 @@ cd interpreter/
 ```shell
 make whitespace ARGS="-l -r tests/arithmetic_letters.txt"
 ```
-2. arithmetic2.txt - SOPHIE EXPLAIN HERE
+2. arithmetic2.txt - Adds, subtracts, multiplies, divides, and mods numbers, and outputs their ASCII equivalents to create the word Pizza.
 ```shell
 make whitespace ARGS="-l -r tests/arithmetic_letters.txt"
 ```
