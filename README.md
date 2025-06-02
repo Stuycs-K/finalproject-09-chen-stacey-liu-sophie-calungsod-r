@@ -14,7 +14,7 @@ can do two things depending on the option used: take in a file containing Whites
 out the code consisting of "[Tab]", "[Space]", or "[LF]" (for line feed, or new lines), or take 
 in a file containing Whitespace and run the code.
   
-### Instructions:
+## Instructions:
 
 First, cd into the interpreter directory.
 
@@ -22,20 +22,71 @@ First, cd into the interpreter directory.
 cd interpreter/
 ```
 
-In order to compile and run the program, the user can use one of two commands:
-1. `make whitespace ARGS="-p [file name]"`
-2. `make whitespace ARGS="-r [file name]"`
+### Here, the user will use "make whitespace" and two required flags to either run or print a file.
 
-In both commands, the file should contain properly written whitespace code. The -p option will print the tabs, spaces, and line feeds (new lines) that make up the whitespace code, while the -r option will run the code written.
+**Flag 1 Options (-l/-s):**
+1. -l: Used if a test file is written with letters in place of spaces, tabs, and new lines. 'L' or 'N' represents a new line, 'T' represents a tab, and 'S' represents a space.
+2. -s: Used if a test file is written with spaces, tabs, and new lines.
 
-For testing, users may use a number of test files included in `interpreter/tests`:
-1. hw.txt - Prints "Hello, World!"
-2. truth.txt - A typical truth machine used to test esoteric languages. If 1 is inputted, 1 will be printed infinitely (use ^C to exit). If 0 is inputted, 0 is printed once. 
-3. charEcho.txt - Type one character and press enter. The character will be echoed back. Use ^C to exit.
+**Flag 2 Options (-p/-r):**
+1. -p: Prints the tabs, spaces, and line feeds (new lines) that make up the whitespace code in a readable format.
+2. -r: Runs the whitespace code written.
 
-Example:
+***All Options***
+1. `make whitespace ARGS="-l -p [file name]"` -> Prints the contents of a file written with letters in a readable format.
+2. `make whitespace ARGS="-l -r [file name]"` -> Runs the code from a file written with letters.
+3. `make whitespace ARGS="-s -p [file name]"` -> Prints the contents of a file written with spaces in a readable format.
+4. `make whitespace ARGS="-s -r [file name]"` -> Runs the code from a file written with spaces.
+
+## For testing, users may use a number of test files included in `interpreter/tests`.
+**EXAMPLE:** `make whitespace ARGS="-l -r tests/arithmetic_letters.txt"`
+
+### Requires the -l option:
+1. arithmetic_letters.txt - Returns the sum of two inputted numbers.
 ```shell
-make whitespace ARGS='-r tests/hw.txt'
+make whitespace ARGS="-l -r tests/arithmetic_letters.txt"
+```
+2. arithmetic2.txt - SOPHIE EXPLAIN HERE
+```shell
+make whitespace ARGS="-l -r tests/arithmetic_letters.txt"
+```
+3. charEcho_letters.txt - Type one character and press enter. The character will be echoed back. Use ^C to exit.
+```shell
+make whitespace ARGS="-l -r tests/charEcho_letters.txt"
+```
+4. hw_letters.txt -  Prints "Hello, World"
+```shell
+make whitespace ARGS="-l -r tests/hw_letters.txt"
+```
+5. truth_letters.txt - A typical truth machine used to test esoteric languages. If 1 is inputted, 1 will be printed infinitely (use ^C to exit). If 0 is inputted, 0 is printed once.
+```shell
+make whitespace ARGS="-l -r tests/truth_letters.txt"  
+```
+
+### Requires the -s option:
+1. charEcho.txt - Type one character and press enter. The character will be echoed back. Use ^C to exit.
+```shell
+make whitespace ARGS="-s -r tests/charEcho.txt"
+```
+2. hw.txt - Prints "Hello, World!"
+```shell
+make whitespace ARGS="-s -r tests/hw.txt"
+```
+3. testfc.txt - Tests flow control jumps and labels, prints "abc" (the letters pushed onto the stack) if it works correctly.
+```shell
+make whitespace ARGS="-s -r tests/testfc.txt"
+```
+4. testfc2.txt - Tests flow control jumps and labels, prints "ababc" (the letters pushed onto the stack) if it works correctly.
+```shell
+make whitespace ARGS="-s -r tests/testfc2.txt"
+```
+5. testfc3.txt - Tests flow control jumps and labels, prints "ababab..." indefinitely (the letters pushed onto the stack) if it works correctly.
+```shell
+make whitespace ARGS="-s -r tests/testfc3.txt"
+```
+6. truth.txt - A typical truth machine used to test esoteric languages. If 1 is inputted, 1 will be printed infinitely (use ^C to exit). If 0 is inputted, 0 is printed once.
+```shell
+make whitespace ARGS="-s -r tests/truth.txt"  
 ```
 
 ### Resources/ References:
