@@ -40,18 +40,18 @@ This document must be updated daily every time you finish a work session.
 - Added i/o files to main and added i/o function calls to main program. (15 min)
 - Updated error print statements to add clarity on which IMP is causing the issue & fixed the catch if statement for the math functions to detect for < 2 items rather than < 1 & added more catch statements to the heap, stack, io, and math functions. (35 min)
 
-### 2025-05-27
+### 2025-05-27 - main prog & diagrams
 - Discussed with group on their thoughts on how we would ask for user input. Worked on getting a number parameter in main program to finish stack implentation in main code. (20 min)
 - Drew some diagrams to help explain stack manipulation and heap access (20 min)
 
-### 2025-05-28
+### 2025-05-28 - diagrams, presentation updates, & bug fixes
 - Drew diagrams for i/o and math. Added diagrams to presentation markdown file, did some formatting changes to it and added some additional content explaining further some concepts. (45 min)
 - Fixed a grammar issue in a comment (< 1 min)
 - Fixed some bugs that prevented the interpreter from working on macs (15 min)
 
-### 2025-05-29
+### 2025-05-29 - presentation updates
 - Added tables on the whitespace syntax for each command & made some formatting changes to the markdown files (40 min)
 - Added the print statements asking for input (3 min)
 
-### 2025-05-30
-- Wrote some test cases for arithmetic operations and inputting numbers (60 min)
+### 2025-05-30 - test cases (this took way too long)
+- Wrote some test cases for arithmetic operations and inputting numbers (70 min)
