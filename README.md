@@ -66,7 +66,7 @@ make whitespace ARGS="-l -r tests/charEcho_letters.txt"
 ```shell
 make whitespace ARGS="-l -r tests/hw_letters.txt"
 ```
-5. subroutine2_letters.txt - Tests flow control subroutines, prints "-15" (the result after performing operations on the stack) if it works correctly.
+5. subroutine2_letters.txt - Tests flow control subroutines, prints "-15" (the result after performing operations on the stack) if it works correctly (use ^C to exit).
 ```shell
 make whitespace ARGS="-l -r tests/subroutine2_letters.txt"  
 ```
@@ -97,11 +97,11 @@ make whitespace ARGS="-s -r tests/testfc.txt"
 ```shell
 make whitespace ARGS="-s -r tests/testfc2.txt"
 ```
-6. testfc3.txt - Tests flow control jumps and labels, prints "ababab..." indefinitely (the letters pushed onto the stack) if it works correctly.
+6. testfc3.txt - Tests flow control jumps and labels, prints "ababab..." indefinitely (the letters pushed onto the stack) if it works correctly (use ^C to exit).
 ```shell
 make whitespace ARGS="-s -r tests/testfc3.txt"
 ```
-7. truth.txt - A typical truth machine used to test esoteric languages. If 1 is inputted, 1 will be printed infinitely (use ^C to exit). If 0 is inputted, 0 is printed once.
+7. truth.txt - A typical truth machine used to test esoteric languages. If 0 is inputted, 0 is printed once. If any number other than 0 is inputted, 1 will be printed infinitely (use ^C to exit).
 ```shell
 make whitespace ARGS="-s -r tests/truth.txt"  
 ```
@@ -112,8 +112,9 @@ make whitespace ARGS="-s -r tests/truth.txt"
 2. [Esolangs Wiki - Esoteric programming language](https://esolangs.org/wiki/Esoteric_programming_language)
 3. [Esolangs Wiki - Truth machine test](https://esolangs.org/wiki/Truth-machine)
 4. [Wikipedia - Whitespace (programming language)](https://en.wikipedia.org/wiki/Whitespace_(programming_language))
-5. [Whitespace decoder from dcode](https://www.dcode.fr/whitespace-language)
-6. [Whitespace tutorial from Hackage](https://hackage.haskell.org/package/whitespace-0.4/src/docs/tutorial.html)
-7. [Whitespace | Esolang Showcase by The Zip Creator (video)](https://www.youtube.com/watch?v=O406bEHAOcc)
-8. [Whitespace Programming Language Tutorial by Script Kiddie (video)](https://www.youtube.com/watch?v=ea7HZ96dwqs)
-9. [ Whitespace! by Truttle1 (video)](https://www.youtube.com/watch?v=dIZM68voaY8)
+5. [Hackage - Whitespace tutorial](https://hackage.haskell.org/package/whitespace-0.4/src/docs/tutorial.html)
+6. [Whitespace decoder from dcode](https://www.dcode.fr/whitespace-language)
+7. [Whitespace tutorial from Hackage](https://hackage.haskell.org/package/whitespace-0.4/src/docs/tutorial.html)
+8. [Whitespace | Esolang Showcase by The Zip Creator (video)](https://www.youtube.com/watch?v=O406bEHAOcc)
+9. [Whitespace Programming Language Tutorial by Script Kiddie (video)](https://www.youtube.com/watch?v=ea7HZ96dwqs)
+10. [ Whitespace! by Truttle1 (video)](https://www.youtube.com/watch?v=dIZM68voaY8)
