@@ -64,7 +64,7 @@ make whitespace ARGS="-l -r tests/hw_letters.txt"
 ```shell
 make whitespace ARGS="-l -r tests/subroutine2_letters.txt"  
 ```
-6. truth_letters.txt - A typical truth machine used to test esoteric languages. If 1 is inputted, 1 will be printed infinitely (use ^C to exit). If 0 is inputted, 0 is printed once.
+6. truth_letters.txt - A typical truth machine used to test esoteric languages. If 0 is inputted, 0 is printed once. If any number other than 0 is inputted, 1 will be printed infinitely (use ^C to exit).
 ```shell
 make whitespace ARGS="-l -r tests/truth_letters.txt"  
 ```
