@@ -7,9 +7,15 @@ This document must be updated daily every time you finish a work session.
 ### 2025-05-15 - whitespace research
 - Started looking into the syntax of whitespace and how numbers work in it and typed up corresponding notes. (40 min)
 - Noted down the syntax for input and output for whitespace. (10 min)
+Resources found:
+- https://en.wikipedia.org/wiki/Whitespace_(programming_language)
+- http://www.youtube.com/watch?v=ea7HZ96dwqs
+- https://www.youtube.com/watch?v=dIZM68voaY8
+- https://www.dcode.fr/whitespace-language
+- https://hackage.haskell.org/package/whitespace-0.4/src/docs/tutorial.html
 
 ### 2025-05-16 - research & stack implementation
-- Added notes on how numbers and math operations work and the syntax for heap access. (20 min)
+- Using the resouces found the other day, added notes on how numbers and math operations work and the syntax for heap access. (20 min)
 - Started writing basic functions for a stack. (20 min)
 
 ### 2025-05-19 - stack implementation cont.
@@ -22,9 +28,9 @@ This document must be updated daily every time you finish a work session.
 - Wrote comments for the functions, fixed incorrect logic for slide function, wrote tests. (30 min)
 
 ### 2025-05-21 - whitespace knowledge clarification
-- Clarified how heap access and input/output works in whitespace. (10 min)
+- Clarified how heap access and input/output works in whitespace using the goated [video](https://www.youtube.com/watch?v=O406bEHAOcc) Stacey found. (10 min)
 
-### 2025-05-22 - heap implementation 
+### 2025-05-22 - heap implementation
 - Created a heap struct and wrote store and retrieve functions for a heap. (20 min)
 
 ### 2025-05-23 - heaps & math operation fixes
@@ -33,7 +39,7 @@ This document must be updated daily every time you finish a work session.
 - Wrote heap tests. (20 min)
 - Merged branch with main and added function calls to main program. (20 min)
 
-### 2025-05-24 - i/o implentation
+### 2025-05-24 - i/o implementation
 - Wrote and tested input char/num and output char/num functions. (50 min)
 
 ### 2025-05-25 - merges & heap fixes
@@ -41,7 +47,7 @@ This document must be updated daily every time you finish a work session.
 - Updated error print statements to add clarity on which IMP is causing the issue & fixed the catch if statement for the math functions to detect for < 2 items rather than < 1 & added more catch statements to the heap, stack, io, and math functions. (35 min)
 
 ### 2025-05-27 - main prog & diagrams
-- Discussed with group on their thoughts on how we would ask for user input. Worked on getting a number parameter in main program to finish stack implentation in main code. (20 min)
+- Discussed with group on their thoughts on how we would ask for user input. Worked on getting a number parameter in main program to finish stack implementation in main code. (20 min)
 - Drew some diagrams to help explain stack manipulation and heap access (20 min)
 
 ### 2025-05-28 - diagrams, presentation updates, & bug fixes
@@ -56,6 +62,9 @@ This document must be updated daily every time you finish a work session.
 ### 2025-05-30 - test cases (this took way too long)
 - Wrote some test cases for arithmetic operations and inputting numbers (70 min)
 
-### 2025-5-02 - presentation updates, bug fixes & video
+### 2025-05-02 - presentation updates, bug fixes & video
 - Added more references to the readme and added an explanation for the arithmetic2 test & fixed an input bug (25 min)
 - Wrote a brief script for myself and recorded the final video with the others (45 min)
+
+### 2025-05-02 - final touches
+- Added 'goodbye' print statement for when user ctrl c's & added links to references used to the devlog (20 min)
