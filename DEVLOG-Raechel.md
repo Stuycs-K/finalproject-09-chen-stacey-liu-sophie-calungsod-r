@@ -2,10 +2,6 @@
 
 This document must be updated daily every time you finish a work session.
 
-### Resources / References:
-
-
-
 ## Raechel Calungsod
 
 ### 2025-05-15 - Setting up C files
