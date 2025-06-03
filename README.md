@@ -7,8 +7,8 @@
 Raechel Calungsod, Stacey Chen, Sophie Liu
 
 ### Project Description:
-This project is a Whitespace interpreter. Whitespace is an esoteric programming language written
-by Edwin Brady and Chris Morris in 2002. Whitespace only takes in spaces, tabs, and new lines
+This project is a Whitespace interpreter. Whitespace is an esoteric programming language that was 
+written by Edwin Brady and Chris Morris in 2002. Whitespace only takes in spaces, tabs, and new lines
 and translates it into plaintext or executable code using a set algorithm. Our Whitespace interpreter
 can do two things depending on the option used: take in a file containing Whitespace and print
 out the code consisting of "[Tab]", "[Space]", or "[LF]" (for line feed, or new lines), or take
