@@ -85,7 +85,7 @@ make whitespace ARGS="-s -r tests/charEcho.txt"
 ```shell
 make whitespace ARGS="-s -r tests/hw.txt"
 ```
-3. subroutine.txt - Tests flow control subroutines, prints "30" (the sum of the numbers pushed onto the stack) if it works correctly.
+3. subroutine.txt - Tests flow control subroutines, prints "30" (the sum of the top two numbers pushed onto the stack) if it works correctly.
 ```shell
 make whitespace ARGS="-s -r tests/subroutine.txt"
 ```
