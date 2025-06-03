@@ -4,8 +4,12 @@
 - Spent a full class period on researching Whitespace syntax and figuring out how numbers and stack manipulation works in Whitespace.
 - Spent 30 minutes at home continuing with stack manipulation research and flow control, along with initial brainstorming of how to structure code.
 
+Links used:
+- https://esolangs.org/wiki/Whitespace
+- https://www.dcode.fr/whitespace-language
+
 ### 2024-05-16 - Started coding number
-- Spent a full class period figuring out how to identify numbers in Whitespace.
+- Spent a full class period figuring out how to identify numbers in Whitespace (continued with previous sources and also [this website](https://hackage.haskell.org/package/whitespace-0.4/src/docs/tutorial.html )).
 
 ### 2024-05-18 - Finished coding number
 - Spent 30 minutes finishing the code for finding numbers in Whitespace.
