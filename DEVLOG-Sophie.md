@@ -55,3 +55,7 @@ This document must be updated daily every time you finish a work session.
 
 ### 2025-05-30 - test cases (this took way too long)
 - Wrote some test cases for arithmetic operations and inputting numbers (70 min)
+
+### 2025-5-02 - presentation updates, bug fixes & video
+- Added more references to the readme and added an explanation for the arithmetic2 test & fixed an input bug (25 min)
+- Wrote a brief script for myself and recorded the final video with the others (45 min)
