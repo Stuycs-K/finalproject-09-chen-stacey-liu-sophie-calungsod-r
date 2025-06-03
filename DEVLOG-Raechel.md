@@ -107,4 +107,4 @@ I spent 40 minutes in class writing explanations for our new test cases in the R
 addition, I worked with my group to rearrange our presentation and go into more detail for
 our testing segments.
 
-My group and I spent 30 minutes recording our video. I spent 20 minutes editing.
+My group and I spent 30 minutes recording our [video](https://www.youtube.com/watch?v=cDo-Dnvu3rs), which I then spent 20 minutes editing.
