@@ -19,6 +19,8 @@ At home, I spent 30 minutes reviewing the syntax and rules of Whitespace
 and old C files in order to finish up the function used to read the 
 Whitespace files. It should now correctly return the tabs, spaces, and new
 lines in a string, but I will have to test properly tomorrow.
+
+Research links:
 - [Esolangs Wiki - Whitespace page](https://esolangs.org/wiki/Whitespace)
 - [Esolangs Wiki - Esoteric programming language](https://esolangs.org/wiki/Esoteric_programming_language)
 
@@ -32,6 +34,8 @@ At home, I spent 30 minutes continuing to organize our spreadsheet and started
 to figure out a linked list structure for the Whitespace input. I created a
 new struct and started a function that will parse a string holding the file
 contents into a linked list of the new struct nodes.
+
+Research links:
 - [Wikipedia - Whitespace (programming language)](https://en.wikipedia.org/wiki/Whitespace_(programming_language))
 - [Whitespace tutorial from Hackage](https://hackage.haskell.org/package/whitespace-0.4/src/docs/tutorial.html)
 
@@ -55,7 +59,7 @@ to interpret the encoded Whitespace.
 
 I spent 25 minutes at home continuing with the function that will call which 
 interpretation function to use using conditionals, this time working on flow
-control and heap access. I also reorganized some of our research on my spreadsheet.
+control and heap access. I also reorganized some of our research on my [spreadsheet](https://docs.google.com/spreadsheets/d/14W82Xnd7GLH7q-C042Vcj3EvOX9cQKRK27DrdMsMLZk/edit?usp=sharing).
 
 ### 2025-05-22 - Writing README, presentation, and consolidating code
 I spent 35 minutes in class combining code, specifically adding the basics for our
