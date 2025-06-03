@@ -14,6 +14,12 @@ can do two things depending on the option used: take in a file containing Whites
 out the code consisting of "[Tab]", "[Space]", or "[LF]" (for line feed, or new lines), or take
 in a file containing Whitespace and run the code.
 
+### Video Presentation:
+[Whitespace Cybersecurity Final Project (Raechel Calungsod, Stacey Chen, Sophie Liu)](https://www.youtube.com/watch?v=cDo-Dnvu3rs)
+
+### PRESENTATION.md:
+[Link to GitHub PRESENTATION.md file](https://github.com/Stuycs-K/finalproject-09-chen-stacey-liu-sophie-calungsod-r/blob/main/PRESENTATION.md)
+
 ***
 
 ## Instructions:
@@ -60,7 +66,7 @@ make whitespace ARGS="-l -r tests/charEcho_letters.txt"
 ```shell
 make whitespace ARGS="-l -r tests/hw_letters.txt"
 ```
-5. subroutine2_letters.txt - Tests flow control subroutines, prints "30" (the sum of the numbers pushed onto the stack) if it works correctly.
+5. subroutine2_letters.txt - Tests flow control subroutines, prints "-15" (the result after performing operations on the stack) if it works correctly.
 ```shell
 make whitespace ARGS="-l -r tests/subroutine2_letters.txt"  
 ```
@@ -79,7 +85,7 @@ make whitespace ARGS="-s -r tests/charEcho.txt"
 ```shell
 make whitespace ARGS="-s -r tests/hw.txt"
 ```
-3. subroutine.txt - Tests flow control subroutines, prints "-15" (the result after performing operations on the stack) if it works correctly.
+3. subroutine.txt - Tests flow control subroutines, prints "30" (the sum of the top two numbers pushed onto the stack) if it works correctly.
 ```shell
 make whitespace ARGS="-s -r tests/subroutine.txt"
 ```
