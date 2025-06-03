@@ -60,7 +60,7 @@ make whitespace ARGS="-l -r tests/charEcho_letters.txt"
 ```shell
 make whitespace ARGS="-l -r tests/hw_letters.txt"
 ```
-5. subroutine2_letters.txt - Tests flow control subroutines, prints "30" (the sum of the numbers pushed onto the stack) if it works correctly.
+5. subroutine2_letters.txt - Tests flow control subroutines, prints "-15" (the sum of the numbers pushed onto the stack) if it works correctly.
 ```shell
 make whitespace ARGS="-l -r tests/subroutine2_letters.txt"  
 ```
@@ -79,7 +79,7 @@ make whitespace ARGS="-s -r tests/charEcho.txt"
 ```shell
 make whitespace ARGS="-s -r tests/hw.txt"
 ```
-3. subroutine.txt - Tests flow control subroutines, prints "-15" (the result after performing operations on the stack) if it works correctly.
+3. subroutine.txt - Tests flow control subroutines, prints "30" (the result after performing operations on the stack) if it works correctly.
 ```shell
 make whitespace ARGS="-s -r tests/subroutine.txt"
 ```
