@@ -127,7 +127,7 @@ ex. testfc3.txt - Tests flow control jumps and labels, prints "ababab..." indefi
 make whitespace ARGS="-s -r tests/testfc3.txt"
 ```
 
-ex. truth.txt - A typical truth machine used to test esoteric languages. If 1 is inputted, 1 will be printed infinitely (use ^C to exit). If 0 is inputted, 0 is printed once.
+ex. truth.txt - A typical truth machine used to test esoteric languages. If 0 is inputted, 0 is printed once. If any number other than 0 is inputted, 1 will be printed infinitely (use ^C to exit).
 ```shell
 make whitespace ARGS="-s -r tests/truth.txt"  
 ```
