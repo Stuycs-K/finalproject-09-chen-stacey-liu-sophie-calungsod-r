@@ -86,7 +86,7 @@ Operator | Parameter | Command
 
 ## Input/Output
 
-Finally, for input/output, the IMP at the beginning of each command is [TAB][LINEFEED]. Input/output commands pop a value from a stack and performs an action with it, whether it be using it as an address for a user inputted value or as the value to be outputted.
+For input/output, the IMP at the beginning of each command is [TAB][LINEFEED]. Input/output commands pop a value from a stack and performs an action with it, whether it be using it as an address for a user inputted value or as the value to be outputted.
 
 Operator | Parameter | Command
 --- | --- | ---
@@ -110,7 +110,7 @@ make whitespace ARGS="-s -r tests/charEcho.txt"
 
 ## Flow Control
 
-For flow control, the IMP at the beginning of each command is [LINEFEED]. Flow control, essentially, determines how the program moves from one statement to another, based on given conditions. This involves handling things like loops and conditional statements. Some flow control operations take a label, which, similar to a number, is a sequence of tabs and spaces terminated by a linefeed. With this label, we can mark down certain locations in the program to “jump” to when the label is called. Calling a subroutine is similar to jumping to a label, except that subroutines are terminated by a return statement.
+Finally, for flow control, the IMP at the beginning of each command is [LINEFEED]. Flow control, essentially, determines how the program moves from one statement to another, based on given conditions. This involves handling things like loops and conditional statements. Some flow control operations take a label, which, similar to a number, is a sequence of tabs and spaces terminated by a linefeed. With this label, we can mark down certain locations in the program to “jump” to when the label is called. Calling a subroutine is similar to jumping to a label, except that subroutines are terminated by a return statement.
 
 Operator | Parameter | Command
 --- | --- | ---
