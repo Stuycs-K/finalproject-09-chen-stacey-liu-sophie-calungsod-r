@@ -11,6 +11,13 @@ Heap heap;
 struct labelInfo * globalreturnLabel;
 struct labelInfo * globallabel_ary;
 
+static void sighandler(int signo) {
+  if (signo == SIGINT) {
+    printf("\ngoodbye\n");
+    exit(0);
+  }
+}
+
 /*
   argv[0]: nothing
   argv[1]: letterFile or spaceFile (-l or -s)
@@ -21,6 +28,8 @@ int main(int argc, char *argv[]){
   init(&stack);
   char * fileName;
   char * stringOf;
+
+  signal(SIGINT, sighandler);
 
   if (argc<=2){
     printf("\nTwo flags and a file name are needed.\n"
