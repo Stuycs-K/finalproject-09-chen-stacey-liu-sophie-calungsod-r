@@ -54,4 +54,5 @@
 - Spent 30 minutes debugging subroutine and added some test cases (letter versions)
 
 ### 2024-06-02 - Edited test cases and worked on presentation
-- Spent class period fixing/adding new test cases and worked on the explanation for flow control in the explanation
+- Spent class period fixing/adding new test cases and worked on the explanation for flow control in PRESENTATION.md
+- Spent 30 minutes and preparing for and recording the presentation video with the others
