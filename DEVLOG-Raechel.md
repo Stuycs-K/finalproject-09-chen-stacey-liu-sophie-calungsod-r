@@ -2,6 +2,10 @@
 
 This document must be updated daily every time you finish a work session.
 
+### Resources / References:
+
+
+
 ## Raechel Calungsod
 
 ### 2025-05-15 - Setting up C files
@@ -15,6 +19,8 @@ At home, I spent 30 minutes reviewing the syntax and rules of Whitespace
 and old C files in order to finish up the function used to read the 
 Whitespace files. It should now correctly return the tabs, spaces, and new
 lines in a string, but I will have to test properly tomorrow.
+- [Esolangs Wiki - Whitespace page](https://esolangs.org/wiki/Whitespace)
+- [Esolangs Wiki - Esoteric programming language](https://esolangs.org/wiki/Esoteric_programming_language)
 
 ### 2025-05-16 - Whitespace spreadsheet formatting, fixing main C code, and linked lists
 I spent 40 minutes of class time creating a spreadsheet that contains 
@@ -26,6 +32,8 @@ At home, I spent 30 minutes continuing to organize our spreadsheet and started
 to figure out a linked list structure for the Whitespace input. I created a
 new struct and started a function that will parse a string holding the file
 contents into a linked list of the new struct nodes.
+- [Wikipedia - Whitespace (programming language)](https://en.wikipedia.org/wiki/Whitespace_(programming_language))
+- [Whitespace tutorial from Hackage](https://hackage.haskell.org/package/whitespace-0.4/src/docs/tutorial.html)
 
 
 ### 2025-05-19 - Combining and testing code
