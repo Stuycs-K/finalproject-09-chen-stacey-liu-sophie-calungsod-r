@@ -7,7 +7,8 @@ This document must be updated daily every time you finish a work session.
 ### 2025-05-15 - whitespace research
 - Started looking into the syntax of whitespace and how numbers work in it and typed up corresponding notes. (40 min)
 - Noted down the syntax for input and output for whitespace. (10 min)
-Resources found:
+
+**Resources found:**
 - https://en.wikipedia.org/wiki/Whitespace_(programming_language)
 - http://www.youtube.com/watch?v=ea7HZ96dwqs
 - https://www.youtube.com/watch?v=dIZM68voaY8
@@ -67,4 +68,4 @@ Resources found:
 - Wrote a brief script for myself and recorded the final video with the others (45 min)
 
 ### 2025-05-02 - final touches
-- Added 'goodbye' print statement for when user ctrl c's & added links to references used to the devlog (20 min)
+- Added 'goodbye' print statement for when user ctrl c's & added links to the references found/used to the devlog (20 min)
